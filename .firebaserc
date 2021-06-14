@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "questionanswers-arg": {
+      "hosting": {
+        "question-answer": [
+          "questionanswers-arg"
+        ]
+      }
+    }
+  }
+}

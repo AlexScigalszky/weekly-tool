@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Nuevo</h1>
+<div mat-dialog-content>
+  <ol>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Tìtulo</mat-label>
+        <input matInput [(ngModel)]="question.title" />
+      </mat-form-field>
+    </li>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="question.description"
+          rows="5"
+        ></textarea>
+      </mat-form-field>
+    </li>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>Tu nombre (opcional)</mat-label>
+        <input matInput [(ngModel)]="question.name" />
+      </mat-form-field>
+    </li>
+  </ol>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onNoClick()" mat-stroked-button  color="warn">Cancelar</button>
+  <button (click)="create()" mat-stroked-button color="primary">Aceptar</button>
+</div>

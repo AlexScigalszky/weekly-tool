@@ -1,0 +1,5 @@
+@import "~@angular/material/theming";
+
+.question-voted {
+  background: mat-color($mat-light-theme-background, hover, 0.12);
+}

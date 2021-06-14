@@ -1,0 +1,31 @@
+<mat-list>
+  <mat-list-item>
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <h4 md-line>
+      <a
+        routerLink="/"
+        (click)="handleClickMenu()"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Home
+      </a>
+    </h4>
+  </mat-list-item>
+  <!-- 
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <h4 md-line>
+      <a
+        routerLink="/hello"
+        (click)="handleClickMenu()"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        hello
+      </a>
+    </h4>
+  </mat-list-item> -->
+</mat-list>

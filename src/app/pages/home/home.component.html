@@ -1,0 +1,14 @@
+<div class="example-button-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Sala: {{ room | uppercase }}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <app-question-list
+    [questions]="questions$ | async"
+    [highlight]="questionsHighlight$ | async"
+    (newClicked)="openDialog()"
+    (voted)="vote($event)"
+  ></app-question-list>
+</div>
