@@ -67,11 +67,11 @@ export class QuestionService {
 
   async createRoom(room: string): Promise<Room> {
     const newRoom: Room = {
-      id: room,
       ...new Room(),
+      id: room,
     };
-    return this.roomCollection
-      .doc(newRoom.id)
+    return await this.roomCollection
+      .doc(`${newRoom.id}`)
       .set(newRoom)
       .then(() => newRoom);
   }

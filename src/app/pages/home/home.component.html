@@ -1,5 +1,5 @@
-<div *ngIf="apiData$ | async as apiData">
-  <mat-accordion>
+<div *ngIf="apiData$ | async as apiData" layout-margin>
+  <mat-accordion layout="row">
     <mat-expansion-panel
       (opened)="itsChatTime = true"
       (closed)="itsChatTime = false"
@@ -27,18 +27,22 @@
       </mat-form-field>
 
       <button mat-button>
-        <app-timer [startTime]="apiData.room.timeStartTime.toDate()"></app-timer>
+        <app-timer
+          [startTime]="apiData.room.timeStartTime.toDate()"
+        ></app-timer>
       </button>
 
       <button mat-button (click)="startTimer()">COMENZAR TIMER</button>
 
       <mat-card-content>
-        <app-question-item [question]="currentQuestion$ | async"></app-question-item>
+        <app-question-item
+          [question]="currentQuestion$ | async"
+        ></app-question-item>
       </mat-card-content>
     </mat-expansion-panel>
   </mat-accordion>
 
-  <div *ngIf="!itsChatTime">
+  <div *ngIf="!itsChatTime" layout="row" class="question-list-container">
     <app-question-list
       [questions]="apiData.questions"
       [highlight]="questionsHighlight$ | async"
