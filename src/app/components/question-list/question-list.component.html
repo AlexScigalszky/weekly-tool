@@ -7,13 +7,14 @@
         [highlight]="highlightQuestion(question)"
         (voted)="vote($event)"
       ></app-question-item>
-      <mat-divider></mat-divider>
+
       <mat-card-actions>
         <button
           mat-button
           (click)="onNewClicked()"
-          color="accent"
-          class="text-upper"
+          color="primary"
+          class="text-upper "
+          layout-align="center center"
         >
           Nuevo
         </button>

@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { flatMap, map, mergeMap, share, tap } from 'rxjs/operators';
 import { QuestionItemModalComponent } from 'src/app/components/question-item-modal/question-item-modal.component';
+import { Nullable } from 'src/app/models/nullable';
 import { Question } from 'src/app/models/question';
+import { Room } from 'src/app/models/room';
 import { QuestionService } from 'src/app/services/question.service';
 import { VotingService } from 'src/app/services/voting.service';
+
+export type ApiData = {
+  room: Room;
+  questions: Question[];
+};
 
 @Component({
   selector: 'app-home',
@@ -15,10 +23,14 @@ import { VotingService } from 'src/app/services/voting.service';
 })
 export class HomeComponent implements OnInit {
   room: string = (Math.random() * 100000).toString();
-  questions$: Observable<Question[]> = of([]);
-  questionsHighlight$: Observable<Question[]> = this.votingService.getHighlight().pipe(
-    tap(console.error)
-  );
+  apiData$: Observable<Nullable<ApiData>> = of(null);
+  currentQuestion$: Observable<Nullable<Question>> = of(null);
+  questionsHighlight$: Observable<
+    Question[]
+  > = this.votingService.getHighlight();
+  currentQuestion = new FormControl(null);
+  itsChatTime = false;
+  startTime = new Date();
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +48,24 @@ export class HomeComponent implements OnInit {
       console.log(`room ${this.room} created`);
     }
     this.questionService.setRoom(this.room);
-    this.questions$ = this.questionService.list().pipe(tap(console.log));
+
+    this.apiData$ = combineLatest([
+      this.questionService.getRoom(this.room),
+      this.questionService.list(),
+    ]).pipe(
+      map(([room, questions]) => ({
+        room: room,
+        questions: questions,
+      })),
+      tap((data) => this.currentQuestion.setValue(data.room.currentQuestionId)),
+      share(),
+    );
+
+    this.currentQuestion$ = this.apiData$.pipe(
+      mergeMap((data: ApiData) =>
+        this.questionService.getQuestion(data.room.currentQuestionId)
+      )
+    );
   }
 
   openDialog(): void {
@@ -58,5 +87,10 @@ export class HomeComponent implements OnInit {
       this.questionService.update(question);
       console.log('question updated', question);
     }
+  }
+
+  startTimer(): void {
+    const questionId = this.currentQuestion.value;
+    this.questionService.updateRoom(this.room, new Date(), questionId);
   }
 }

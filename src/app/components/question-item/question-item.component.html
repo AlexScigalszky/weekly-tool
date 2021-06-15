@@ -9,8 +9,12 @@
 
   <span>{{ question.votes }} votes &nbsp;</span>
   <button mat-icon-button (click)="vote()">
-    <mat-icon aria-hidden="false" aria-label="face"
-    [color]="highlight ? 'accent': 'primary'"
-    >check_circle</mat-icon>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="face"
+      [color]="highlight ? 'accent' : 'primary'"
+    >
+      check_circle
+    </mat-icon>
   </button>
 </mat-list-item>

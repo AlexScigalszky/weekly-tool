@@ -50,12 +50,16 @@ export class QuestionService {
     this.questionCollection.doc(id).set(question);
   }
 
+  getRoom(roomName: string): Observable<Room> {
+    return this.roomCollection.doc<Room>(roomName).valueChanges();
+  }
+
   update(question: Question) {
     this.questionCollection.doc(question.id).set(question, { merge: true });
   }
 
   async existsRooom(room: string): Promise<boolean> {
-    var docRef = this.firestore.collection('rooms').doc(room);
+    var docRef = this.roomCollection.doc(room);
 
     var doc = await docRef.get().toPromise();
     return doc.exists;
@@ -64,12 +68,22 @@ export class QuestionService {
   async createRoom(room: string): Promise<Room> {
     const newRoom: Room = {
       id: room,
-      questions: [],
+      ...new Room(),
     };
-
     return this.roomCollection
       .doc(newRoom.id)
       .set(newRoom)
       .then(() => newRoom);
+  }
+
+  getQuestion(currentQuestionId: string): Observable<Question> {
+    return this.roomCollection.doc<Question>(currentQuestionId).valueChanges();
+  }
+
+  updateRoom(room: string, timeStartTime: Date, questionId: string) {
+    this.roomCollection
+      .doc(room)
+      .update({ timeStartTime: timeStartTime, currentQuestionId: questionId })
+      .then(() => console.log(`timer set ${timeStartTime}`));
   }
 }

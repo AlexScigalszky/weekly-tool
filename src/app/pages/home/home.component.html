@@ -1,14 +1,49 @@
-<div class="example-button-container">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Sala: {{ room | uppercase }}</span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<div *ngIf="apiData$ | async as apiData">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="itsChatTime = true"
+      (closed)="itsChatTime = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Sala: {{ apiData.room.id | uppercase }}
+        </mat-panel-title>
 
-  <app-question-list
-    [questions]="questions$ | async"
-    [highlight]="questionsHighlight$ | async"
-    (newClicked)="openDialog()"
-    (voted)="vote($event)"
-  ></app-question-list>
+        <mat-panel-description>
+          Expandir para comezar una charla
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Selecciona un tema a conversar</mat-label>
+        <mat-select [formControl]="currentQuestion">
+          <mat-option
+            *ngFor="let question of apiData.questions"
+            [value]="question.id"
+          >
+            {{ question.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button>
+        <app-timer [startTime]="apiData.room.timeStartTime.toDate()"></app-timer>
+      </button>
+
+      <button mat-button (click)="startTimer()">COMENZAR TIMER</button>
+
+      <mat-card-content>
+        <app-question-item [question]="currentQuestion$ | async"></app-question-item>
+      </mat-card-content>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div *ngIf="!itsChatTime">
+    <app-question-list
+      [questions]="apiData.questions"
+      [highlight]="questionsHighlight$ | async"
+      (newClicked)="openDialog()"
+      (voted)="vote($event)"
+    ></app-question-list>
+  </div>
 </div>
