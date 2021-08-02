@@ -27,9 +27,11 @@ export class TimerService {
   }
 
   startTimer() {
-    this.runTimer = true;
-    this.hasStarted = true;
-    this.timerTick();
+    if (this.runTimer) {
+      this.runTimer = true;
+      this.hasStarted = true;
+      this.timerTick();
+    }
   }
 
   pauseTimer() {

@@ -2,10 +2,13 @@ mat-form-field {
   width: 100%;
 }
 body {
-  background: no-repeat url("http://w3itsolutions.net/img/bg-1.png");
+  background-color: #5ECAEC;
 }
 
 mat-sidenav-container {
   background-color: transparent !important;
 }
 
+mat-card {
+  margin: 1rem;
+}

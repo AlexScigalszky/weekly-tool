@@ -14,47 +14,51 @@
     </div>
   </app-question-list>
 
-  <mat-card>
-    <mat-card-content>
-      <h1>Tiempo de conversación</h1>
-      <p>Primero se debe elegir un tema de conversación:</p>
-      <mat-form-field appearance="fill">
-        <mat-label>Selecciona un tema a conversar</mat-label>
-        <mat-select [formControl]="currentQuestionControl">
-          <mat-option
-            *ngFor="let question of apiData.questions"
-            [value]="question.id"
+  <div>
+    <mat-card>
+      <mat-card-content>
+        <h1>Tiempo de conversación</h1>
+        <p>Primero se debe elegir un tema de conversación:</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Selecciona un tema a conversar</mat-label>
+          <mat-select [formControl]="currentQuestionControl">
+            <mat-option
+              *ngFor="let question of apiData.questions"
+              [value]="question.id"
+            >
+              {{ question.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="showStartButton$ | async">
+          <small>
+            Darle COMENZAR TIMER para poner en marcha la cuenta del tiempo
+            (Manejamos slots de tiempos de 7 minutos)
+          </small>
+          <button mat-button (click)="startTimer()">COMENZAR TIMER</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card id="topic">
+      <mat-card-content>
+        <div *ngIf="currentQuestion$ | async as currentQuestion">
+          <h2>El tema elegido es:</h2>
+
+          <h3>{{ currentQuestion.title }}</h3>
+          <p>{{ currentQuestion.description }}</p>
+          <small *ngIf="currentQuestion.name"
+            >Sugerido por: {{ currentQuestion.name }}</small
           >
-            {{ question.title }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <!-- <app-question-item [question]="currentQuestion"></app-question-item> -->
+        </div>
 
-      <div *ngIf="currentQuestion$ | async as currentQuestion">
-        <h2>El tema elegido es:</h2>
-
-        <h3>{{ currentQuestion.title }}</h3>
-        <p>{{ currentQuestion.description }}</p>
-        <small *ngIf="currentQuestion.name">Sugerido por: {{ currentQuestion.name }}</small>
-        <!-- <app-question-item [question]="currentQuestion"></app-question-item> -->
-      </div>
-    </mat-card-content>
-
-    <mat-card-actions>
-      <div *ngIf="timeStartTime">
-        {{ minutes }} minutos y contando..
-        {{ startTime | date: "HH:mm:ss" }}
-      </div>
-
-      <br>
-
-      <div *ngIf="showStartButton$ | async">
-        <small>
-          Darle COMENZAR TIMER para poner en marcha la cuenta del tiempo
-          (Manejamos slots de tiempos de 7 minutos)
-        </small>
-        <button mat-button (click)="startTimer()">COMENZAR TIMER</button>
-      </div>
-    </mat-card-actions>
-  </mat-card>
+        <div *ngIf="timeStartTime">
+          {{ minutes }} minutos y contando..
+          {{ startTime | date: "HH:mm:ss" }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

@@ -81,8 +81,8 @@ export class QuestionService {
     return this.questionCollection.doc<Question>(currentQuestionId).valueChanges();
   }
 
-  updateRoom(room: string, timeStartTime: Date, questionId: string) {
-    this.roomCollection
+  updateRoom(room: string, timeStartTime: Date, questionId: string) : Promise<any>{
+    return this.roomCollection
       .doc(room)
       .update({ 
         timeStartTime: timeStartTime,

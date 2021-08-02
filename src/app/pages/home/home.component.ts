@@ -70,11 +70,11 @@ export class HomeComponent implements OnInit {
         room: room,
         questions: questions,
       })),
+      tap((x) => console.log('refresh room', x)),
       tap((data) => this.setCurrentQuestion(data.room))
     );
 
     this.currentQuestion$ = this.apiData$.pipe(
-      // tap(console.log),
       map((apiData) => apiData.room),
       filter((room) => room !== null),
       mergeMap((room: Room) =>
@@ -88,11 +88,11 @@ export class HomeComponent implements OnInit {
       this.currentQuestionControl.valueChanges,
     ]).pipe(
       map(([apiData, currentQuestionSelected]: [ApiData, string]) => {
-        if (this.timeRunning(apiData.room)) {
+        // if (this.timeRunning(apiData.room)) {
           return apiData.room.currentQuestionId !== currentQuestionSelected;
-        } else {
-          return false;
-        }
+        // } else {
+        //   return false;
+        // }
       })
     );
   }
@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
       this.timeStartTime = room.timeStartTime.toDate();
       this.timer.initTimer();
       this.timer.startTimer();
+      this.calculateMinutes();
     }
     return this.currentQuestionControl.setValue(room.currentQuestionId);
   }
@@ -135,10 +136,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  startTimer(): void {
+  async startTimer(): Promise<void> {
     const questionId = this.currentQuestionControl.value;
-    this.questionService.updateRoom(this.room, this.timeStartTime, questionId);
     this.timeStartTime = new Date();
+    await this.questionService.updateRoom(
+      this.room,
+      this.timeStartTime,
+      questionId
+    );
+    this.calculateMinutes();
   }
 
   diffDays = (date: Date, otherDate: Date) => {
