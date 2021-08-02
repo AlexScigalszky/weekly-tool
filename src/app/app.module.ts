@@ -28,9 +28,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingService } from './services/voting.service';
-import { TimerComponent } from './components/timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { TimerComponent } from './components/timer/timer.component';
     QuestionItemComponent,
     QuestionListComponent,
     QuestionItemModalComponent,
-    TimerComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +60,7 @@ import { TimerComponent } from './components/timer/timer.component';
     MatButtonModule,
     MatSelectModule,
     MatExpansionModule,
+    MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

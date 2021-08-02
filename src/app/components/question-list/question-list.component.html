@@ -1,5 +1,6 @@
 <mat-card tdMediaToggle="gt-xs">
   <mat-card-content>
+    <ng-content select="[card-title]"></ng-content>
     <mat-list>
       <app-question-item
         *ngFor="let question of questions"

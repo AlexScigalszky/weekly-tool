@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class TimerService {
-  static TIMEOUT_SECONDS = 1800; // 60 * 30
+  static TIMEOUT_SECONDS = 18000; // 60 * 30 *10
   timeout = TimerService.TIMEOUT_SECONDS;
   time: number;
   runTimer: boolean;

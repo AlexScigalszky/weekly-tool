@@ -3,3 +3,12 @@
 .question-voted {
   background: mat-color($mat-light-theme-background, hover, 0.12);
 }
+
+/* SCSS */
+.mat-list-item.mat-list-item-word-wrap {
+  height: initial !important;
+  .mat-line {
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+  }
+}

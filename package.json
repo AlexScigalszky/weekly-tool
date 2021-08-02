@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "serve": "ng s",
     "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -23,6 +24,7 @@
     "@angular/router": "~12.0.0",
     "express": "^4.17.1",
     "firebase": "^8.0.0",
+    "firebase-firestore-timestamp": "^1.0.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

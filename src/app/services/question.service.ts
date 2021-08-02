@@ -4,6 +4,7 @@ import { Question } from '../models/question';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
+  
 } from '@angular/fire/firestore';
 import { Room } from '../models/room';
 import { map } from 'rxjs/operators';
@@ -77,13 +78,16 @@ export class QuestionService {
   }
 
   getQuestion(currentQuestionId: string): Observable<Question> {
-    return this.roomCollection.doc<Question>(currentQuestionId).valueChanges();
+    return this.questionCollection.doc<Question>(currentQuestionId).valueChanges();
   }
 
   updateRoom(room: string, timeStartTime: Date, questionId: string) {
     this.roomCollection
       .doc(room)
-      .update({ timeStartTime: timeStartTime, currentQuestionId: questionId })
+      .update({ 
+        timeStartTime: timeStartTime,
+        currentQuestionId: questionId
+      })
       .then(() => console.log(`timer set ${timeStartTime}`));
   }
 }

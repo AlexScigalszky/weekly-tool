@@ -1,3 +1,5 @@
-.question-list-container {
-    padding-top: 2rem;
+#home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }

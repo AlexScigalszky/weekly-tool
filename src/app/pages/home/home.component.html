@@ -1,22 +1,26 @@
-<div *ngIf="apiData$ | async as apiData" layout-margin>
-  <mat-accordion layout="row">
-    <mat-expansion-panel
-      (opened)="itsChatTime = true"
-      (closed)="itsChatTime = false"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Sala: {{ apiData.room.id | uppercase }}
-        </mat-panel-title>
+<div *ngIf="apiData$ | async as apiData" id="home-container">
+  <app-question-list
+    [questions]="apiData.questions"
+    [highlight]="questionsHighlight$ | async"
+    (newClicked)="openDialog()"
+    (voted)="vote($event)"
+  >
+    <div card-title>
+      <h1>Temas a conversar</h1>
+      <p>
+        Escribí un idea junto con su descripción para conversarlo entre todos.
+        Si querés podés agregar tu nombre
+      </p>
+    </div>
+  </app-question-list>
 
-        <mat-panel-description>
-          Expandir para comezar una charla
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
+  <mat-card>
+    <mat-card-content>
+      <h1>Tiempo de conversación</h1>
+      <p>Primero se debe elegir un tema de conversación:</p>
       <mat-form-field appearance="fill">
         <mat-label>Selecciona un tema a conversar</mat-label>
-        <mat-select [formControl]="currentQuestion">
+        <mat-select [formControl]="currentQuestionControl">
           <mat-option
             *ngFor="let question of apiData.questions"
             [value]="question.id"
@@ -26,28 +30,31 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-button>
-        <app-timer
-          [startTime]="apiData.room.timeStartTime.toDate()"
-        ></app-timer>
-      </button>
+      <div *ngIf="currentQuestion$ | async as currentQuestion">
+        <h2>El tema elegido es:</h2>
 
-      <button mat-button (click)="startTimer()">COMENZAR TIMER</button>
+        <h3>{{ currentQuestion.title }}</h3>
+        <p>{{ currentQuestion.description }}</p>
+        <small *ngIf="currentQuestion.name">Sugerido por: {{ currentQuestion.name }}</small>
+        <!-- <app-question-item [question]="currentQuestion"></app-question-item> -->
+      </div>
+    </mat-card-content>
 
-      <mat-card-content>
-        <app-question-item
-          [question]="currentQuestion$ | async"
-        ></app-question-item>
-      </mat-card-content>
-    </mat-expansion-panel>
-  </mat-accordion>
+    <mat-card-actions>
+      <div *ngIf="timeStartTime">
+        {{ minutes }} minutos y contando..
+        {{ startTime | date: "HH:mm:ss" }}
+      </div>
 
-  <div *ngIf="!itsChatTime" layout="row" class="question-list-container">
-    <app-question-list
-      [questions]="apiData.questions"
-      [highlight]="questionsHighlight$ | async"
-      (newClicked)="openDialog()"
-      (voted)="vote($event)"
-    ></app-question-list>
-  </div>
+      <br>
+
+      <div *ngIf="showStartButton$ | async">
+        <small>
+          Darle COMENZAR TIMER para poner en marcha la cuenta del tiempo
+          (Manejamos slots de tiempos de 7 minutos)
+        </small>
+        <button mat-button (click)="startTimer()">COMENZAR TIMER</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
 </div>

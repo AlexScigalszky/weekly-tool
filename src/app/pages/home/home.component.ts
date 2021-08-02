@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, Observable, of } from 'rxjs';
-import { flatMap, map, mergeMap, share, tap } from 'rxjs/operators';
+import { combineLatest, merge, Observable, of, race } from 'rxjs';
+import { filter, map, mergeMap, share, tap } from 'rxjs/operators';
 import { QuestionItemModalComponent } from 'src/app/components/question-item-modal/question-item-modal.component';
 import { Nullable } from 'src/app/models/nullable';
 import { Question } from 'src/app/models/question';
 import { Room } from 'src/app/models/room';
 import { QuestionService } from 'src/app/services/question.service';
+import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 
 export type ApiData = {
@@ -24,23 +25,35 @@ export type ApiData = {
 export class HomeComponent implements OnInit {
   room: string = (Math.random() * 100000).toString();
   apiData$: Observable<Nullable<ApiData>> = of(null);
-  currentQuestion$: Observable<Nullable<Question>> = of(null);
   questionsHighlight$: Observable<
     Question[]
   > = this.votingService.getHighlight();
-  currentQuestion = new FormControl(null);
+  currentQuestionControl = new FormControl(null);
   itsChatTime = false;
-  startTime = new Date();
+  minutes: Nullable<number> = null;
+  timeStartTime: Nullable<Date> = null;
+  currentQuestion$: Observable<Question>;
+  showStartButton$: Observable<boolean> = of(true);
 
   constructor(
     private route: ActivatedRoute,
     private questionService: QuestionService,
     private votingService: VotingService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private timer: TimerService
+  ) {
+    this.timer.onFinished().subscribe((finish: boolean) => {
+      if (finish) {
+        this.timer.resetTimer();
+      }
+    });
+    this.timer.onTimerTick().subscribe((ticks: number) => {
+      this.calculateMinutes();
+    });
+  }
 
   async ngOnInit(): Promise<void> {
-    this.room = this.route.snapshot.paramMap.get('room');
+    this.room = this.route.snapshot.paramMap.get('room') ?? 'default';
 
     var exists = await this.questionService.existsRooom(this.room);
     if (!exists) {
@@ -57,14 +70,47 @@ export class HomeComponent implements OnInit {
         room: room,
         questions: questions,
       })),
-      tap((data) => this.currentQuestion.setValue(data.room.currentQuestionId)),
-      share(),
+      tap((data) => this.setCurrentQuestion(data.room))
     );
 
     this.currentQuestion$ = this.apiData$.pipe(
-      mergeMap((data: ApiData) =>
-        this.questionService.getQuestion(data.room.currentQuestionId)
-      )
+      // tap(console.log),
+      map((apiData) => apiData.room),
+      filter((room) => room !== null),
+      mergeMap((room: Room) =>
+        this.questionService.getQuestion(room.currentQuestionId)
+      ),
+      tap(console.log)
+    );
+
+    this.showStartButton$ = combineLatest([
+      this.apiData$,
+      this.currentQuestionControl.valueChanges,
+    ]).pipe(
+      map(([apiData, currentQuestionSelected]: [ApiData, string]) => {
+        if (this.timeRunning(apiData.room)) {
+          return apiData.room.currentQuestionId !== currentQuestionSelected;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
+  private setCurrentQuestion(room: Room): void {
+    if (this.timeRunning(room)) {
+      this.timeStartTime = room.timeStartTime.toDate();
+      this.timer.initTimer();
+      this.timer.startTimer();
+    }
+    return this.currentQuestionControl.setValue(room.currentQuestionId);
+  }
+
+  private timeRunning(room: Room) {
+    return (
+      room.currentQuestionId !== null &&
+      room.timeStartTime !== undefined &&
+      room.timeStartTime !== null
     );
   }
 
@@ -90,7 +136,20 @@ export class HomeComponent implements OnInit {
   }
 
   startTimer(): void {
-    const questionId = this.currentQuestion.value;
-    this.questionService.updateRoom(this.room, new Date(), questionId);
+    const questionId = this.currentQuestionControl.value;
+    this.questionService.updateRoom(this.room, this.timeStartTime, questionId);
+    this.timeStartTime = new Date();
+  }
+
+  diffDays = (date: Date, otherDate: Date) => {
+    const diffMs = Math.abs(date.getTime() - otherDate.getTime());
+    return Math.round(((diffMs % 86400000) % 3600000) / 60000);
+  };
+
+  calculateMinutes(): void {
+    if (this.timeStartTime !== null) {
+      this.minutes = this.diffDays(new Date(), this.timeStartTime);
+      console.log('minutes', this.minutes);
+    }
   }
 }

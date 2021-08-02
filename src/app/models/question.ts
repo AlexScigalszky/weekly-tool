@@ -1,7 +1,7 @@
 export class Question {
   id: string = '';
-  name: string = 'unknown';
+  name: string = '';
   votes: number = 0;
-  title: string = 'unknown title';
+  title: string = '';
   description: string = '';
 }

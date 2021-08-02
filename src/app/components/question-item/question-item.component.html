@@ -1,11 +1,11 @@
 <mat-list-item *ngIf="question" [class.question-voted]="highlight">
-  <h3 matLine>{{ question.title }} ({{ question.relevance }} points)</h3>
+  <h3 matLine>{{ question.title }}</h3>
   <small matLine *ngIf="question.name">
     {{ question.name }}
-  </small>
-  <p matLine>
+  </small> 
+  <!-- <div matLine>
     {{ question.description }}
-  </p>
+  </div> -->
 
   <span>{{ question.votes }} votes &nbsp;</span>
   <button mat-icon-button (click)="vote()">
