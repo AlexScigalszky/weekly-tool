@@ -41,7 +41,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card id="topic">
+    <mat-card>
       <mat-card-content>
         <div *ngIf="currentQuestion$ | async as currentQuestion">
           <h2>El tema elegido es:</h2>
@@ -53,11 +53,13 @@
           >
           <!-- <app-question-item [question]="currentQuestion"></app-question-item> -->
         </div>
+      </mat-card-content>
+    </mat-card>
 
-        <div *ngIf="timeStartTime">
-          {{ minutes }} minutos y contando..
-          {{ startTime | date: "HH:mm:ss" }}
-        </div>
+    <mat-card *ngIf="timeStartTime">
+      <mat-card-content>
+        {{ minutes }} minutos y contando..
+        {{ startTime | date: "HH:mm:ss" }}
       </mat-card-content>
     </mat-card>
   </div>
