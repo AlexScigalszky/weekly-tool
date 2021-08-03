@@ -1,17 +1,17 @@
 #home-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 @media (min-width: 769px) {
-    #home-container {
-        grid-template-columns: 1fr 1fr;
-    }
+  #home-container {
+    grid-template-columns: 1fr 1fr;
   }
+}
 
 #spinner {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }

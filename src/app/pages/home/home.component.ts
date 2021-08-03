@@ -26,9 +26,8 @@ export type ApiData = {
 export class HomeComponent implements OnInit {
   room: string = (Math.random() * 100000).toString();
   apiData$: Observable<Nullable<ApiData>> = of(null);
-  questionsHighlight$: Observable<
-    Question[]
-  > = this.votingService.getHighlight();
+  questionsHighlight$: Observable<Question[]> =
+    this.votingService.getHighlight();
   currentQuestionControl = new FormControl(null);
   itsChatTime = false;
   minutes: Nullable<number> = null;
@@ -41,7 +40,7 @@ export class HomeComponent implements OnInit {
     private questionService: QuestionService,
     private votingService: VotingService,
     public dialog: MatDialog,
-    private timer: TimerService
+    private timer: TimerService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {
@@ -72,16 +71,16 @@ export class HomeComponent implements OnInit {
         questions: questions,
       })),
       tap((x) => console.log('refresh room', x)),
-      tap((data) => this.setCurrentQuestion(data.room))
+      tap((data) => this.setCurrentQuestion(data.room)),
     );
 
     this.currentQuestion$ = this.apiData$.pipe(
       map((apiData) => apiData.room),
       filter((room) => room !== null),
       mergeMap((room: Room) =>
-        this.questionService.getQuestion(room.currentQuestionId)
+        this.questionService.getQuestion(room.currentQuestionId),
       ),
-      tap(console.log)
+      tap(console.log),
     );
 
     this.showStartButton$ = combineLatest([
@@ -90,7 +89,7 @@ export class HomeComponent implements OnInit {
     ]).pipe(
       map(([apiData, currentQuestionSelected]: [ApiData, string]) => {
         return apiData.room.currentQuestionId !== currentQuestionSelected;
-      })
+      }),
     );
   }
 
@@ -99,7 +98,7 @@ export class HomeComponent implements OnInit {
       console.log(`room.timeStartTime ${room.timeStartTime}`);
       if (room.timeStartTime.toString().includes('Timestamp')) {
         this.timeStartTime = new Date(
-          (room.timeStartTime as Timestamp).seconds * 1000
+          (room.timeStartTime as Timestamp).seconds * 1000,
         );
       } else {
         this.timeStartTime = new Date(room.timeStartTime);
@@ -148,7 +147,7 @@ export class HomeComponent implements OnInit {
     await this.questionService.updateRoom(
       this.room,
       this.timeStartTime,
-      questionId
+      questionId,
     );
     this.calculateMinutes();
   }

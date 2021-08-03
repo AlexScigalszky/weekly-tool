@@ -21,7 +21,7 @@ export class QuestionService {
 
   constructor(private firestore: AngularFirestore) {
     this.roomCollection = this.firestore.collection<Room>(
-      this.roomCollectionName
+      this.roomCollectionName,
     );
     this.setRoom('default');
   }
@@ -30,7 +30,7 @@ export class QuestionService {
     this.questionCollectionName = `rooms/${room}/questions`;
     this.questionCollection = this.firestore.collection<Question>(
       this.questionCollectionName,
-      this.orderByRelevance
+      this.orderByRelevance,
     );
   }
 
@@ -90,14 +90,14 @@ export class QuestionService {
         catchError((err: any) => {
           console.error(`Question ${currentQuestionId} not found`);
           return of(null);
-        })
+        }),
       );
   }
 
   updateRoom(
     room: string,
     timeStartTime: Date,
-    questionId: string
+    questionId: string,
   ): Promise<any> {
     return this.roomCollection
       .doc(room)

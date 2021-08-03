@@ -27,8 +27,8 @@ export class AppComponent implements OnInit {
     //   this.sidenavMode = 'side';
     // } else {
     //   // for mobile
-      this.sidenavOpened = false;
-      this.sidenavMode = 'over';
+    this.sidenavOpened = false;
+    this.sidenavMode = 'over';
     // }
   }
 }

@@ -15,7 +15,7 @@ export class VotingService {
 
   constructor() {
     const votingSystemExistingStr = localStorage.getItem(KEY) ?? '';
-    console.log({votingSystemExistingStr});
+    console.log({ votingSystemExistingStr });
     if (votingSystemExistingStr) {
       this.votingSystem = new VotingSystem(JSON.parse(votingSystemExistingStr));
       this.emitNewValues();
