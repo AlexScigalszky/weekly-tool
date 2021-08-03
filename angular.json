@@ -113,5 +113,8 @@
       }
     }
   },
-  "defaultProject": "question-answer"
+  "defaultProject": "question-answer",
+  "cli": {
+    "analytics": false
+  }
 }

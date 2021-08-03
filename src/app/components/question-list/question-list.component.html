@@ -1,25 +1,8 @@
-<mat-card tdMediaToggle="gt-xs">
-  <mat-card-content>
-    <ng-content select="[card-title]"></ng-content>
-    <mat-list>
-      <app-question-item
-        *ngFor="let question of questions"
-        [question]="question"
-        [highlight]="highlightQuestion(question)"
-        (voted)="vote($event)"
-      ></app-question-item>
-
-      <mat-card-actions>
-        <button
-          mat-button
-          (click)="onNewClicked()"
-          color="primary"
-          class="text-upper "
-          layout-align="center center"
-        >
-          Nuevo
-        </button>
-      </mat-card-actions>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<mat-list>
+  <app-question-item
+  *ngFor="let question of questions"
+  [question]="question"
+  [highlight]="highlightQuestion(question)"
+  (voted)="vote($event)"
+  ></app-question-item>
+</mat-list>
