@@ -31,8 +31,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingService } from './services/voting.service';
-import { MinesweeperComponent } from './components/minesweeper/minesweeper.component';
-import { DamonKillerComponent } from './components/damon-killer/damon-killer.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +41,6 @@ import { DamonKillerComponent } from './components/damon-killer/damon-killer.com
     QuestionItemComponent,
     QuestionListComponent,
     QuestionItemModalComponent,
-    MinesweeperComponent,
-    DamonKillerComponent,
   ],
   imports: [
     BrowserModule,
