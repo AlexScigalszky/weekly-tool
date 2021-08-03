@@ -1,0 +1,387 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:700';
+
+// medium difficulty (16x16x40) takes a long time to compile and is slow to play :/
+$rows: 9;
+$cols: 9; // don't forget to make the Haml match
+$mines: 10;
+
+$size: 24px;
+$colors: #0000ff, #008100, #ff1300, #000083, #810500, #2a9494, #000000, #808080;
+
+$count: $rows * $cols;
+@if $mines > $count { @error "More mines than blocks"; }
+$pos: ();
+@for $i from 0 to $mines {
+	$mine: 0;
+	$continue: true;	
+	@while $continue != null {
+		$mine: random($count);
+		$continue: index($pos, $mine);
+	}
+	$pos: append($pos, $mine);
+}
+
+body {
+	min-height: 100vh;
+	// strange margin behaviour thing cancelling
+	padding: 1px; box-sizing: border-box;
+	background: teal url(https://assets.codepen.io/15664/bliss.jpg) center / cover no-repeat;
+	counter-reset: mines $mines;
+}
+
+form {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+input { visibility: hidden; position: absolute; top: -99px; left: -99px; }
+input[id^="f"]:checked { counter-increment: mines -1; }
+
+.infos {
+	order: 2;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	width: $cols * $size;
+}
+.timer {
+	font-family: "Roboto Sans", monospace;
+	font-size: 0; // Prevent white-space
+	background: #ccc;
+	border: 1px solid #808080;
+	height: 2.25rem; line-height: 2.25rem;
+	padding: 0 .5rem;
+	.separator {
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 1rem;
+		&:before { content: ':'; }
+	}
+	@keyframes digit {
+		from { top: 0; }
+		to { top: -1000%; }
+	}
+	@keyframes digitTo6 {
+		from { top: 0; }
+		to { top: -600%; }
+	}
+	@keyframes extend { from { width: 0; } 10%, to { width: auto; } }
+	.digit {
+		display: inline-block;
+		position: relative;
+		overflow: hidden;
+		vertical-align: middle;
+		font-size: 1rem;
+		&:before { content: '0'; visibility: hidden; } // Size
+		&:after {
+			content: '0 \A 1 \A 2 \A 3 \A 4 \A 5 \A 6 \A 7 \A 8 \A 9';
+			position: absolute;
+			top: 0; left: 0;
+			animation: digit 1s steps(10) infinite paused;
+		}
+		&:nth-last-child(1):after { animation-duration: 10s; }
+		&:nth-last-child(2):after {
+			content: '0 \A 1 \A 2 \A 3 \A 4 \A 5';
+			animation-name: digitTo6;
+			animation-timing-function: steps(6);
+			animation-duration: 60s;
+		}
+		&:nth-last-child(4):after { animation-duration: 600s; }
+		&:nth-last-child(5):after { animation-duration: 6000s; }
+		&:nth-last-child(6) {
+			width: 0;
+			animation: extend 60000s steps(1) infinite paused;
+			&:after { animation-duration: 60000s; }
+		}
+	}
+}
+.counter {
+	display: inline-block;
+	border: 1px solid #808080;
+	background: #ccc;
+	padding: 0 .5rem;
+	font-size: 1.25rem;
+	font-family: "Roboto Sans", monospace;
+	height: 2.25rem; line-height: 2.25rem;
+	&:before { content: '🤔'; font-size: 1rem; margin-right: .5em; }
+	&:after {
+		content: counter(mines);
+	}
+}
+
+input[id^="c"]:checked ~ .infos .timer .digit {
+	&, &:after {
+		animation-play-state: running;
+	}
+}
+
+.actionSelector {
+	order: 1;
+	text-align: center;
+	margin: 10px;
+	cursor: default;
+	label {
+		display: inline-block;
+		position: relative;
+		width: 1.8em; height: 1.8em;
+		text-align: center; line-height: 1.8em;
+		cursor: pointer;
+		&:before {
+			content: '';
+			position: absolute;
+			left: 0; top: 0;
+			width: 100%; height: 100%;
+			transform: scale(0);
+			border-radius: 50%;
+			background: rgba(210, 210, 210, .8);
+			box-sizing: border-box;
+			border: 1px solid #808080;
+			transition: transform .3s, border-radius .3s;
+			transition-timing-function: cubic-bezier(.75,1.75,.75,.75);
+			z-index: -1;
+		}
+	}
+}
+#modeMine:checked ~ .actionSelector label[for="modeMine"],
+#modeFlag:checked ~ .actionSelector label[for="modeFlag"] {
+	cursor: default;
+	&:before {
+		transform: scale(1);
+		border-radius: 2px;
+	}
+}
+
+.grid {
+	order: 3;
+	user-select: none;
+	position: relative;
+	margin: 10px auto;
+	width: $cols * 1em; height: $rows * 1em;
+	font-size: $size;
+	display: flex;
+	flex-flow: row wrap;
+	border: solid #808080;
+	border-width: 1px 0 0 1px;
+	label {
+		display: block;
+		position: relative;
+		width: 1em; height: 1em;
+		background: #c0c0c0;
+		box-sizing: border-box;
+		border: solid #808080;
+		border-width: 0 1px 1px 0;
+		flex: 0 0 (100% / $cols);
+		overflow: hidden;
+		cursor: pointer;
+		pointer-events: none;
+		&:before {
+			content: '';
+			font-size: .9rem;
+			font-family: 'Roboto Mono', monospace;
+			font-weight: bold;
+			position: absolute;
+			left: 50%; top: 50%;
+			transform: translate(-50%, -50%);
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0; top: 0;
+			width: 100%; height: 100%;
+			box-sizing: border-box;
+			background: #c0c0c0;
+			border: 2px outset #ececec;
+			font-size: .75rem;
+			text-align: center;
+			pointer-events: auto;
+		}
+		&:active:after {
+			background: #bdbdbd;
+			border: solid #999;
+			border-width: 2px 0 0 2px;
+		}
+	}
+	.flags {
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%; height: 100%;
+		display: flex;
+		flex-flow: row wrap;
+		opacity: 0;
+		visibility: hidden;
+	}
+	.error, .victory {
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%; height: 100%;
+		background: rgba(10, 0, 0, .75);
+		color: #fff;
+		font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+		border: none;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity .3s, visibility .3s;
+	}
+	.victory {
+		background: rgba(0, 10, 0, .75);
+	}
+}
+
+#modeFlag:checked ~ .grid .flags {
+	visibility: visible;
+}
+
+#modeMine:checked ~ .grid:active ~ .infos .counter:before {
+	content: '😓' !important;
+}
+@function makeFlagCountSelector($n) {
+	$sel: ();
+	@for $i from 1 through $n {
+		$sel: append($sel, "input[id^="f"]:checked ~ ", space);
+	}
+	@return $sel;
+}
+#{makeFlagCountSelector(1)} .infos .counter:before { content: '😐'; }
+#{makeFlagCountSelector(round($mines / 3))} .infos .counter:before { content: '😏'; }
+#{makeFlagCountSelector(round($mines / 2))} .infos .counter:before { content: '🙂'; }
+#{makeFlagCountSelector(round($mines * 2 / 3))} .infos .counter:before { content: '😊'; }
+#{makeFlagCountSelector(round($mines * 3 / 4))} .infos .counter:before { content: '😃'; }
+// almost there
+#{makeFlagCountSelector($mines - 1)} .infos .counter:before { content: '🤓'; }
+// 0 mines left but no victory screen : uh oh
+#{makeFlagCountSelector($mines)} .infos .counter:before { content: '😕'; }
+// now you're just not even trying
+#{makeFlagCountSelector($mines + 1)} .infos .counter:before { content: '😒'; }
+@if round(($count + $mines) / 2) > $mines + 1 {
+	#{makeFlagCountSelector(round(($count + $mines) / 2))} .infos .counter:before { content: '😠'; }
+}
+@if $count > $mines + 1 {
+	// I mean ... yeah ...
+	#{makeFlagCountSelector($count)} .infos .counter:before { content: '🖕'; }
+}
+
+$vals: ();
+$victorySelector: ();
+@for $i from 1 through $count {
+	$val: 0;
+	@if index($pos, $i) != null {
+		$val: -1;
+		.grid label:nth-child(#{$i}):before {
+			content: '💣';
+			font-size: .75rem;
+		}
+		#c#{$i}:checked {
+			~ .grid {
+				.error { opacity: 1; visibility: visible; }
+				> label:after { visibility: hidden; }
+				label:nth-child(#{$i}) { background-color: #f00; }
+				&:active ~ .infos .timer .digit {
+					&, &:after {
+						animation: none;
+					}
+				}
+			}
+			~ .infos {
+				.counter:before { content: '😣' !important; }
+				.timer .digit {
+					&, &:after {
+						animation-play-state: paused;
+					}
+				}
+			}
+		}
+	} @else {
+		$x: ($i - 1) % $cols;
+		$y: floor(($i - 1) / $cols);
+		$neighbours: 0;
+		@for $dx from -1 through 1 {
+			@for $dy from -1 through 1 {
+				$nx: $x + $dx; $ny: $y + $dy;
+				@if ($dx != 0 or $dy != 0) and
+					$nx >= 0 and $nx < $cols and
+					$ny >= 0 and $ny < $rows {
+						$ni: $ny * $cols + $nx + 1;
+						@if index($pos, $ni) { $neighbours: $neighbours + 1; }
+				}
+			}
+		}
+		$val: $neighbours;
+		@if $neighbours > 0 {
+			.grid label:nth-child(#{$i}):before {
+				content: '#{$neighbours}';
+				color: nth($colors, $neighbours);
+			}
+		}
+	}
+	$vals: append($vals, $val);
+	$victorySelector: append($victorySelector, "#f#{$i}" + if($val == -1, ":checked", ":not(:checked)") + " ~", space);
+}
+
+#{$victorySelector} .grid {
+	> label:after { visibility: hidden; }
+	.victory { opacity: 1; visibility: visible; }
+	&:active ~ .infos .timer .digit {
+		&, &:after {
+			animation: none;
+		}
+	}
+}
+#{$victorySelector} .infos {
+	.counter:before { content: '😎'; }
+	.timer .digit {
+		&, &:after {
+			animation-play-state: paused;
+		}
+	}
+}
+
+$handled: ();
+@function uncoverSelector($i, $direct: true) {
+	$val: nth($vals, $i);
+	$psel: if($direct or $val == 0, ("#c#{$i}:checked"), ());
+	$sel: ("label:nth-child(#{$i})");
+	@if $val == 0 {
+		@if index($handled, $i) != null { @return null; }
+		$handled: append($handled, $i) !global;
+		$x: ($i - 1) % $cols;
+		$y: floor(($i - 1) / $cols);
+		@for $dx from -1 through 1 {
+			@for $dy from -1 through 1 {
+				$nx: $x + $dx; $ny: $y + $dy;
+				@if ($dx != 0 or $dy != 0) and
+					$nx >= 0 and $nx < $cols and
+					$ny >= 0 and $ny < $rows {
+						$result: uncoverSelector($ny * $cols + $nx + 1, false);
+						// $result: null;
+						@if $result != null {
+							$psel: join($psel, nth($result, 1), comma);
+							$sel: join($sel, nth($result, 2), comma);
+						}
+				}
+			}
+		}
+	}
+	@return ($psel, $sel);
+}
+@for $i from 1 through $count {
+	#f#{$i}:checked {
+		~ .grid label:nth-child(#{$i}):after { content: '🚩'; pointer-events:none; visibility: visible !important; }
+		~ #modeFlag:checked ~ .grid .flags label:nth-child(#{$i}):after { pointer-events: auto; }
+	}
+	$result: uncoverSelector($i);
+	@if $result != null {
+		// using @each splits the selector into smaller blocks
+		// (if a selector is too long it can break in some browsers)
+		@each $psel in nth($result, 1) {
+			#{$psel} ~ .grid {
+				#{nth($result, 2)} {
+					&:after {
+						pointer-events: none;
+						visibility: hidden;
+					}
+				}
+			}
+		}
+	}
+}

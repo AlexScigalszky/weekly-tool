@@ -1,4 +1,4 @@
-<div *ngIf="apiData$ | async as apiData" id="home-container">
+<div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
   <app-question-list
     [questions]="apiData.questions"
     [highlight]="questionsHighlight$ | async"
@@ -61,3 +61,9 @@
     </mat-card>
   </div>
 </div>
+
+<ng-template #spinner>
+  <div id="spinner">
+    <app-game></app-game>
+  </div>
+</ng-template>

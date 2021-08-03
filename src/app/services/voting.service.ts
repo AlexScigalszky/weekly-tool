@@ -41,7 +41,7 @@ export class VotingService {
   }
 
   getHighlight(): Observable<Question[]> {
-    return this.highlightSubject.asObservable().pipe(distinctUntilChanged());
+    return this.highlightSubject.asObservable();
   }
 
   private emitNewValues(): void {

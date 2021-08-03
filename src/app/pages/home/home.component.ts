@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
         questions: questions,
       })),
       tap((x) => console.log('refresh room', x)),
-      tap((data) => this.setCurrentQuestion(data.room))
+      tap((data) => this.setCurrentQuestion(data.room)),
     );
 
     this.currentQuestion$ = this.apiData$.pipe(
