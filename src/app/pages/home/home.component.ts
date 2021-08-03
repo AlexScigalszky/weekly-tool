@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest,  Observable, of } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
 import { QuestionItemModalComponent } from 'src/app/components/question-item-modal/question-item-modal.component';
 import { Nullable } from 'src/app/models/nullable';
