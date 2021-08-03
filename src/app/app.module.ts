@@ -32,6 +32,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingService } from './services/voting.service';
 import { MinesweeperComponent } from './components/minesweeper/minesweeper.component';
+import { DamonKillerComponent } from './components/damon-killer/damon-killer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MinesweeperComponent } from './components/minesweeper/minesweeper.compo
     QuestionItemComponent,
     QuestionListComponent,
     QuestionItemModalComponent,
-    MinesweeperComponent
+    MinesweeperComponent,
+    DamonKillerComponent,
   ],
   imports: [
     BrowserModule,

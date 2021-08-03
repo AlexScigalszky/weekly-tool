@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, merge, Observable, of, race } from 'rxjs';
-import { filter, map, mergeMap, share, tap } from 'rxjs/operators';
+import { combineLatest,  Observable, of } from 'rxjs';
+import { filter, map, mergeMap, tap } from 'rxjs/operators';
 import { QuestionItemModalComponent } from 'src/app/components/question-item-modal/question-item-modal.component';
 import { Nullable } from 'src/app/models/nullable';
 import { Question } from 'src/app/models/question';
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
         questions: questions,
       })),
       tap((x) => console.log('refresh room', x)),
-      tap((data) => this.setCurrentQuestion(data.room)),
+      tap((data) => this.setCurrentQuestion(data.room))
     );
 
     this.currentQuestion$ = this.apiData$.pipe(
@@ -89,11 +89,7 @@ export class HomeComponent implements OnInit {
       this.currentQuestionControl.valueChanges,
     ]).pipe(
       map(([apiData, currentQuestionSelected]: [ApiData, string]) => {
-        // if (this.timeRunning(apiData.room)) {
         return apiData.room.currentQuestionId !== currentQuestionSelected;
-        // } else {
-        //   return false;
-        // }
       })
     );
   }
@@ -140,8 +136,9 @@ export class HomeComponent implements OnInit {
     console.log(`vote`, question);
     const votesChanges = this.votingService.voteUp(question);
     if (votesChanges) {
-      this.questionService.update(question);
-      console.log('question updated', question);
+      this.questionService
+        .update(question)
+        .then(() => console.log('question updated', question));
     }
   }
 

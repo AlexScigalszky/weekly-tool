@@ -32,10 +32,15 @@ export class VotingSystem {
   }
 
   private canMakeNewVote() {
-    return this.maxVotesAvaliables > this.questionsUp.length;
+    const result = this.maxVotesAvaliables > this.questionsUp.length;
+    console.log('canMakeNewVote', result);
+    return result;
   }
 
   private wasVoted(question: Question): boolean {
-    return this.questionsUp.find((x) => x.id === question.id) !== undefined;
+    const result =
+      this.questionsUp.find((x) => x.id === question.id) !== undefined;
+    console.log('wasVoted', result);
+    return result;
   }
 }

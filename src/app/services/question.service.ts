@@ -55,8 +55,10 @@ export class QuestionService {
     return this.roomCollection.doc<Room>(roomName).valueChanges();
   }
 
-  update(question: Question) {
-    this.questionCollection.doc(question.id).set(question, { merge: true });
+  update(question: Question): Promise<void> {
+    return this.questionCollection
+      .doc(question.id)
+      .set(question, { merge: true });
   }
 
   async existsRooom(room: string): Promise<boolean> {
@@ -84,14 +86,13 @@ export class QuestionService {
     return this.questionCollection
       .doc<Question>(currentQuestionId)
       .valueChanges()
-      .pipe(catchError((err: any) => {
+      .pipe(
+        catchError((err: any) => {
           console.error(`Question ${currentQuestionId} not found`);
           return of(null);
-        }
-
-      ));
+        })
+      );
   }
-
 
   updateRoom(
     room: string,

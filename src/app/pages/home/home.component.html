@@ -47,15 +47,15 @@
 
         <h3>{{ currentQuestion.title }}</h3>
         <p>{{ currentQuestion.description }}</p>
-        <small *ngIf="currentQuestion.name"
-          >Sugerido por: <strong>{{ currentQuestion.name }}</strong></small
-        >
+        <small *ngIf="currentQuestion.name">
+          Sugerido por: <strong>{{ currentQuestion.name }}</strong>
+        </small>
       </mat-card-content>
     </mat-card>
 
     <mat-card *ngIf="timeStartTime">
       <mat-card-content>
-        {{ minutes }} minutos y contando..
+        {{ minutes }} minutos y contando...
         {{ startTime | date: "HH:mm:ss" }}
       </mat-card-content>
     </mat-card>
@@ -64,6 +64,8 @@
 
 <ng-template #spinner>
   <div id="spinner">
-    <app-game></app-game>
+      <!-- <app-damon-killer></app-damon-killer> -->
+      <p>Cargando... </p>
+      <p>Con amor, niñita</p>      
   </div>
 </ng-template>
