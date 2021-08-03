@@ -11,6 +11,7 @@ import { Room } from 'src/app/models/room';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
+import { Timestamp } from 'firebase-firestore-timestamp';
 
 export type ApiData = {
   room: Room;
@@ -89,7 +90,7 @@ export class HomeComponent implements OnInit {
     ]).pipe(
       map(([apiData, currentQuestionSelected]: [ApiData, string]) => {
         // if (this.timeRunning(apiData.room)) {
-          return apiData.room.currentQuestionId !== currentQuestionSelected;
+        return apiData.room.currentQuestionId !== currentQuestionSelected;
         // } else {
         //   return false;
         // }
@@ -99,7 +100,15 @@ export class HomeComponent implements OnInit {
 
   private setCurrentQuestion(room: Room): void {
     if (this.timeRunning(room)) {
-      this.timeStartTime = room.timeStartTime.toDate();
+      console.log(`room.timeStartTime ${room.timeStartTime}`);
+      if (room.timeStartTime.toString().includes('Timestamp')) {
+        this.timeStartTime = new Date(
+          (room.timeStartTime as Timestamp).seconds * 1000
+        );
+      } else {
+        this.timeStartTime = new Date(room.timeStartTime);
+      }
+
       this.timer.initTimer();
       this.timer.startTimer();
       this.calculateMinutes();

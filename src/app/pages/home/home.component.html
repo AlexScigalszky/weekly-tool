@@ -41,18 +41,15 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card>
+    <mat-card *ngIf="currentQuestion$ | async as currentQuestion">
       <mat-card-content>
-        <div *ngIf="currentQuestion$ | async as currentQuestion">
-          <h2>El tema elegido es:</h2>
+        <h2>El tema elegido es:</h2>
 
-          <h3>{{ currentQuestion.title }}</h3>
-          <p>{{ currentQuestion.description }}</p>
-          <small *ngIf="currentQuestion.name"
-            >Sugerido por: {{ currentQuestion.name }}</small
-          >
-          <!-- <app-question-item [question]="currentQuestion"></app-question-item> -->
-        </div>
+        <h3>{{ currentQuestion.title }}</h3>
+        <p>{{ currentQuestion.description }}</p>
+        <small *ngIf="currentQuestion.name"
+          >Sugerido por: <strong>{{ currentQuestion.name }}</strong></small
+        >
       </mat-card-content>
     </mat-card>
 

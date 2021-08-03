@@ -1,12 +1,12 @@
 import { Nullable } from './nullable';
 import { Question } from './question';
-// import { Timestamp } from 'firebase-firestore-timestamp';
-import { Timestamp } from '@firebase/firestore-types';
+import { Timestamp } from 'firebase-firestore-timestamp';
+// import { Timestamp } from '@firebase/firestore-types';
 
 export class Room {
   id: string = (Math.random() * 100000).toString();
   timestamp?: Date = new Date();
   currentQuestionId: Nullable<string> = null;
-  timeStartTime: Timestamp = Timestamp.now();
+  timeStartTime: Date = new Date();
   questions: Question[] = [];
 }

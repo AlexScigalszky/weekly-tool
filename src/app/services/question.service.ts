@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Question } from '../models/question';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  
 } from '@angular/fire/firestore';
 import { Room } from '../models/room';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { Nullable } from '../models/nullable';
 
 @Injectable({
   providedIn: 'root',
@@ -77,16 +77,32 @@ export class QuestionService {
       .then(() => newRoom);
   }
 
-  getQuestion(currentQuestionId: string): Observable<Question> {
-    return this.questionCollection.doc<Question>(currentQuestionId).valueChanges();
+  getQuestion(currentQuestionId: string): Observable<Nullable<Question>> {
+    if (!currentQuestionId) {
+      return of(null);
+    }
+    return this.questionCollection
+      .doc<Question>(currentQuestionId)
+      .valueChanges()
+      .pipe(catchError((err: any) => {
+          console.error(`Question ${currentQuestionId} not found`);
+          return of(null);
+        }
+
+      ));
   }
 
-  updateRoom(room: string, timeStartTime: Date, questionId: string) : Promise<any>{
+
+  updateRoom(
+    room: string,
+    timeStartTime: Date,
+    questionId: string
+  ): Promise<any> {
     return this.roomCollection
       .doc(room)
-      .update({ 
+      .update({
         timeStartTime: timeStartTime,
-        currentQuestionId: questionId
+        currentQuestionId: questionId,
       })
       .then(() => console.log(`timer set ${timeStartTime}`));
   }
