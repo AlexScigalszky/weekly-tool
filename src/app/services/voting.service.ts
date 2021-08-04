@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Question } from '../models/question';
 import { VotingSystem } from '../models/voting-system';
 

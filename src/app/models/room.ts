@@ -1,7 +1,5 @@
 import { Nullable } from './nullable';
 import { Question } from './question';
-import { Timestamp } from 'firebase-firestore-timestamp';
-// import { Timestamp } from '@firebase/firestore-types';
 
 export class Room {
   id: string = (Math.random() * 100000).toString();
