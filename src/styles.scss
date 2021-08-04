@@ -13,6 +13,15 @@ body {
   min-height: 100vh;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
+.logo {
+  width: 6rem;
+}
+
 header {
   margin-bottom: 2rem;
   padding: 3rem 1rem;
@@ -21,6 +30,9 @@ header {
   }
   background-color: darken(#5ecaec, 20%);
   color: #fff;
+  img {
+    margin-right: 1rem;
+  }
   h1 {
     font-size: 2.5rem !important;
   }
@@ -65,4 +77,8 @@ mat-card {
 }
 .mat-card-header-text {
   margin-left: 0 !important;
+}
+
+.to_left {
+  float: left;
 }
