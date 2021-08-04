@@ -1,25 +1,19 @@
 <h1 mat-dialog-title>Nuevo tema</h1>
 <div mat-dialog-content>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Título</mat-label>
-        <input matInput [(ngModel)]="question.title" />
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Descripción</mat-label>
-        <textarea
-          matInput
-          [(ngModel)]="question.description"
-          rows="5"
-        ></textarea>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Tu nombre (opcional)</mat-label>
-        <input matInput [(ngModel)]="question.name" />
-      </mat-form-field>
-  
+  <mat-form-field appearance="outline">
+    <mat-label>Título</mat-label>
+    <input matInput [(ngModel)]="question.title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="question.description" rows="5"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tu nombre (opcional)</mat-label>
+    <input matInput [(ngModel)]="question.name" />
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button (click)="onNoClick()" mat-button color="primary">Cancelar</button>

@@ -10,8 +10,8 @@ body {
 
   min-height: 100vh;
 
-  display:flex; 
-  flex-direction:column; 
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -30,7 +30,7 @@ header {
   }
 }
 footer {
-  margin-top:auto;
+  margin-top: auto;
   padding: 1rem;
   @media (min-width: 960px) {
     padding: 1.5rem 2rem;

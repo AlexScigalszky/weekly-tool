@@ -11,7 +11,8 @@
       color: #fff;
     }
   }
-  .question-name, .question-description {
+  .question-name,
+  .question-description {
     @media (max-width: 959px) {
       max-width: 160px;
     }
@@ -23,7 +24,6 @@
     text-align: right;
   }
 }
-
 
 /* SCSS */
 .mat-list-item.mat-list-item-word-wrap {
