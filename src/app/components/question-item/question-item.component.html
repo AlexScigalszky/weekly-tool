@@ -3,16 +3,15 @@
   [class.question-voted]="highlight"
   (click)="vote()"
 >
-  <h3 matLine>{{ question.title }}</h3>
-  <small matLine *ngIf="question.name">
+  <h3 matLine class="question-title">{{ question.title }}</h3>
+  <div matLine *ngIf="question.name" class="question-name">
     {{ question.name }}
-  </small>
-  <div matLine>
+  </div>
+  <div matLine class="question-description">
     {{ question.description }}
   </div>
-
-  <div>{{ question.votes }} votos</div>
-  <button mat-flat-button [color]="highlight ? 'accent' : 'primary'">
+  <div class="question-votes">{{ question.votes }} votos</div>
+  <button mat-stroked-button [color]="highlight ? 'accent' : 'primary'">
     Votar
   </button>
 </mat-list-item>

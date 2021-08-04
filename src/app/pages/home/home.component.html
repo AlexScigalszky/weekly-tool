@@ -18,7 +18,7 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button (click)="openDialog()" mat-raised-button color="primary">
+        <button (click)="openDialog()" mat-flat-button color="primary">
           Nuevo tema
         </button>
       </mat-card-actions>
@@ -34,7 +34,7 @@
 
       <mat-card-content>
         <p>1- Seleccioná un tema a conversar</p>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Temas</mat-label>
           <mat-select [formControl]="currentQuestionControl">
             <mat-option

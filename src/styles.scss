@@ -8,9 +8,10 @@ body {
   margin: 0;
   padding: 0;
 
-  display: grid;
-  grid-template-rows: auto 1fr auto;
   min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 img {
@@ -41,7 +42,7 @@ header {
   }
 }
 footer {
-  margin-top: 2rem;
+  margin-top: auto;
   padding: 1rem;
   @media (min-width: 960px) {
     padding: 1.5rem 2rem;
