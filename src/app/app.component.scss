@@ -1,4 +1,8 @@
-.main-container {
-  padding: 10px 20px 10px 20px;
-  min-height: calc(100vh - 56px) !important;
+.mat-drawer-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 960px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

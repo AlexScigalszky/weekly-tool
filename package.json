@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "prittier": "npx prettier --write ./src",
     "clean": "rimraf ./dist",
     "build:ci": "npm run clean && npm run build"
   },
