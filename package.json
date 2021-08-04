@@ -9,8 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "clean": "rimraf ./dist",
-    "build:prod": "ng build --prod",
-    "build:ci": "npm run clean && npm run test && npm run build:prod"
+    "build:ci": "npm run clean && npm run build"
   },
   "private": true,
   "dependencies": {
