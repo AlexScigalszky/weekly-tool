@@ -1,8 +1,12 @@
-<mat-list-item *ngIf="question" [class.question-voted]="highlight" (click)="vote()">
+<mat-list-item
+  *ngIf="question"
+  [class.question-voted]="highlight"
+  (click)="vote()"
+>
   <h3 matLine>{{ question.title }}</h3>
   <small matLine *ngIf="question.name">
     {{ question.name }}
-  </small> 
+  </small>
   <div matLine>
     {{ question.description }}
   </div>

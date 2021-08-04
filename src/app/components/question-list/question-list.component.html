@@ -1,8 +1,8 @@
 <mat-list>
   <app-question-item
-  *ngFor="let question of questions"
-  [question]="question"
-  [highlight]="highlightQuestion(question)"
-  (voted)="vote($event)"
+    *ngFor="let question of questions"
+    [question]="question"
+    [highlight]="highlightQuestion(question)"
+    (voted)="vote($event)"
   ></app-question-item>
 </mat-list>

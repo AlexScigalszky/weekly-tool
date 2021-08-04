@@ -1,11 +1,11 @@
 #home-container {
-    display: grid;
-    gap: 1rem;
+  display: grid;
+  gap: 1rem;
 }
 @media (min-width: 960px) {
-    #home-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  #home-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .main-card .mat-card-content {
@@ -14,19 +14,19 @@
 }
 
 #spinner {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    z-index: 99999;
-    color: #fff;
-    background-color: darken(#5ECAEC, 20%);
-    h1 {
-        font-size: 3rem;
-    }
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 99999;
+  color: #fff;
+  background-color: darken(#5ecaec, 20%);
+  h1 {
+    font-size: 3rem;
+  }
 }
