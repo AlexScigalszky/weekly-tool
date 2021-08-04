@@ -1,20 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-html {
+:root {
   font-family: 'Roboto', sans-serif;
+  background-color: #5ECAEC;
+}
+body {
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh
+}
+
+header {
+  margin-bottom: 2rem;
+  padding: 3rem 1rem;
+  @media (min-width: 960px) {
+    padding: 3rem 2rem;
+  }
+  background-color: darken(#5ECAEC, 20%);
+  color: #fff;
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  h2 {
+    margin-bottom: 0 !important;
+  }
+}
+footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  @media (min-width: 960px) {
+    padding: 1.5rem 2rem;
+  }
+  background-color: darken(#5ECAEC, 20%);
+  color: rgb(255,255,255,0.7);
+  a {
+    color: rgb(255,255,255,1);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 mat-form-field {
   width: 100%;
-}
-body {
-  background-color: #5ecaec;
 }
 
 mat-sidenav-container {
   background-color: transparent !important;
 }
 
+// Card
 mat-card {
-  margin: 1rem;
+  + mat-card {
+    margin-top: 1rem;
+  }
+}
+.mat-list-base .mat-list-item .mat-list-item-content,
+.mat-list-base .mat-list-option .mat-list-item-content {
+  //padding: 0 !important;
+}
+.mat-card-header-text {
+  margin-left: 0 !important;
 }

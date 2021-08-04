@@ -1,20 +1,14 @@
-<mat-list-item *ngIf="question" [class.question-voted]="highlight">
+<mat-list-item *ngIf="question" [class.question-voted]="highlight" (click)="vote()">
   <h3 matLine>{{ question.title }}</h3>
   <small matLine *ngIf="question.name">
     {{ question.name }}
-  </small>
-  <!-- <div matLine>
+  </small> 
+  <div matLine>
     {{ question.description }}
-  </div> -->
+  </div>
 
-  <span>{{ question.votes }} votes &nbsp;</span>
-  <button mat-icon-button (click)="vote()">
-    <mat-icon
-      aria-hidden="false"
-      aria-label="face"
-      [color]="highlight ? 'accent' : 'primary'"
-    >
-      check_circle
-    </mat-icon>
+  <div>{{ question.votes }} votos</div>
+  <button mat-flat-button [color]="highlight ? 'accent' : 'primary'">
+    Votar
   </button>
 </mat-list-item>
