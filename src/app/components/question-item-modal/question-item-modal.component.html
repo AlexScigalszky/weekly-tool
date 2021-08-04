@@ -1,14 +1,12 @@
-<h1 mat-dialog-title>Nuevo</h1>
+<h1 mat-dialog-title>Nuevo tema</h1>
 <div mat-dialog-content>
-  <ol>
-    <li>
-      <mat-form-field appearance="fill">
-        <mat-label>Tìtulo</mat-label>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Título</mat-label>
         <input matInput [(ngModel)]="question.title" />
       </mat-form-field>
-    </li>
-    <li>
-      <mat-form-field appearance="fill">
+  
+      <mat-form-field appearance="outline">
         <mat-label>Descripción</mat-label>
         <textarea
           matInput
@@ -16,18 +14,14 @@
           rows="5"
         ></textarea>
       </mat-form-field>
-    </li>
-    <li>
-      <mat-form-field appearance="fill">
+  
+      <mat-form-field appearance="outline">
         <mat-label>Tu nombre (opcional)</mat-label>
         <input matInput [(ngModel)]="question.name" />
       </mat-form-field>
-    </li>
-  </ol>
+  
 </div>
 <div mat-dialog-actions>
-  <button (click)="onNoClick()" mat-stroked-button color="warn">
-    Cancelar
-  </button>
-  <button (click)="create()" mat-stroked-button color="primary">Aceptar</button>
+  <button (click)="onNoClick()" mat-button color="primary">Cancelar</button>
+  <button (click)="create()" mat-flat-button color="primary">Crear</button>
 </div>
