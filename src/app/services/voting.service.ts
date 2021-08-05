@@ -13,12 +13,20 @@ export class VotingService {
   highlightSubject = new BehaviorSubject<Question[]>([]);
 
   constructor() {
+    this.loadVotingSystemFromStorage();
+  }
+
+  private loadVotingSystemFromStorage(room: string = 'default'): void {
     const votingSystemExistingStr = localStorage.getItem(KEY) ?? '';
     console.log({ votingSystemExistingStr });
     if (votingSystemExistingStr) {
       this.votingSystem = new VotingSystem(JSON.parse(votingSystemExistingStr));
       this.emitNewValues();
     }
+  }
+
+  setRoom(room: string): void {
+    this.loadVotingSystemFromStorage(room);
   }
 
   voteUp(question: Question): boolean {
@@ -35,8 +43,8 @@ export class VotingService {
     return result;
   }
 
-  saveVotingSystem(votingSystem: VotingSystem): void {
-    localStorage.setItem(KEY, JSON.stringify(votingSystem));
+  saveVotingSystem(votingSystem: VotingSystem, room: string = ''): void {
+    localStorage.setItem(`${KEY}-${room}`, JSON.stringify(votingSystem));
   }
 
   getHighlight(): Observable<Question[]> {

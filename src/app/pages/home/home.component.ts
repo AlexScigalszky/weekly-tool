@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
       console.log(`room ${this.room} created`);
     }
     this.questionService.setRoom(this.room);
+    this.votingService.setRoom(this.room);
 
     this.apiData$ = combineLatest([
       this.questionService.getRoom(this.room),
@@ -70,7 +71,7 @@ export class HomeComponent implements OnInit {
         room: room,
         questions: questions,
       })),
-      tap((x) => console.log('refresh room', x)),
+      tap((data) => console.log('refresh room', data)),
       tap((data) => this.setCurrentQuestion(data.room)),
     );
 

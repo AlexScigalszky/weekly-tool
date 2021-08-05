@@ -34,7 +34,7 @@ export class QuestionService {
     );
   }
 
-  orderByRelevance = (ref) => ref.orderBy('votes');
+  orderByRelevance = (ref: any) => ref.orderBy('votes');
 
   list(): Observable<Question[]> {
     return this.questionCollection
