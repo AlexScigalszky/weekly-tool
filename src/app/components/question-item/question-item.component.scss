@@ -1,6 +1,9 @@
 @import '~@angular/material/theming';
-.mat-list-item {
-  cursor: pointer;
+.question-item {
+  display: grid;
+  columns: 2fr 1fr;
+  margin: 1rem;
+  padding: 0.8rem;
   &:hover {
     background-color: mat-color($mat-light-theme-background, hover, 0.05);
   }
@@ -9,6 +12,14 @@
     button {
       background-color: #ff4081;
       color: #fff;
+    }
+  }
+  .question-title {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    h3 {
+      display: block;
     }
   }
   .question-name,
@@ -22,14 +33,5 @@
     padding-left: 16px;
     padding-right: 16px;
     text-align: right;
-  }
-}
-
-/* SCSS */
-.mat-list-item.mat-list-item-word-wrap {
-  height: initial !important;
-  .mat-line {
-    word-wrap: break-word !important;
-    white-space: pre-wrap !important;
   }
 }
