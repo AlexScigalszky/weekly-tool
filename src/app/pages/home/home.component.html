@@ -4,8 +4,11 @@
       <mat-card-header>
         <mat-card-title> Temas a conversar </mat-card-title>
         <mat-card-subtitle>
-          Escribí un idea junto con su descripción para conversarlo entre todos.
-          Si querés podés agregar tu nombre
+          <p>
+            Escribí un idea junto con su descripción para conversarlo entre
+            todos. Si querés podés agregar tu nombre. Al momento de votar, sólo
+            podrás hacerlo en 3 items.
+          </p>
         </mat-card-subtitle>
         <div class="center-items">
           <button (click)="openDialog()" mat-flat-button color="primary">
@@ -21,7 +24,6 @@
           (voted)="vote($event)"
         ></app-question-list>
       </mat-card-content>
-
     </mat-card>
   </div>
 
