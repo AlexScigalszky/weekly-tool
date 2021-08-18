@@ -32,6 +32,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingService } from './services/voting.service';
 import { FullscreenButtonComponent } from './components/fullscreen-button/fullscreen-button.component';
+import { NewRoomModalComponent } from './components/new-room-modal/new-room-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FullscreenButtonComponent } from './components/fullscreen-button/fullsc
     QuestionListComponent,
     QuestionItemModalComponent,
     FullscreenButtonComponent,
+    NewRoomModalComponent,
   ],
   imports: [
     BrowserModule,

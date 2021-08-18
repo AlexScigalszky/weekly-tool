@@ -4,6 +4,7 @@
   font-family: 'Roboto', sans-serif;
   background-color: #5ecaec;
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -21,6 +22,10 @@ img {
 
 .logo {
   width: 6rem;
+}
+
+.to-rigth {
+  float: right;
 }
 
 header {
@@ -82,4 +87,52 @@ mat-card {
 
 .to_left {
   float: left;
+}
+
+
+#selected-topic:-webkit-full-screen {
+  
+  background-color: #5ecaec;
+  mat-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+#selected-topic:-moz-full-screen {
+  
+  background-color: #5ecaec;
+  mat-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+#selected-topic:-ms-fullscreen {
+  
+  background-color: #5ecaec;
+  mat-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+#selected-topic:fullscreen {
+  background-color: #5ecaec;
+  mat-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 }

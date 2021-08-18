@@ -27,7 +27,7 @@
     </mat-card>
   </div>
 
-  <div>
+  <div id="selected-topic">
     <mat-card>
       <mat-card-header>
         <mat-card-title> Tiempo de conversación </mat-card-title>
@@ -60,7 +60,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="currentQuestion$ | async as currentQuestion">
+    <mat-card  *ngIf="currentQuestion$ | async as currentQuestion">
       <mat-card-header>
         <mat-card-title>
           Tema elegido: {{ currentQuestion.title }}
@@ -73,14 +73,15 @@
         <p>
           {{ currentQuestion.description }}
         </p>
+        <h3 *ngIf="timeStartTime">
+          {{ minutes }} minutos y contando...
+          {{ startTime | date: 'HH:mm:ss' }}
+        </h3>
       </mat-card-content>
-    </mat-card>
+      <mat-card-actions>
+        <app-fullscreen-button [id]="'selected-topic'"></app-fullscreen-button>
 
-    <mat-card *ngIf="timeStartTime">
-      <mat-card-content>
-        {{ minutes }} minutos y contando...
-        {{ startTime | date: 'HH:mm:ss' }}
-      </mat-card-content>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>

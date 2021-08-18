@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Nuevo tema</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="title" />
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button (click)="onNoClick()" mat-button color="primary">Cancelar</button>
+  <button (click)="create()" mat-flat-button color="primary">Crear</button>
+</div>

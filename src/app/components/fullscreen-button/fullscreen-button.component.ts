@@ -9,12 +9,14 @@ import { DOCUMENT } from '@angular/common';
 export class FullscreenButtonComponent implements OnInit {
   elem: any;
   isFullScreen: boolean;
+  id = 'selected-topic';
 
   constructor(@Inject(DOCUMENT) private document: any) {}
 
   ngOnInit(): void {
     this.chkScreenMode();
-    this.elem = document.documentElement;
+    this.elem = document.getElementById(this.id);
+    console.log('this.elem', this.elem);
   }
 
   @HostListener('document:fullscreenchange', ['$event'])
