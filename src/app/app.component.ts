@@ -17,6 +17,9 @@ export class AppComponent {
     });
 
     const roomName = await dialogRef.afterClosed().toPromise();
+    if (roomName === undefined) {
+      return;
+    }
     console.log('roomName', roomName);
     this.questions.getRoom(roomName).subscribe((room) => {
       if (room !== undefined) {
