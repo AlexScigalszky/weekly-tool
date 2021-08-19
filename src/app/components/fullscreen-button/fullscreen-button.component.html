@@ -1,6 +1,16 @@
-<button mat-flat-button class="fullscreen" *ngIf="!isFullScreen" (click)="openFullscreen()">
+<button
+  mat-flat-button
+  class="fullscreen"
+  *ngIf="!isFullScreen"
+  (click)="openFullscreen()"
+>
   Pantalla completa
 </button>
-<button mat-flat-button class="fullscreen" *ngIf="isFullScreen" (click)="closeFullscreen()">
+<button
+  mat-flat-button
+  class="fullscreen"
+  *ngIf="isFullScreen"
+  (click)="closeFullscreen()"
+>
   Salir de pantalla completa
 </button>

@@ -60,7 +60,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card  *ngIf="currentQuestion$ | async as currentQuestion">
+    <mat-card *ngIf="currentQuestion$ | async as currentQuestion">
       <mat-card-header>
         <mat-card-title>
           Tema elegido: {{ currentQuestion.title }}
@@ -80,7 +80,6 @@
       </mat-card-content>
       <mat-card-actions>
         <app-fullscreen-button [id]="'selected-topic'"></app-fullscreen-button>
-
       </mat-card-actions>
     </mat-card>
   </div>
