@@ -1,8 +1,4 @@
-<div
-  *ngIf="question"
-  [class.question-voted]="highlight"
-  class="question-item"
->
+<div *ngIf="question" [class.question-voted]="highlight" class="question-item">
   <div class="question-title">
     <div>
       <h3>{{ question.title }}</h3>
@@ -11,7 +7,11 @@
       </div>
     </div>
     <div>
-      <button mat-stroked-button [color]="highlight ? 'accent' : 'primary'">
+      <button
+        mat-stroked-button
+        [color]="highlight ? 'accent' : 'primary'"
+        (click)="vote()"
+      >
         Votar
       </button>
       {{ question.votes }} votos

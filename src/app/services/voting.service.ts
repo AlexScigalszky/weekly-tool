@@ -11,14 +11,16 @@ const KEY = 'voting-system';
 export class VotingService {
   votingSystem: VotingSystem = new VotingSystem(null);
   highlightSubject = new BehaviorSubject<Question[]>([]);
+  room: string = 'default';
 
   constructor() {
     this.loadVotingSystemFromStorage();
   }
 
-  private loadVotingSystemFromStorage(room: string = 'default'): void {
-    const votingSystemExistingStr = localStorage.getItem(KEY) ?? '';
-    console.log({ votingSystemExistingStr });
+  private loadVotingSystemFromStorage(room: string = this.room): void {
+    const votingSystemExistingStr =
+      localStorage.getItem(`${KEY}-${room}`) ?? '';
+    console.log(`${KEY}-${room}`, { votingSystemExistingStr });
     if (votingSystemExistingStr) {
       this.votingSystem = new VotingSystem(JSON.parse(votingSystemExistingStr));
       this.emitNewValues();
@@ -26,6 +28,7 @@ export class VotingService {
   }
 
   setRoom(room: string): void {
+    this.room = room;
     this.loadVotingSystemFromStorage(room);
   }
 
@@ -43,8 +46,9 @@ export class VotingService {
     return result;
   }
 
-  saveVotingSystem(votingSystem: VotingSystem, room: string = ''): void {
+  saveVotingSystem(votingSystem: VotingSystem, room: string = this.room): void {
     localStorage.setItem(`${KEY}-${room}`, JSON.stringify(votingSystem));
+    console.log(`Voting System saved ${KEY}-${room}`, votingSystem);
   }
 
   getHighlight(): Observable<Question[]> {
