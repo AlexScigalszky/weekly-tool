@@ -107,4 +107,13 @@ export class QuestionService {
       })
       .then(() => console.log(`timer set ${timeStartTime}`));
   }
+
+  resetVotes(room: string, questions: Question[]) {
+    questions
+      .map((question) => ({
+        ...question,
+        votes: 0,
+      }))
+      .forEach(async (question) => await this.update(question));
+  }
 }

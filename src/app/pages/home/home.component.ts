@@ -132,9 +132,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  vote(question: Question): void {
+  vote(question: Question, questionsHighlight: Question[]): void {
     console.log(`vote`, question);
-    const votesChanges = this.votingService.voteUp(question);
+    const exists = questionsHighlight.some((x) => x.id == question.id);
+    let votesChanges = false;
+    if (exists) {
+      votesChanges = this.votingService.voteDown(question);
+    } else {
+      votesChanges = this.votingService.voteUp(question);
+    }
+
     if (votesChanges) {
       this.questionService
         .update(question)
@@ -162,6 +169,15 @@ export class HomeComponent implements OnInit {
     if (this.timeStartTime !== null) {
       this.minutes = this.diffDays(new Date(), this.timeStartTime);
       console.log('minutes', this.minutes);
+    }
+  }
+
+  resetVotes(questions: Question[]): void {
+    if (
+      confirm('¿estás seguro de querer eliminar todos los votos?') &&
+      prompt('Ingresa la clave para validar esto') === 'cS4vRT66fp6I'
+    ) {
+      this.questionService.resetVotes(this.room, questions);
     }
   }
 }

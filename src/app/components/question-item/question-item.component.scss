@@ -4,6 +4,7 @@
   columns: 2fr 1fr;
   margin: 1rem;
   padding: 0.8rem;
+  border-bottom: 1px solid #cccccc;
   &:hover {
     background-color: mat-color($mat-light-theme-background, hover, 0.05);
   }
@@ -20,6 +21,9 @@
     justify-content: space-between;
     h3 {
       display: block;
+    }
+    button {
+      margin-right: 1rem;
     }
   }
   .question-name,

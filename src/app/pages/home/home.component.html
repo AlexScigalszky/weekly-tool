@@ -9,21 +9,30 @@
             todos. Si querés podés agregar tu nombre. Al momento de votar, sólo
             podrás hacerlo en 3 items.
           </p>
-        </mat-card-subtitle>
-        <div class="center-items">
           <button (click)="openDialog()" mat-flat-button color="primary">
             Nuevo tema
           </button>
-        </div>
+        </mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
         <app-question-list
+          *ngIf="questionsHighlight$ | async as questionsHighlight"
           [questions]="apiData.questions"
-          [highlight]="questionsHighlight$ | async"
-          (voted)="vote($event)"
+          [highlight]="questionsHighlight"
+          (voted)="vote($event, questionsHighlight)"
         ></app-question-list>
       </mat-card-content>
+
+      <mat-card-actions>
+        <button
+          (click)="resetVotes(apiData.questions)"
+          mat-stroked-button
+          color="primary"
+        >
+          Limpiar votos
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
 
