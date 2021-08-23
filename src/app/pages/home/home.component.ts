@@ -186,7 +186,9 @@ export class HomeComponent implements OnInit {
   }
 
   editQuestion(question: Question): void {
-    const dialogRef = this.openQuestionModal(JSON.parse(JSON.stringify(question)));
+    const dialogRef = this.openQuestionModal(
+      JSON.parse(JSON.stringify(question)),
+    );
 
     dialogRef.afterClosed().subscribe((question) => {
       this.questionService

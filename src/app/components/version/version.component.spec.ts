@@ -21,6 +21,8 @@ describe('VersionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
     fixture.detectChanges();
-    expect(fixture.debugElement.nativeElement.textContent.trim()).toContain('v');
+    expect(fixture.debugElement.nativeElement.textContent.trim()).toContain(
+      'v',
+    );
   });
 });
