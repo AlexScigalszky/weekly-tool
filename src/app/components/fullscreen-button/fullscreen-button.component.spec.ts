@@ -3,11 +3,9 @@ import { By } from '@angular/platform-browser';
 
 import { FullscreenButtonComponent } from './fullscreen-button.component';
 
-declare const viewport: any;
 describe('FullscreenButtonComponent', () => {
   let component: FullscreenButtonComponent;
   let fixture: ComponentFixture<FullscreenButtonComponent>;
-  // viewport.set(320, 240);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
