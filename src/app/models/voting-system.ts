@@ -5,14 +5,20 @@ export class VotingSystem {
   questionsUp: Question[] = [];
 
   constructor(data?: VotingSystem) {
-    if (data && data.questionsUp) {
+    if (!data) {
+      return;
+    }
+    if (data.questionsUp) {
       this.questionsUp = data.questionsUp;
+    }
+    if (data.maxVotesAvaliables) {
+      this.maxVotesAvaliables = data.maxVotesAvaliables;
     }
   }
 
   voteUp(question: Question): boolean {
     const wasVoted = this.wasVoted(question);
-    const canMakeNewVote = this.canMakeNewVote(question);
+    const canMakeNewVote = this.canMakeNewVote();
     if (!wasVoted && canMakeNewVote) {
       question.votes++;
       this.questionsUp = [question, ...this.questionsUp];
@@ -34,7 +40,7 @@ export class VotingSystem {
     return true;
   }
 
-  private canMakeNewVote(question: Question) {
+  private canMakeNewVote() {
     const result = this.maxVotesAvaliables > this.questionsUp.length;
     console.log('canMakeNewVote', result);
     return result;
