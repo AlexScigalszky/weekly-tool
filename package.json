@@ -7,7 +7,7 @@
     "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --browsers=ChromeHeadlessCI",
     "prittier:fix": "npx prettier --write ./src",
     "prittier:check": "npx prettier --check ./src",
     "clean": "rimraf ./dist",

@@ -14,7 +14,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
-import { AppbarComponent } from './components/appbar/appbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { QuestionItemComponent } from './components/question-item/question-item.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
@@ -38,7 +37,6 @@ import { NewRoomModalComponent } from './components/new-room-modal/new-room-moda
   declarations: [
     AppComponent,
     SidenavComponent,
-    AppbarComponent,
     HomeComponent,
     QuestionItemComponent,
     QuestionListComponent,
