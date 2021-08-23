@@ -4,15 +4,15 @@
   "scripts": {
     "ng": "ng",
     "prebuild": "node PreBuild.js",
-    "serve": "node PreBuild.js & ng s",
-    "start": "node PreBuild.js & node server.js",
-    "build": "node PreBuild.js & ng build",
-    "watch": "node PreBuild.js & ng build --watch --configuration development",
-    "test": "node PreBuild.js & cls & ng test --browsers=ChromeHeadlessCI",
+    "serve": "node PreBuild.js && ng s",
+    "start": "node PreBuild.js && node server.js",
+    "build": "node PreBuild.js && ng build",
+    "watch": "node PreBuild.js && ng build --watch --configuration development",
+    "test": "node PreBuild.js && ng test --browsers=ChromeHeadlessCI",
     "prittier:fix": "npx prettier --write ./src",
     "prittier:check": "npx prettier --check ./src",
     "clean": "rimraf ./dist",
-    "build:ci": "node PreBuild.js & npm run prittier:check && npm run clean && npm run build"
+    "build:ci": "node PreBuild.js && npm run prittier:check && npm run clean && npm run build"
   },
   "private": true,
   "dependencies": {
