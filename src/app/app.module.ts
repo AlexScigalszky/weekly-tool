@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingService } from './services/voting.service';
 import { FullscreenButtonComponent } from './components/fullscreen-button/fullscreen-button.component';
 import { NewRoomModalComponent } from './components/new-room-modal/new-room-modal.component';
+import { VersionComponent } from './components/version/version.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NewRoomModalComponent } from './components/new-room-modal/new-room-moda
     QuestionItemModalComponent,
     FullscreenButtonComponent,
     NewRoomModalComponent,
+    VersionComponent,
   ],
   imports: [
     BrowserModule,
