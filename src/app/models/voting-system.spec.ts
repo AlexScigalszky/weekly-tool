@@ -35,8 +35,12 @@ describe('VotingSystem', () => {
   it('should be created with new values', () => {
     const service = new VotingSystem(newVotingSystem);
     expect(service).toBeTruthy();
-    expect(service.maxVotesAvaliables).toEqual(newVotingSystem.maxVotesAvaliables);
-    expect(service.questionsUp.length).toEqual(newVotingSystem.questionsUp.length);
+    expect(service.maxVotesAvaliables).toEqual(
+      newVotingSystem.maxVotesAvaliables,
+    );
+    expect(service.questionsUp.length).toEqual(
+      newVotingSystem.questionsUp.length,
+    );
   });
 
   it('vote up', () => {

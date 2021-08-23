@@ -8,59 +8,74 @@ import { DOCUMENT } from '@angular/common';
 })
 export class FullscreenButtonComponent implements OnInit {
   elem: any;
-  isFullScreen: boolean;
+  isFullScreen: boolean = false;
   id = 'selected-topic';
 
   constructor(@Inject(DOCUMENT) private document: any) {}
 
   ngOnInit(): void {
     this.chkScreenMode();
-    this.elem = document.getElementById(this.id);
+    const elem = document.getElementById(this.id);
+    this.elem = elem ? elem : this.elem;
     console.log('this.elem', this.elem);
   }
 
-  @HostListener('document:fullscreenchange', ['$event'])
-  @HostListener('document:webkitfullscreenchange', ['$event'])
-  @HostListener('document:mozfullscreenchange', ['$event'])
-  @HostListener('document:MSFullscreenChange', ['$event'])
-  fullscreenmodes(event) {
+  @HostListener('document:fullscreenchange')
+  @HostListener('document:webkitfullscreenchange')
+  @HostListener('document:mozfullscreenchange')
+  @HostListener('document:MSFullscreenChange')
+  fullscreenmodes() {
     this.chkScreenMode();
   }
   chkScreenMode() {
-    if (document.fullscreenElement) {
-      //fullscreen
-      this.isFullScreen = true;
-    } else {
-      //not in full screen
-      this.isFullScreen = false;
+    var newValueOfFullScreen = document?.fullscreenElement;
+    if (newValueOfFullScreen) {
+      if (newValueOfFullScreen) {
+        this.isFullScreen = true;
+      } else {
+        this.isFullScreen = false;
+      }
     }
   }
   openFullscreen() {
-    if (this.elem.requestFullscreen) {
-      this.elem.requestFullscreen();
-    } else if (this.elem.mozRequestFullScreen) {
-      /* Firefox */
-      this.elem.mozRequestFullScreen();
-    } else if (this.elem.webkitRequestFullscreen) {
-      /* Chrome, Safari and Opera */
-      this.elem.webkitRequestFullscreen();
-    } else if (this.elem.msRequestFullscreen) {
-      /* IE/Edge */
-      this.elem.msRequestFullscreen();
+    this.isFullScreen = true;
+    try {
+      if (this.elem) {
+        if (this.elem.requestFullscreen) {
+          this.elem.requestFullscreen();
+        } else if (this.elem.mozRequestFullScreen) {
+          /* Firefox */
+          this.elem.mozRequestFullScreen();
+        } else if (this.elem.webkitRequestFullscreen) {
+          /* Chrome, Safari and Opera */
+          this.elem.webkitRequestFullscreen();
+        } else if (this.elem.msRequestFullscreen) {
+          /* IE/Edge */
+          this.elem.msRequestFullscreen();
+        }
+      }
+    } catch (error: any) {
+      console.log(`cannot open fullscreen properly`, error);
     }
-  } /* Close fullscreen */
+  }
+
   closeFullscreen() {
-    if (this.document.exitFullscreen) {
-      this.document.exitFullscreen();
-    } else if (this.document.mozCancelFullScreen) {
-      /* Firefox */
-      this.document.mozCancelFullScreen();
-    } else if (this.document.webkitExitFullscreen) {
-      /* Chrome, Safari and Opera */
-      this.document.webkitExitFullscreen();
-    } else if (this.document.msExitFullscreen) {
-      /* IE/Edge */
-      this.document.msExitFullscreen();
+    try {
+      if (this.document.exitFullscreen) {
+        this.document.exitFullscreen();
+      } else if (this.document.mozCancelFullScreen) {
+        /* Firefox */
+        this.document.mozCancelFullScreen();
+      } else if (this.document.webkitExitFullscreen) {
+        /* Chrome, Safari and Opera */
+        this.document.webkitExitFullscreen();
+      } else if (this.document.msExitFullscreen) {
+        /* IE/Edge */
+        this.document.msExitFullscreen();
+      }
+    } catch (error: any) {
+      console.log(`cannot close fullscreen properly`, error);
     }
+    this.isFullScreen = false;
   }
 }

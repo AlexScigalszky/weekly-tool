@@ -7,7 +7,7 @@
     "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers=ChromeHeadlessCI",
+    "test": "cls && ng test --browsers=ChromeHeadlessCI",
     "prittier:fix": "npx prettier --write ./src",
     "prittier:check": "npx prettier --check ./src",
     "clean": "rimraf ./dist",
@@ -50,6 +50,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "karma-viewport": "^1.0.8",
     "open": "^7.0.3",
     "prettier": "2.3.2",
     "typescript": "~4.2.3"
