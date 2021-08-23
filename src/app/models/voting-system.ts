@@ -12,7 +12,7 @@ export class VotingSystem {
 
   voteUp(question: Question): boolean {
     const wasVoted = this.wasVoted(question);
-    const canMakeNewVote = this.canMakeNewVote();
+    const canMakeNewVote = this.canMakeNewVote(question);
     if (!wasVoted && canMakeNewVote) {
       question.votes++;
       this.questionsUp = [question, ...this.questionsUp];
@@ -34,7 +34,7 @@ export class VotingSystem {
     return true;
   }
 
-  private canMakeNewVote() {
+  private canMakeNewVote(question: Question) {
     const result = this.maxVotesAvaliables > this.questionsUp.length;
     console.log('canMakeNewVote', result);
     return result;

@@ -23,6 +23,7 @@ export class VotingService {
     console.log(`${KEY}-${room}`, { votingSystemExistingStr });
     if (votingSystemExistingStr) {
       this.votingSystem = new VotingSystem(JSON.parse(votingSystemExistingStr));
+      this.saveVotingSystem(this.votingSystem);
       this.emitNewValues();
     }
   }
