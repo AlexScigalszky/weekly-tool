@@ -10,8 +10,13 @@ export class QuestionItemComponent {
   @Input() question!: Question;
   @Input() highlight: boolean = false;
   @Output() voted = new EventEmitter<Question>();
+  @Output() editButtonClicked = new EventEmitter<Question>();
 
   vote(): void {
     this.voted.emit(this.question);
+  }
+
+  edit(): void {
+    this.editButtonClicked.emit(this.question);
   }
 }

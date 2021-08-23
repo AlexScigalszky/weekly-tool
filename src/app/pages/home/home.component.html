@@ -21,6 +21,7 @@
           [questions]="apiData.questions"
           [highlight]="questionsHighlight"
           (voted)="vote($event, questionsHighlight)"
+          (editButtonClicked)="editQuestion($event)"
         ></app-question-list>
       </mat-card-content>
 

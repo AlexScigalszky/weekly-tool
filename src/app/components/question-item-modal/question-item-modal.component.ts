@@ -13,7 +13,9 @@ export class QuestionItemModalComponent {
   constructor(
     public dialogRef: MatDialogRef<QuestionItemModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Question,
-  ) {}
+  ) {
+    this.question = data;
+  }
 
   public onNoClick(): void {
     this.dialogRef.close();

@@ -27,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotingService } from './services/voting.service';
 import { FullscreenButtonComponent } from './components/fullscreen-button/fullscreen-button.component';
@@ -63,6 +64,7 @@ import { VersionComponent } from './components/version/version.component';
     MatSelectModule,
     MatExpansionModule,
     MatGridListModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

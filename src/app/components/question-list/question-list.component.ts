@@ -11,6 +11,7 @@ export class QuestionListComponent {
   @Input() highlight: Question[] = [];
   @Output() newClicked = new EventEmitter<boolean>();
   @Output() voted = new EventEmitter<Question>();
+  @Output() editButtonClicked = new EventEmitter<Question>();
 
   onNewClicked(): void {
     this.newClicked.emit(true);
@@ -18,6 +19,10 @@ export class QuestionListComponent {
 
   vote(question: Question): void {
     this.voted.emit(question);
+  }
+
+  edit(question: Question): void {
+    this.editButtonClicked.emit(question);
   }
 
   highlightQuestion(question): boolean {

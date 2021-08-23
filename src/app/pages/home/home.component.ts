@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, of } from 'rxjs';
 import { filter, map, mergeMap, tap } from 'rxjs/operators';
@@ -121,14 +121,18 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionItemModalComponent, {
-      width: '50vw',
-      data: new Question(),
-    });
+    const dialogRef = this.openQuestionModal(new Question());
 
     dialogRef.afterClosed().subscribe((question) => {
       this.questionService.add(question);
       console.log(`question ${question} added in ${this.room}`);
+    });
+  }
+
+  private openQuestionModal(question: Question): MatDialogRef<any> {
+    return this.dialog.open(QuestionItemModalComponent, {
+      width: '50vw',
+      data: question,
     });
   }
 
@@ -179,5 +183,15 @@ export class HomeComponent implements OnInit {
     ) {
       this.questionService.resetVotes(this.room, questions);
     }
+  }
+
+  editQuestion(question: Question): void {
+    const dialogRef = this.openQuestionModal(JSON.parse(JSON.stringify(question)));
+
+    dialogRef.afterClosed().subscribe((question) => {
+      this.questionService
+        .update(question)
+        .then(() => console.log('question updated', question));
+    });
   }
 }

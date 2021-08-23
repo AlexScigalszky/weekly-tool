@@ -4,5 +4,6 @@
     [question]="question"
     [highlight]="highlightQuestion(question)"
     (voted)="vote($event)"
+    (editButtonClicked)="edit($event)"
   ></app-question-item>
 </mat-list>
