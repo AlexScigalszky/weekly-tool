@@ -77,8 +77,8 @@ describe('VotingService', () => {
     expect(result).toBeTrue();
     service.highlightSubject.subscribe((value) => {
       expect(value.length).toEqual(1);
-      const question1 = value.find(x => x.id === questionOne.id);
-      expect(question1.votes).toEqual(1)
+      const question1 = value.find((x) => x.id === questionOne.id);
+      expect(question1.votes).toEqual(1);
       done();
     });
   });
@@ -89,8 +89,8 @@ describe('VotingService', () => {
     expect(result).toBeTrue();
     service.highlightSubject.subscribe((value) => {
       expect(value.length).toEqual(2);
-      const question2 = value.find(x => x.id === questionTwo.id);
-      expect(question2.votes).toEqual(1)
+      const question2 = value.find((x) => x.id === questionTwo.id);
+      expect(question2.votes).toEqual(1);
       done();
     });
   });
@@ -104,5 +104,4 @@ describe('VotingService', () => {
       done();
     });
   });
-
 });
