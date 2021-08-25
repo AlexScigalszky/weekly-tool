@@ -63,7 +63,7 @@ describe('QuestionItemModalComponent', () => {
     fixture.detectChanges();
 
     tick();
-    
+
     const input = fixture.debugElement.query(By.css('#title')).nativeElement;
     expect(input.value).toEqual('oldValue');
     // expect(titleInput.nativeElement.value).toBe(question.title);

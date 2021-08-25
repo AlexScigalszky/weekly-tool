@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakoutRoom } from 'src/app/models/breackout-room';
 import { BreakoutRoomsService } from 'src/app/services/breakout-rooms.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { BreakoutRoomsService } from 'src/app/services/breakout-rooms.service';
   styleUrls: ['./breakout-rooms.component.scss'],
 })
 export class BreakoutRoomsComponent implements OnInit {
-  urlRoom = this.breakoutRooms.getRandomLink();
+  urlRoom: BreakoutRoom = this.breakoutRooms.getRandomLink();
   countRooms = this.breakoutRooms.getCountRooms();
   showLink = false;
   message = 'Creando salas';

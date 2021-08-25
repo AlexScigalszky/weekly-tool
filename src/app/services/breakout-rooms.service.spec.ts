@@ -13,13 +13,12 @@ describe('BreakoutRoomsService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
     expect(service.rooms).toBeTruthy();
-    expect(service.rooms.length).toBeGreaterThan(0)
+    expect(service.rooms.length).toBeGreaterThan(0);
   });
 
   it('should be created', () => {
-    service.rooms.forEach(_ => {
-      expect(service.getRandomLink()).toBeDefined();  
+    service.rooms.forEach((_) => {
+      expect(service.getRandomLink()).toBeDefined();
     });
-    
   });
 });

@@ -8,9 +8,8 @@ describe('BreakoutRoomsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BreakoutRoomsComponent ]
-    })
-    .compileComponents();
+      declarations: [BreakoutRoomsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
