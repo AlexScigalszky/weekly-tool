@@ -1,0 +1,31 @@
+<div id="breakout-main" class="center-items">
+  <div>
+    <h1>Breakout</h1>
+
+    <a
+      id="breakout-link"
+      *ngIf="!showLink"
+      mat-raised-button
+      color="accent"
+      href="#"
+    >
+      {{ message }}
+    </a>
+    <a
+      id="breakout-link"
+      *ngIf="urlRoom && showLink"
+      mat-raised-button
+      color="accent"
+      [href]="urlRoom"
+      target="_blank"
+    >
+      Entrar
+    </a>
+
+    <h3>¿Cómo funciona esto?</h3>
+    <p>
+      Tenemos {{ countRooms }} salas de Meet preparadas, el botón de arriba te
+      va a llevar a una de esas al azar. <br><small>Esto es mejor que zoom</small>
+    </p>
+  </div>
+</div>

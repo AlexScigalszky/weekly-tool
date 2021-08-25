@@ -33,6 +33,7 @@ import { VotingService } from './services/voting.service';
 import { FullscreenButtonComponent } from './components/fullscreen-button/fullscreen-button.component';
 import { NewRoomModalComponent } from './components/new-room-modal/new-room-modal.component';
 import { VersionComponent } from './components/version/version.component';
+import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { VersionComponent } from './components/version/version.component';
     FullscreenButtonComponent,
     NewRoomModalComponent,
     VersionComponent,
+    BreakoutRoomsComponent,
   ],
   imports: [
     BrowserModule,
