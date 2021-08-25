@@ -7,12 +7,31 @@
   <h1>
     Weekly Tool
     <div style="float: right" class="center-items">
-      <button (click)="newRoom()" mat-flat-button color="primary">
-        Nueva Sala
+      <button
+        mat-icon-button
+        class="margin-zero"
+        [matMenuTriggerFor]="globalMenu"
+        aria-label="dropdown menu"
+      >
+        <mat-icon>more_vert</mat-icon>
       </button>
-      <a href="/breakout" mat-flat-button color="secondary" style="margin-left: 0.5rem;">
-        Breakout
-      </a>
+      <mat-menu #globalMenu="matMenu" xPosition="before">
+        <a
+          href="/"
+          mat-menu-item
+        >
+          Inicio
+        </a>
+        <!-- <button (click)="newRoom()" mat-menu-item>
+          Nueva Sala
+        </button> -->
+        <a
+          href="/breakout"
+          mat-menu-item
+        >
+          Breakout
+        </a>
+      </mat-menu>
     </div>
   </h1>
   <h2>Herramienta para encuestas</h2>

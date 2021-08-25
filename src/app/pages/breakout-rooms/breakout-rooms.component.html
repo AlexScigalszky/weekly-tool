@@ -7,6 +7,7 @@
       *ngIf="!showLink"
       mat-raised-button
       color="accent"
+      class="link-disabled"
       href="#"
     >
       {{ message }}
@@ -25,7 +26,12 @@
     <h3>¿Cómo funciona esto?</h3>
     <p>
       Tenemos {{ countRooms }} salas de Meet preparadas, el botón de arriba te
-      va a llevar a una de esas al azar. <br><small>Esto es mejor que zoom</small>
+      va a llevar a una de esas al azar.
+      <br />
+      IMPORTANTE: No nos olvidemos de controlar el tiempo y volvamos al meet
+      plenario
+      <br />
+      <small>Esto es mejor que zoom</small>
     </p>
   </div>
 </div>

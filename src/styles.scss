@@ -138,3 +138,6 @@ mat-card {
   align-items: center;
   justify-content: center;
 }
+.link-disabled {
+  pointer-events: none;
+}
