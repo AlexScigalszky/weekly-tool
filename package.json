@@ -5,7 +5,7 @@
     "ng": "ng",
     "prebuild": "node PreBuild.js",
     "serve": "node PreBuild.js && ng s",
-    "start": "node PreBuild.js && node server.js",
+    "start": "node server.js",
     "build": "node PreBuild.js && ng build",
     "watch": "node PreBuild.js && ng build --watch --configuration development",
     "test": "cls && node PreBuild.js && ng test --browsers=Chrome",
