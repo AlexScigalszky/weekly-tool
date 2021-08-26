@@ -1,0 +1,37 @@
+<h1>Configuración</h1>
+<div class="two-columns bg-white">
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Patio</mat-label>
+    <input matInput id="patio" [(ngModel)]="patio" />
+  </mat-form-field>
+
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Cafeteria</mat-label>
+    <input matInput id="cafeteria" [(ngModel)]="cafeteria" />
+  </mat-form-field>
+
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Sala de Reuniones</mat-label>
+    <input matInput id="sala-de-reuniones" [(ngModel)]="salaDeReuniones" />
+  </mat-form-field>
+
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Piso de abajo</mat-label>
+    <input matInput id="piso-de-abajo" [(ngModel)]="pisoDeAbajo" />
+  </mat-form-field>
+
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Cocina</mat-label>
+    <input matInput id="cocina" [(ngModel)]="cocina" />
+  </mat-form-field>
+
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Piso de arriba</mat-label>
+    <input matInput id="piso-de-arriba" [(ngModel)]="pisoDeArriba" />
+  </mat-form-field>
+</div>
+<div class="center-items">
+  <button id="create-button" (click)="save()" mat-flat-button color="primary">
+    Guardar
+  </button>
+</div>

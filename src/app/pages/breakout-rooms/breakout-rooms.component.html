@@ -14,7 +14,7 @@
     </a>
     <a
       id="breakout-link"
-      *ngIf="urlRoom && showLink"
+      *ngIf="showLink && urlRoom$ | async as urlRoom"
       mat-raised-button
       color="accent"
       [href]="urlRoom.url"
@@ -26,8 +26,8 @@
 
     <h3>¿Cómo funciona esto?</h3>
     <p>
-      Tenemos {{ countRooms }} salas de Meet preparadas, el botón de arriba te
-      va a llevar a una de esas al azar.
+      Tenemos {{ countRooms$ | async }} salas de Meet preparadas, el botón de
+      arriba te va a llevar a una de esas al azar.
       <br />
       IMPORTANTE: No nos olvidemos de controlar el tiempo y volvamos al meet
       plenario

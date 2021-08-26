@@ -34,6 +34,7 @@ import { FullscreenButtonComponent } from './components/fullscreen-button/fullsc
 import { NewRoomModalComponent } from './components/new-room-modal/new-room-modal.component';
 import { VersionComponent } from './components/version/version.component';
 import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.co
     NewRoomModalComponent,
     VersionComponent,
     BreakoutRoomsComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

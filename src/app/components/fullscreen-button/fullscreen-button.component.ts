@@ -17,7 +17,6 @@ export class FullscreenButtonComponent implements OnInit {
     this.chkScreenMode();
     const elem = document.getElementById(this.id);
     this.elem = elem ? elem : this.elem;
-    console.log('this.elem', this.elem);
   }
 
   @HostListener('document:fullscreenchange')

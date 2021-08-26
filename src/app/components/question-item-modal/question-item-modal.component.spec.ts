@@ -1,15 +1,15 @@
 import { DebugElement } from '@angular/core';
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { By } from '@angular/platform-browser';
 import { Question } from 'src/app/models/question';
 import { QuestionItemModalComponent } from './question-item-modal.component';
-import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { MatListModule } from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { findEl, setValueTo } from 'src/test.helpers';
 
 describe('QuestionItemModalComponent', () => {
   let component: QuestionItemModalComponent;
@@ -32,21 +32,28 @@ describe('QuestionItemModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [QuestionItemModalComponent],
+      imports: [
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatListModule,
+      ],
       providers: [
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: MAT_DIALOG_DATA, useValue: question },
-        { provide: ComponentFixtureAutoDetect, useValue: true },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(QuestionItemModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    titleInput = fixture.debugElement.query(By.css('#title'))!;
-    descriptionInput = fixture.debugElement.query(By.css('#description'))!;
-    nameInput = fixture.debugElement.query(By.css('#name'))!;
-    createButton = fixture.debugElement.query(By.css('#create-button'))!;
-    cancelButton = fixture.debugElement.query(By.css('#cancel-button'))!;
+    titleInput = findEl(fixture, '#title')!;
+    descriptionInput = findEl(fixture, '#description')!;
+    nameInput = findEl(fixture, '#name')!;
+    createButton = findEl(fixture, '#create-button')!;
+    cancelButton = findEl(fixture, '#cancel-button')!;
   });
 
   it('should create', () => {
@@ -58,69 +65,40 @@ describe('QuestionItemModalComponent', () => {
     expect(cancelButton.nativeElement).toBeTruthy();
   });
 
-  it('should show question data to edit', fakeAsync(() => {
-    component.question.title = question.name;
+  it('should show question data to edit', () => {
+    component.question = question;
     fixture.detectChanges();
 
-    tick();
+    expect(titleInput.nativeElement.value).toBe(question.title);
+    expect(descriptionInput.nativeElement.value).toBe(question.description);
+    expect(nameInput.nativeElement.value).toBe(question.name);
+  });
 
-    const input = fixture.debugElement.query(By.css('#title')).nativeElement;
-    expect(input.value).toEqual('oldValue');
-    // expect(titleInput.nativeElement.value).toBe(question.title);
-    // expect(descriptionInput.nativeElement).toBe('question.description');
-    // expect(nameInput.nativeElement).toBe(question.name);
-  }));
+  it('create must return a new question', () => {
+    setValueTo(titleInput, question.title);
+    setValueTo(descriptionInput, question.description);
+    setValueTo(nameInput, question.name);
 
-  // it('create must return a new question', async () => {
-  //   await sendInput(titleInput, question.title);
-  //   await sendInput(descriptionInput, question.description);
-  //   await sendInput(nameInput, question.name);
-  //   fixture.detectChanges();
+    fixture.detectChanges();
 
-  //   expect(titleInput.nativeElement.textContent.trim()).toBe(question.title);
-  //   expect(descriptionInput.nativeElement.textContent.trim()).toBe(
-  //     question.description,
-  //   );
-  //   expect(nameInput.nativeElement.textContent.trim()).toBe(question.name);
-  //   createButton.nativeElement.triggerEventHandler('click', null);
-  //   fixture.detectChanges();
+    expect(titleInput.nativeElement.value).toBe(question.title);
+    expect(descriptionInput.nativeElement.value).toBe(question.description);
+    expect(nameInput.nativeElement.value).toBe(question.name);
 
-  //   expect(component.create).toHaveBeenCalled();
-  //   expect(component.dialogRef.close).toHaveBeenCalledWith(null);
-  // });
+    let createSpy = spyOn(component, 'create');
+    createButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
 
-  // it('create must NO return any question', async () => {
-  //   await sendInput(titleInput, question.title);
-  //   await sendInput(descriptionInput, question.description);
-  //   await sendInput(nameInput, question.name);
-  //   fixture.detectChanges();
-  //   expect(titleInput.nativeElement.textContent.trim()).toBe(question.title);
-  //   expect(descriptionInput.nativeElement.textContent.trim()).toBe(
-  //     question.description,
-  //   );
-  //   expect(nameInput.nativeElement.textContent.trim()).toBe(question.name);
+    expect(createSpy).toHaveBeenCalled();
+    expect(component.question).toEqual(question);
+  });
 
-  //   cancelButton.triggerEventHandler('click', null);
-  //   fixture.detectChanges();
+  it('create must NO return any question', async () => {
+    let onNoClickSpy = spyOn(component, 'onNoClick');
 
-  //   expect(component.onNoClick).toHaveBeenCalled();
-  //   expect(component.dialogRef.close).toHaveBeenCalledWith(null);
-  // });
+    cancelButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
 
-  // function sendInput(element: DebugElement, text: string) {
-  //   element.nativeElement.addEventListener('input', function () {
-  //     // Create and dispatch/trigger an event on the fly
-  //     // Note: Optionally, we've also leveraged the "function expression" (instead of the "arrow function expression") so "this" will represent the element
-  //     this.dispatchEvent(
-  //       new CustomEvent('awesome', {
-  //         bubbles: true,
-  //         detail: { text: () => text },
-  //       }),
-  //     );
-  //   });
-  //   // element.nativeElement.value = text;
-  //   // element.nativeElement.dispatchEvent(new Event('input'));
-  //   // fixture.detectChanges();
-  //   return fixture.whenStable();
-  // }
+    expect(onNoClickSpy).toHaveBeenCalled();
+  });
 });

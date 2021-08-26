@@ -13,7 +13,8 @@
     "prittier:fix": "npx prettier --write ./src",
     "prittier:check": "npx prettier --check ./src",
     "clean": "rimraf ./dist",
-    "build:ci": "node PreBuild.js && npm run prittier:check && npm run clean && npm run build"
+    "build:ci": "node PreBuild.js && npm run prittier:check && npm run clean && npm run build",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "@types/node": "^12.20.20",
     "firebase-tools": "^8.0.0",
     "fuzzy": "^0.1.3",
+    "husky": "^7.0.2",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
     "jasmine-core": "~3.7.0",
@@ -53,8 +55,12 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "karma-viewport": "^1.0.8",
+    "lint-staged": "^11.1.2",
     "open": "^7.0.3",
     "prettier": "2.3.2",
     "typescript": "~4.2.3"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
