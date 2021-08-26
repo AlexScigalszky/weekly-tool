@@ -35,6 +35,7 @@ import { NewRoomModalComponent } from './components/new-room-modal/new-room-moda
 import { VersionComponent } from './components/version/version.component';
 import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { BreakoutRoomsFirebaseService } from './services/breakout-rooms-firebase.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [QuestionService, VotingService],
+  providers: [QuestionService, VotingService, BreakoutRoomsFirebaseService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

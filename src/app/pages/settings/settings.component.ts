@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakoutRoomsService } from 'src/app/services/breakout-rooms.service';
+import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
   cocina: string = '';
   pisoDeArriba: string = '';
 
-  constructor(private breakoutRooms: BreakoutRoomsService) {}
+  constructor(private breakoutRooms: BreakoutRoomsFirebaseService) {}
 
   ngOnInit(): void {}
 
