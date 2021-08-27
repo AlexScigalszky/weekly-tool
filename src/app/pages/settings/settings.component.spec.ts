@@ -10,7 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { findEl, setValueTo } from 'src/test.helpers';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
-import { BreakoutRoomsServiceMock } from './breakout-rooms-mock.service';
+import { BreakoutRoomsServiceMock } from '../../services/breakout-rooms-mock.service';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;

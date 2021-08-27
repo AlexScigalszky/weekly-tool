@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreakoutRoom } from 'src/app/models/breackout-room';
-import { BreakoutRoomsService } from 'src/app/services/breakout-rooms.service';
+import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 
 @Component({
   selector: 'app-breakout-rooms',
@@ -14,7 +14,7 @@ export class BreakoutRoomsComponent implements OnInit {
   showLink = false;
   message = 'Creando salas';
 
-  constructor(private breakoutRooms: BreakoutRoomsService) {}
+  constructor(private breakoutRooms: BreakoutRoomsFirebaseService) {}
 
   ngOnInit(): void {
     setTimeout(() => (this.message = 'Seleccionando sala al azar'), 500);
