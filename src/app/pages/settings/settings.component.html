@@ -1,5 +1,5 @@
 <h1>Configuración</h1>
-<div class="two-columns bg-white">
+<div class="two-columns bg-white" *ngIf="model">
   <mat-form-field color="accent" appearance="outline">
     <mat-label>Patio</mat-label>
     <input matInput id="patio" [(ngModel)]="model.patio" />

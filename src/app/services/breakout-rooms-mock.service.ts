@@ -13,15 +13,15 @@ export class BreakoutRoomsServiceMock {
           url: '',
         },
         {
-          name: 'cafeteria',
+          name: 'cafetería',
           url: '',
         },
         {
-          name: 'salaDeReuniones',
+          name: 'sala de reuniones',
           url: '',
         },
         {
-          name: 'pisoDeAbajo',
+          name: 'piso de abajo',
           url: '',
         },
         {
@@ -29,13 +29,13 @@ export class BreakoutRoomsServiceMock {
           url: '',
         },
         {
-          name: 'pisoDeArriba',
+          name: 'piso de arriba',
           url: '',
         },
       ],
     });
   }
-  
+
   update(
     patio: string,
     cafeteria: string,

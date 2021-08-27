@@ -9,14 +9,15 @@ import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-fi
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  model = {
-    patio: 'patio',
-    cafeteria: 'cafeteria',
-    salaDeReuniones: 'salaDeReuniones',
-    pisoDeAbajo: 'pisoDeAbajo',
-    cocina: 'cocina',
-    pisoDeArriba: 'pisoDeArriba',
-  };
+  model = null;
+  // {
+  //   patio: 'patio',
+  //   cafeteria: 'cafeteria',
+  //   salaDeReuniones: 'salaDeReuniones',
+  //   pisoDeAbajo: 'pisoDeAbajo',
+  //   cocina: 'cocina',
+  //   pisoDeArriba: 'pisoDeArriba',
+  // };
 
   constructor(private breakoutRooms: BreakoutRoomsFirebaseService) {
     this.breakoutRooms.currentFirebaseRooms$
