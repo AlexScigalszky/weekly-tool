@@ -6,11 +6,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BreakoutRoom } from '../models/breackout-room';
-
-export class BreakoutRoomFirebase {
-  name: string = 'default';
-  rooms: BreakoutRoom[] = [];
-}
+import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -60,8 +56,8 @@ export class BreakoutRoomsFirebaseService {
     pisoDeAbajo: string,
     cocina: string,
     pisoDeArriba: string,
-  ): void {
-    this.roomCollection.doc<BreakoutRoomFirebase>(this.roomName).set(
+  ): Promise<void> {
+    return this.roomCollection.doc<BreakoutRoomFirebase>(this.roomName).set(
       {
         ...new BreakoutRoomFirebase(),
         rooms: [

@@ -10,15 +10,9 @@ describe('BreakoutRoomsService', () => {
     service = TestBed.inject(BreakoutRoomsService);
   });
 
-  it('should be created', () => {
+  it('should be created', async () => {
     expect(service).toBeTruthy();
-    expect(service.rooms).toBeTruthy();
-    expect(service.rooms.length).toBeGreaterThan(0);
-  });
-
-  it('should be created', () => {
-    service.rooms.forEach((_) => {
-      expect(service.getRandomLink()).toBeDefined();
-    });
+    const roomCounts = await service.getCountRooms().toPromise();
+    expect(roomCounts).toBeGreaterThan(0);
   });
 });

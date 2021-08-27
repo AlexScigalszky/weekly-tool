@@ -1,4 +1,4 @@
 export class BreakoutRoom {
-  url: string;
-  name: string;
+  url: string = '';
+  name: string = '';
 }

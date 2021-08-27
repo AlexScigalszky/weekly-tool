@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
@@ -12,7 +13,7 @@ describe('AppComponent', () => {
    * */
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatDialogModule, MatMenuModule],
+      imports: [RouterTestingModule, MatDialogModule, MatMenuModule, MatIconModule],
       declarations: [AppComponent, VersionComponent],
       // I used 'useValue' because it is just a json. If it was class, I'd use 'useClass'
       providers: [

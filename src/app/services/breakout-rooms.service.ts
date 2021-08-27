@@ -14,7 +14,7 @@ export class BreakoutRoomsService {
   cocina = 'https://meet.google.com/jsb-teai-zfd';
   pisoDeArriba = 'https://meet.google.com/tqr-ersq-bwy';
 
-  rooms: Nullable<BreakoutRoom[]> = [
+  private rooms: Nullable<BreakoutRoom[]> = [
     { url: this.patio, name: 'patio' },
     { url: this.cafetería, name: 'cafetería' },
     { url: this.salaDeReuniones, name: 'sala de reuniones' },
@@ -43,7 +43,7 @@ export class BreakoutRoomsService {
     pisoDeAbajo: string,
     cocina: string,
     pisoDeArriba: string,
-  ): void {
+  ): Promise<void> {
     this.patio = patio;
     this.cafetería = cafeteria;
     this.salaDeReuniones = salaDeReuniones;
@@ -59,5 +59,6 @@ export class BreakoutRoomsService {
       { url: this.cocina, name: 'cocina' },
       { url: this.pisoDeArriba, name: 'piso de arriba' },
     ];
+    return new Promise<void>((resolve) => resolve());
   }
 }
