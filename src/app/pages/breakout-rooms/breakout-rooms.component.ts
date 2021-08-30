@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { BreakoutRoom } from 'src/app/models/breackout-room';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 
@@ -9,7 +10,7 @@ import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-fi
   styleUrls: ['./breakout-rooms.component.scss'],
 })
 export class BreakoutRoomsComponent implements OnInit {
-  urlRoom$: Observable<BreakoutRoom> = this.breakoutRooms.getRandomLink();
+  urlRoom$: Observable<BreakoutRoom> = this.breakoutRooms.getRandomLink().pipe(delay(1500));
   countRooms$: Observable<number> = this.breakoutRooms.getCountRooms();
   showLink = false;
   message = 'Creando salas';
