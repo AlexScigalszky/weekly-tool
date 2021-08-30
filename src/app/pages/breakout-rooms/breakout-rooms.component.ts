@@ -10,7 +10,9 @@ import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-fi
   styleUrls: ['./breakout-rooms.component.scss'],
 })
 export class BreakoutRoomsComponent implements OnInit {
-  urlRoom$: Observable<BreakoutRoom> = this.breakoutRooms.getRandomLink().pipe(delay(1500));
+  urlRoom$: Observable<BreakoutRoom> = this.breakoutRooms
+    .getRandomLink()
+    .pipe(delay(1500));
   countRooms$: Observable<number> = this.breakoutRooms.getCountRooms();
   showLink = false;
   message = 'Creando salas';
