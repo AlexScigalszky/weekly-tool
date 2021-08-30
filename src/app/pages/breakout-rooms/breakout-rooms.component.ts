@@ -14,13 +14,11 @@ export class BreakoutRoomsComponent implements OnInit {
     .getRandomLink()
     .pipe(delay(1500));
   countRooms$: Observable<number> = this.breakoutRooms.getCountRooms();
-  showLink = false;
   message = 'Creando salas';
 
   constructor(private breakoutRooms: BreakoutRoomsFirebaseService) {}
 
   ngOnInit(): void {
     setTimeout(() => (this.message = 'Seleccionando sala al azar'), 500);
-    setTimeout(() => (this.showLink = true), 1000);
   }
 }
