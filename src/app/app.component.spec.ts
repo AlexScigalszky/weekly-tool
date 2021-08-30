@@ -13,7 +13,12 @@ describe('AppComponent', () => {
    * */
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatDialogModule, MatMenuModule, MatIconModule],
+      imports: [
+        RouterTestingModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatIconModule,
+      ],
       declarations: [AppComponent, VersionComponent],
       // I used 'useValue' because it is just a json. If it was class, I'd use 'useClass'
       providers: [

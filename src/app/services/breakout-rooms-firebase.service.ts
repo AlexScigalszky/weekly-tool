@@ -5,6 +5,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Constants } from '../constants';
 import { BreakoutRoom } from '../models/breackout-room';
 import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
 
@@ -61,7 +62,7 @@ export class BreakoutRoomsFirebaseService {
       {
         ...new BreakoutRoomFirebase(),
         rooms: [
-          { url: patio, name: 'patio' },
+          { url: patio, name: Constants.PATIO },
           { url: cafeteria, name: 'cafetería' },
           { url: salaDeReuniones, name: 'sala de reuniones' },
           { url: pisoDeAbajo, name: 'piso de abajo' },

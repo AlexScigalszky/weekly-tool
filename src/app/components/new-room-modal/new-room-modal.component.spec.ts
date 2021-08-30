@@ -24,7 +24,7 @@ describe('NewRoomModalComponent', () => {
         BrowserAnimationsModule,
         MatListModule,
         MatDialogModule,
-        MatIconModule
+        MatIconModule,
       ],
       providers: [{ provide: MatDialogRef, useValue: {} }],
     }).compileComponents();

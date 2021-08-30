@@ -13,9 +13,12 @@ describe('BreakoutRoomsFirebaseService', () => {
     service = TestBed.inject(BreakoutRoomsFirebaseService);
   });
 
-  it('should be created', waitForAsync(async () => {
-    expect(service).toBeTruthy();
-    const roomCounts = await service.getCountRooms().toPromise();
-    expect(roomCounts).toBeGreaterThan(0);
-  }));
+  it(
+    'should be created',
+    waitForAsync(async () => {
+      expect(service).toBeTruthy();
+      const roomCounts = await service.getCountRooms().toPromise();
+      expect(roomCounts).toBeGreaterThan(0);
+    }),
+  );
 });
