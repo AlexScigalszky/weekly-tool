@@ -16,6 +16,23 @@ export function findEl<T>(
   return queryByCss<T>(fixture, testId);
 }
 
+export function findEls<T>(
+  fixture: ComponentFixture<T>,
+  testId: string,
+): DebugElement[] {
+  return fixture.debugElement.queryAll(By.css(testId));
+}
+
+export function hasText<T>(
+  fixture: ComponentFixture<T>,
+  testId: string,
+  textToEvaluate: string,
+): boolean {
+  const element = findEl<T>(fixture, testId);
+  const textContent = element.nativeElement.textContent.trim();
+  return expect(textContent).toEqual(textToEvaluate);
+}
+
 export function queryByCss<T>(
   fixture: ComponentFixture<T>,
   selector: string,
