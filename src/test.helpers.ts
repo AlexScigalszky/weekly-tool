@@ -16,6 +16,13 @@ export function findEl<T>(
   return queryByCss<T>(fixture, testId);
 }
 
+export function findEls<T>(
+  fixture: ComponentFixture<T>,
+  testId: string,
+): DebugElement[] {
+  return fixture.debugElement.queryAll(By.css(testId));
+}
+
 export function queryByCss<T>(
   fixture: ComponentFixture<T>,
   selector: string,
