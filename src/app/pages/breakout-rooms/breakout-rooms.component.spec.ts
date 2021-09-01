@@ -1,7 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 import { BreakoutRoomsServiceMock } from 'src/app/services/breakout-rooms-mock.service';
 import { BreakoutRoomsService } from 'src/app/services/breakout-rooms.service';
+import { findEl, hasText } from 'src/test.helpers';
 
 import { BreakoutRoomsComponent } from './breakout-rooms.component';
 
@@ -32,4 +38,24 @@ describe('BreakoutRoomsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show a link to breakout room', fakeAsync(() => {
+    fixture = TestBed.createComponent(BreakoutRoomsComponent);
+    fixture.detectChanges();
+
+    const link = findEl(fixture, '#breakout-link');
+    expect(link).toBeTruthy();
+    
+    tick(450);
+    hasText(fixture, '#breakout-link', 'Creando salas');
+
+    tick(100);
+    fixture.detectChanges();
+    hasText(fixture, '#breakout-link', 'Seleccionando sala al azar');
+
+    tick(2301);
+    fixture.detectChanges();
+    hasText(fixture, '#breakout-link', 'Entrar');
+
+  }));
 });
