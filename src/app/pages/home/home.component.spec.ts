@@ -67,8 +67,31 @@ describe('HomeComponent', () => {
     containText(fixture, '#topics-section', 'Temas a conversar');
   }));
 
-  // it('should show the selected topic section', fakeAsync(() => {
-  //   const topicSection = findEl(fixture, '#selected-topic');
-  //   expect(topicSection).toBeTruthy();
+  // it('should open dialog to add new topic', fakeAsync(() => {
+  //   fail();
+  // }));
+
+  // it('should vote a question', fakeAsync(() => {
+  //   fail();
+  // }));
+
+  // it('should unvote a question', fakeAsync(() => {
+  //   fail();
+  // }));
+
+  // it('select a topic', fakeAsync(() => {
+  //   fail();
+  // }));
+
+  // it('select a topic and start a timer', fakeAsync(() => {
+  //   fail();
+  // }));
+
+  // it('should reset all votes', fakeAsync(() => {
+  //   fail();
+  // }));
+
+  // it('should open edit question dialog', fakeAsync(() => {
+  //   fail();
   // }));
 });

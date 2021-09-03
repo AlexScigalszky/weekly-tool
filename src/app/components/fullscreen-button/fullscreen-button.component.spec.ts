@@ -30,21 +30,21 @@ describe('FullscreenButtonComponent', () => {
     expect(button.nativeElement.textContent.trim()).toBe('Pantalla completa');
   });
 
-  // it('open fullscreen', () => {
-  //   component.openFullscreen();
-  //   expect(component.isFullScreen).toBeTrue();
-  //   fixture.detectChanges();
-  //   const button = fixture.debugElement.query(By.css('.fullscreen'));
-  //   expect(button.nativeElement.textContent.trim()).toBe(
-  //     'Salir de pantalla completa',
-  //   );
-  // });
+  it('open fullscreen', () => {
+    component.openFullscreen();
+    expect(component.isFullScreen).toBeTrue();
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('.fullscreen'));
+    expect(button.nativeElement.textContent.trim()).toBe(
+      'Salir de pantalla completa',
+    );
+  });
 
-  // it('exit fullscreen', () => {
-  //   component.closeFullscreen();
-  //   expect(component.isFullScreen).toBeFalse();
-  //   fixture.detectChanges();
-  //   const button = fixture.debugElement.query(By.css('.fullscreen'));
-  //   expect(button.nativeElement.textContent.trim()).toBe('Pantalla completa');
-  // });
+  it('exit fullscreen', () => {
+    component.closeFullscreen();
+    expect(component.isFullScreen).toBeFalse();
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('.fullscreen'));
+    expect(button.nativeElement.textContent.trim()).toBe('Pantalla completa');
+  });
 });
