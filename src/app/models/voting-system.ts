@@ -19,15 +19,16 @@ export class VotingSystem {
   voteUp(question: Question): boolean {
     const wasVoted = this.wasVoted(question);
     const canMakeNewVote = this.canMakeNewVote();
+    let result = false;
     if (!wasVoted && canMakeNewVote) {
       question.votes++;
       this.questionsUp = [question, ...this.questionsUp];
       console.log(`voted up`, question);
-      return true;
+      result = true;
     } else if (wasVoted) {
-      return this.voteDown(question);
+      result = this.voteDown(question);
     }
-    return false;
+    return result;
   }
 
   voteDown(question: Question): boolean {
@@ -35,7 +36,21 @@ export class VotingSystem {
     if (question.votes < 0) {
       question.votes = 0;
     }
+    console.log(
+      `QUESTION A QUITAR`,
+      this.questionsUp.find((x) => x.id === question.id),
+    );
+
+    console.log(`VALORES ANTES DE QUITAR`, {
+      question,
+      questionsUp: this.questionsUp,
+    });
+
     this.questionsUp = this.questionsUp.filter((x) => x.id !== question.id);
+    console.log(`VALORES DESPUES DE QUITAR`, {
+      question,
+      questionsUp: this.questionsUp,
+    });
     console.log(`voted down`, question);
     return true;
   }

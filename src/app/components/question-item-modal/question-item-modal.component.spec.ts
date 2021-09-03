@@ -105,7 +105,7 @@ describe('QuestionItemModalComponent', () => {
   it('should close the dialog on cancel ', async () => {
     let closeSpy = spyOn(component.dialogRef, 'close');
 
-    component.onNoClick()
+    component.onNoClick();
 
     expect(closeSpy).toHaveBeenCalled();
   });
@@ -114,7 +114,7 @@ describe('QuestionItemModalComponent', () => {
     let closeSpy = spyOn(component.dialogRef, 'close');
 
     component.question = question;
-    component.create()
+    component.create();
 
     expect(closeSpy).toHaveBeenCalledWith(question);
   });
