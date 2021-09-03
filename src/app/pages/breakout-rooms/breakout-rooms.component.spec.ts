@@ -45,7 +45,7 @@ describe('BreakoutRoomsComponent', () => {
 
     const link = findEl(fixture, '#breakout-link');
     expect(link).toBeTruthy();
-    
+
     tick(450);
     hasText(fixture, '#breakout-link', 'Creando salas');
 
@@ -56,6 +56,5 @@ describe('BreakoutRoomsComponent', () => {
     tick(2301);
     fixture.detectChanges();
     hasText(fixture, '#breakout-link', 'Entrar');
-
   }));
 });

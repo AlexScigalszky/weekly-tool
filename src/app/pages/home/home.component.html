@@ -1,6 +1,6 @@
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
   <div>
-    <mat-card tdMediaToggle="gt-xs" class="main-card">
+    <mat-card tdMediaToggle="gt-xs" id="topics-section" class="main-card">
       <mat-card-header>
         <mat-card-title> Temas a conversar </mat-card-title>
         <mat-card-subtitle>
@@ -37,7 +37,7 @@
     </mat-card>
   </div>
 
-  <div id="selected-topic">
+  <div id="selected-topic-section">
     <mat-card>
       <mat-card-header>
         <mat-card-title> Tiempo de conversación </mat-card-title>

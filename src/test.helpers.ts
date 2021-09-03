@@ -33,6 +33,16 @@ export function hasText<T>(
   return expect(textContent).toEqual(textToEvaluate);
 }
 
+export function containText<T>(
+  fixture: ComponentFixture<T>,
+  testId: string,
+  textToEvaluate: string,
+): boolean {
+  const element = findEl<T>(fixture, testId);
+  const textContent = element.nativeElement.textContent.trim();
+  return expect(textContent).toContain(textToEvaluate);
+}
+
 export function queryByCss<T>(
   fixture: ComponentFixture<T>,
   selector: string,
