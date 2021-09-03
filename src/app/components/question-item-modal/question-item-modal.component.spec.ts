@@ -101,4 +101,12 @@ describe('QuestionItemModalComponent', () => {
 
     expect(onNoClickSpy).toHaveBeenCalled();
   });
+
+  // it('should close the dialog on cancel ', async () => {
+  //   fail();
+  // });
+
+  // it('should close the dialog with data on  confirm', async () => {
+  //   fail();
+  // });
 });
