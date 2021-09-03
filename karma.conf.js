@@ -33,7 +33,7 @@ module.exports = function (config) {
       check: {
         global: {
           statements: 40,
-          branches: 40,
+          branches: 30,
           functions: 40,
           lines: 40,
           excludes: ['/**/*mock*.ts'],
