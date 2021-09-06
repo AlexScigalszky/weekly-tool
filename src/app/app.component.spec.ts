@@ -33,4 +33,16 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+
+  // it('should call newRoom', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+
+  //   const newRoomSpy = spyOn(app, 'newRoom');
+
+  //   const newRoomButton = findEl(fixture, '#new-room-button');
+  //   newRoomButton.triggerEventHandler('click', null);
+
+  //   expect(newRoomSpy).toHaveBeenCalled();
+  // });
 });

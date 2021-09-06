@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +15,7 @@ export class TimerService {
   private finishedSubject = new BehaviorSubject<boolean>(null);
   private onTimerTickSubject = new BehaviorSubject<number>(null);
 
-  constructor() {}
-
-  initTimer() {
+  initTimer() : void{
     this.remainingTime = this.timeout;
     this.time = this.remainingTime;
     this.runTimer = false;
@@ -26,7 +24,7 @@ export class TimerService {
     this.finishedSubject.next(this.hasFinished);
   }
 
-  startTimer() {
+  startTimer() : void{
     if (this.runTimer) {
       this.runTimer = true;
       this.hasStarted = true;
@@ -34,11 +32,11 @@ export class TimerService {
     }
   }
 
-  pauseTimer() {
+  pauseTimer() : void {
     this.runTimer = false;
   }
 
-  resetTimer() {
+  resetTimer() : void{
     this.remainingTime = this.timeout;
     this.onTimerTickSubject.next(this.remainingTime);
     this.time = this.remainingTime;
@@ -52,11 +50,11 @@ export class TimerService {
     }
   }
 
-  resumeTimer() {
+  resumeTimer(): void {
     this.startTimer();
   }
 
-  onFinished() {
+  onFinished(): Observable<boolean> {
     return this.finishedSubject.asObservable();
   }
 

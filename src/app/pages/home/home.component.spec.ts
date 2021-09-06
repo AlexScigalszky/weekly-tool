@@ -1,14 +1,17 @@
 import {
   ComponentFixture,
   fakeAsync,
+  flush,
   TestBed,
   tick,
 } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { QuestionMockService } from 'src/app/services/question.mock.service';
 import { QuestionService } from 'src/app/services/question.service';
+import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { environment } from 'src/environments/environment';
@@ -25,6 +28,7 @@ describe('HomeComponent', () => {
       declarations: [HomeComponent],
       imports: [
         RouterModule.forRoot([]),
+        MatCardModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
       ],
       providers: [
@@ -32,7 +36,7 @@ describe('HomeComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: QuestionService, useClass: QuestionMockService },
         { provide: VotingService, useClass: VotingService },
-        { provide: TimerService, useClass: TimerService },
+        { provide: TimerService, useClass: TimerMockService },
       ],
     }).compileComponents();
   });
@@ -51,14 +55,7 @@ describe('HomeComponent', () => {
 
   it('should show topics section', fakeAsync(() => {
     fixture = TestBed.createComponent(HomeComponent);
-
-    fixture.detectChanges();
-    tick(800);
-
-    fixture.detectChanges();
-    tick(800);
-
-    fixture.detectChanges();
+    wait(fixture);
     const topicSection = findEl(fixture, '#topics-section');
     console.log('topicSection', topicSection);
     expect(topicSection).toBeTruthy();
@@ -67,9 +64,25 @@ describe('HomeComponent', () => {
     containText(fixture, '#topics-section', 'Temas a conversar');
   }));
 
-  // it('should open dialog to add new topic', fakeAsync(() => {
-  //   fail();
-  // }));
+  it('hs new topic button', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    wait(fixture);
+    const newTopicButton = findEl(fixture, '#new-topic-button');
+    expect(newTopicButton).toBeTruthy();
+    fixture.detectChanges();
+    fixture.destroy();
+  }));
+
+  it('should open dialog to add new topic', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    wait(fixture);
+    fixture.detectChanges();
+    const button = findEl(fixture, '#new-topic-button');
+    expect(button).toBeTruthy();
+    fixture.detectChanges();
+    fixture.destroy();
+    flush();
+  }));
 
   // it('should vote a question', fakeAsync(() => {
   //   fail();
@@ -95,3 +108,13 @@ describe('HomeComponent', () => {
   //   fail();
   // }));
 });
+
+function wait(fixture: ComponentFixture<HomeComponent>): void {
+  fixture.detectChanges();
+  tick(800);
+
+  fixture.detectChanges();
+  tick(800);
+
+  fixture.detectChanges();
+}
