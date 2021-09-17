@@ -48,4 +48,17 @@ describe('AniversariesComponent', () => {
     const aniversaryIcon = findEl(fixture, '.aniversary-title');
     expect(aniversaryIcon).toBeTruthy();
   });
+
+  
+  it('should show aniversary partners list', () => {
+    expect(component).toBeTruthy();
+    component.aniversaries = aniversaries;
+    
+    fixture.detectChanges();
+
+    const aniversaryIcon = findEl(fixture, '.aniverary-partner-list');
+    expect(aniversaryIcon).toBeTruthy();
+  });
+
+  
 });
