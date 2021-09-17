@@ -15,7 +15,7 @@ export class TimerService {
   private finishedSubject = new BehaviorSubject<boolean>(null);
   private onTimerTickSubject = new BehaviorSubject<number>(null);
 
-  initTimer() : void{
+  initTimer(): void {
     this.remainingTime = this.timeout;
     this.time = this.remainingTime;
     this.runTimer = false;
@@ -24,7 +24,7 @@ export class TimerService {
     this.finishedSubject.next(this.hasFinished);
   }
 
-  startTimer() : void{
+  startTimer(): void {
     if (this.runTimer) {
       this.runTimer = true;
       this.hasStarted = true;
@@ -32,11 +32,11 @@ export class TimerService {
     }
   }
 
-  pauseTimer() : void {
+  pauseTimer(): void {
     this.runTimer = false;
   }
 
-  resetTimer() : void{
+  resetTimer(): void {
     this.remainingTime = this.timeout;
     this.onTimerTickSubject.next(this.remainingTime);
     this.time = this.remainingTime;
