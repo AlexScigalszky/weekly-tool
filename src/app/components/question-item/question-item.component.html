@@ -10,7 +10,7 @@
     </div>
     <div>
       <button
-        id="vote-button"
+        class="vote-button"
         mat-stroked-button
         [color]="highlight ? 'accent' : 'primary'"
         (click)="vote()"
@@ -19,16 +19,15 @@
       </button>
       {{ question.votes }} votos
       <button
-        id="more-button"
         mat-icon-button
-        class="margin-zero"
+        class="margin-zero more-button"
         [matMenuTriggerFor]="menu2"
         aria-label="dropdown menu"
       >
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu2="matMenu" xPosition="before">
-        <button id="edit-button" mat-menu-item (click)="edit()">Editar</button>
+        <button class="edit-button" mat-menu-item (click)="edit()">Editar</button>
       </mat-menu>
     </div>
   </div>

@@ -79,7 +79,7 @@ describe('QuestionItemComponent', () => {
     component.question = question;
     fixture.detectChanges();
 
-    const voteButton = findEl(fixture, '#vote-button');
+    const voteButton = findEl(fixture, '.vote-button');
     expect(voteButton).toBeTruthy();
 
     let spy = spyOn(component.voted, 'emit');
@@ -93,11 +93,11 @@ describe('QuestionItemComponent', () => {
     component.question = question;
     fixture.detectChanges();
 
-    const moreButton = findEl(fixture, '#more-button');
+    const moreButton = findEl(fixture, '.more-button');
     expect(moreButton).toBeTruthy();
     moreButton.triggerEventHandler('click', null);
 
-    const editButton = moreButton.query(By.css('#edit-button'));
+    const editButton = moreButton.query(By.css('.edit-button'));
     let spy = spyOn(component.editButtonClicked, 'emit');
     editButton.triggerEventHandler('click', null);
 

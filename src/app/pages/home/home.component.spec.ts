@@ -6,9 +6,20 @@ import {
   tick,
 } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatOptionModule } from '@angular/material/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { AppModule } from 'src/app/app.module';
 import { QuestionMockService } from 'src/app/services/question.mock.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerMockService } from 'src/app/services/timer-mock.service';
@@ -29,10 +40,22 @@ describe('HomeComponent', () => {
       imports: [
         RouterModule.forRoot([]),
         MatCardModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatListModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatOptionModule,
+        AppModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
       ],
       providers: [
-        { provide: MatDialog, useValue: {} },
+        { provide: MatDialog, useValue: { close: () => {}, open: () => {} } },
         { provide: MatDialogRef, useValue: {} },
         { provide: QuestionService, useClass: QuestionMockService },
         { provide: VotingService, useClass: VotingService },
@@ -78,14 +101,28 @@ describe('HomeComponent', () => {
     wait(fixture);
     fixture.detectChanges();
     const button = findEl(fixture, '#new-topic-button');
-    expect(button).toBeTruthy();
+
+    const openDialogSpy = spyOn(component.dialog, 'open');
+    button.triggerEventHandler('click', null);
+
+    expect(openDialogSpy).toHaveBeenCalled();
     fixture.detectChanges();
     fixture.destroy();
     flush();
   }));
 
   // it('should vote a question', fakeAsync(() => {
-  //   fail();
+  //   fixture = TestBed.createComponent(HomeComponent);
+  //   component = fixture.componentInstance;
+  //   wait(fixture);
+  //   fixture.detectChanges();
+  //   const buttons = findEls(fixture, '.vote-button');
+  //   expect(buttons.length).toBeGreaterThan(0);
+  //   const voteButton = buttons[0];
+  //   expect(voteButton).toBeTruthy();
+  //   voteButton.triggerEventHandler('click', null);
+  //   fixture.detectChanges();
+  //   containText(fixture, '#topics-section', '1 votos');
   // }));
 
   // it('should unvote a question', fakeAsync(() => {

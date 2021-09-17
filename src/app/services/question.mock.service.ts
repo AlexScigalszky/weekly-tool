@@ -15,7 +15,7 @@ export class QuestionMockService {
 
   list(): Observable<Question[]> {
     console.log('list');
-    return of([]).pipe(delay(300));
+    return of([new Question()]).pipe(delay(30));
   }
 
   getRoom(roomName: string): Observable<Room> {

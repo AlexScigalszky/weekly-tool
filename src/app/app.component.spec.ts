@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 import { VersionComponent } from './components/version/version.component';
 import { QuestionService } from './services/question.service';
 
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        AppModule,
         RouterTestingModule,
         MatDialogModule,
         MatMenuModule,
