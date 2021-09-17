@@ -80,7 +80,7 @@ describe('HomeComponent', () => {
     fixture = TestBed.createComponent(HomeComponent);
     wait(fixture);
     const topicSection = findEl(fixture, '#topics-section');
-    console.log('topicSection', topicSection);
+
     expect(topicSection).toBeTruthy();
 
     tick(800);

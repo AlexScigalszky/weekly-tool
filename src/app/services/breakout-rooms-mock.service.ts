@@ -45,7 +45,6 @@ export class BreakoutRoomsServiceMock {
     cocina: string,
     pisoDeArriba: string,
   ): Promise<void> {
-    console.log('promise ejeutated');
     return new Promise<void>((resolve) => resolve());
   }
 
