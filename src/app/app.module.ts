@@ -36,6 +36,7 @@ import { VersionComponent } from './components/version/version.component';
 import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { BreakoutRoomsFirebaseService } from './services/breakout-rooms-firebase.service';
+import { AniversariesComponent } from './components/aniversaries/aniversaries.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { BreakoutRoomsFirebaseService } from './services/breakout-rooms-firebase
     VersionComponent,
     BreakoutRoomsComponent,
     SettingsComponent,
+    AniversariesComponent,
   ],
   imports: [
     BrowserModule,
