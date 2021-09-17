@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
 import { Partner } from 'src/app/models/partner';
 import { findEl } from 'src/test.helpers';
 
@@ -16,6 +17,7 @@ describe('AniversariesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AniversariesComponent],
+      imports: [MatIconModule],
     }).compileComponents();
   });
 
@@ -32,33 +34,40 @@ describe('AniversariesComponent', () => {
   it('should show aniversary icon', () => {
     expect(component).toBeTruthy();
     component.aniversaries = aniversaries;
-    
+
     fixture.detectChanges();
 
     const aniversaryIcon = findEl(fixture, '.aniversary-icon');
     expect(aniversaryIcon).toBeTruthy();
   });
-  
+
   it('should show aniversary title', () => {
     expect(component).toBeTruthy();
     component.aniversaries = aniversaries;
-    
+
     fixture.detectChanges();
 
     const aniversaryIcon = findEl(fixture, '.aniversary-title');
     expect(aniversaryIcon).toBeTruthy();
   });
 
-  
   it('should show aniversary partners list', () => {
     expect(component).toBeTruthy();
     component.aniversaries = aniversaries;
-    
+
     fixture.detectChanges();
 
     const aniversaryIcon = findEl(fixture, '.aniverary-partner-list');
     expect(aniversaryIcon).toBeTruthy();
   });
 
-  
+  it('should show aniversary partners items', () => {
+    expect(component).toBeTruthy();
+    component.aniversaries = aniversaries;
+
+    fixture.detectChanges();
+
+    const aniversaryIcon = findEl(fixture, '.aniverary-partner-list');
+    expect(aniversaryIcon.children.length).toEqual(1);
+  });
 });

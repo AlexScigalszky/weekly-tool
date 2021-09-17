@@ -1,7 +1,9 @@
 <div class="aniversary-section">
-    <mat-icon class="aniversary-icon" >more_vert</mat-icon>
-    <h1 class="aniversary-title">¡Tenemos un aniversario esta semana!</h1>
-    <ul class="aniverary-partner-list">
-
-    </ul>
+  <mat-icon class="aniversary-icon">more_vert</mat-icon>
+  <h1 class="aniversary-title">¡Tenemos un aniversario esta semana!</h1>
+  <ul class="aniverary-partner-list">
+    <li class="" *ngFor="let partner of aniversaries">
+      {{ partner.name }}
+    </li>
+  </ul>
 </div>
