@@ -12,6 +12,8 @@ import { QuestionService } from 'src/app/services/question.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { Timestamp } from 'firebase-firestore-timestamp';
+import { PartnersService } from 'src/app/services/partners.service';
+import { AniversariesService } from 'src/app/services/aniversaries.service';
 
 export type ApiData = {
   room: Room;
@@ -34,6 +36,9 @@ export class HomeComponent implements OnInit {
   timeStartTime: Nullable<Date> = null;
   currentQuestion$: Observable<Question>;
   showStartButton$: Observable<boolean> = of(true);
+  aniversaries$ = this.partnersService
+    .list()
+    .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +46,8 @@ export class HomeComponent implements OnInit {
     private votingService: VotingService,
     public dialog: MatDialog,
     private timer: TimerService,
+    private partnersService: PartnersService,
+    private aniversariesService: AniversariesService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {
@@ -50,6 +57,9 @@ export class HomeComponent implements OnInit {
     this.timer.onTimerTick().subscribe((ticks: number) => {
       this.calculateMinutes();
     });
+    // this.partnersService.updateList();
+    const ayearago = new Date();
+    ayearago.setFullYear(ayearago.getFullYear() - 1);
   }
 
   async ngOnInit(): Promise<void> {

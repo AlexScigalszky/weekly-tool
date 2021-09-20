@@ -1,3 +1,6 @@
+<div>
+  <app-aniversaries [aniversaries]="aniversaries$ | async"></app-aniversaries>
+</div>
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
   <div>
     <mat-card tdMediaToggle="gt-xs" id="topics-section" class="main-card">

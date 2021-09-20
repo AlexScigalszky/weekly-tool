@@ -5,7 +5,7 @@ import { AniversariesService } from './aniversaries.service';
 
 describe('AniversariesService', () => {
   let service: AniversariesService;
-  const partners: Partner[] = [new Partner()];
+  const partners: Partner[] = [new Partner('', new Date())];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -28,10 +28,9 @@ describe('AniversariesService', () => {
   });
 
   it('should filter people with one year in company ', () => {
-    const partner = new Partner();
-    partner.id = '123456';
-    partner.whenWasHired = new Date();
-    partner.whenWasHired.setFullYear(partner.whenWasHired.getFullYear() - 1);
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 1);
+    const partner = new Partner('', date);
     const peoples = service.getWhoHaveAnAniversary([partner, ...partners]);
     expect(peoples.length).toBeGreaterThanOrEqual(1);
     expect(peoples[0].id).toEqual(partner.id);

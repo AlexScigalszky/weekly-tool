@@ -1,5 +1,10 @@
 export class Partner {
   id: string = '';
   name: string = '';
-  whenWasHired: Date = new Date();
+  whenWasHired: number = 0;
+
+  constructor(name: string, whenWasHired: Date) {
+    this.name = name;
+    this.whenWasHired = whenWasHired.getTime();
+  }
 }

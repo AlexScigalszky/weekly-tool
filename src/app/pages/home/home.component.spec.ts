@@ -4,6 +4,7 @@ import {
   flush,
   TestBed,
   tick,
+  waitForAsync,
 } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppModule } from 'src/app/app.module';
+import { AniversariesService } from 'src/app/services/aniversaries.service';
+import { PartnersMockService } from 'src/app/services/partners-mock.service';
+import { PartnersService } from 'src/app/services/partners.service';
 import { QuestionMockService } from 'src/app/services/question.mock.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerMockService } from 'src/app/services/timer-mock.service';
@@ -58,8 +62,10 @@ describe('HomeComponent', () => {
         { provide: MatDialog, useValue: { close: () => {}, open: () => {} } },
         { provide: MatDialogRef, useValue: {} },
         { provide: QuestionService, useClass: QuestionMockService },
-        { provide: VotingService, useClass: VotingService },
         { provide: TimerService, useClass: TimerMockService },
+        { provide: VotingService, useClass: VotingService },
+        { provide: PartnersService, useClass: PartnersMockService },
+        { provide: AniversariesService, useClass: AniversariesService },
       ],
     }).compileComponents();
   });
@@ -70,11 +76,14 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create and show waiting', () => {
-    expect(component).toBeTruthy();
-    const waitingComponent = findEl(fixture, '#spinner');
-    expect(waitingComponent).toBeTruthy();
-  });
+  it(
+    'should create and show waiting',
+    waitForAsync(() => {
+      expect(component).toBeTruthy();
+      const waitingComponent = findEl(fixture, '#spinner');
+      expect(waitingComponent).toBeTruthy();
+    }),
+  );
 
   it('should show topics section', fakeAsync(() => {
     fixture = TestBed.createComponent(HomeComponent);
@@ -86,6 +95,14 @@ describe('HomeComponent', () => {
     tick(800);
     containText(fixture, '#topics-section', 'Temas a conversar');
   }));
+
+  // it('should show aniversary section', fakeAsync(() => {
+  //   fixture = TestBed.createComponent(HomeComponent);
+  //   wait(fixture);
+  //   const topicSection = findEl(fixture, '.aniversary-section');
+
+  //   expect(topicSection).toBeTruthy();
+  // }));
 
   it('hs new topic button', fakeAsync(() => {
     fixture = TestBed.createComponent(HomeComponent);
