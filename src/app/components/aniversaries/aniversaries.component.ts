@@ -13,11 +13,11 @@ export class AniversariesComponent {
 
   constructor(private aniversariesService: AniversariesService) {}
 
-  years(partner: Partner): number {
+  years(partner: Partner): string {
     const y = this.aniversariesService.calculateDiffInYears(
       new Date(partner.whenWasHired),
       new Date(),
     );
-    return isNaN(y) ? 0 : y;
+    return isNaN(y) ? '0 años' : y === 1 ? '1 año' : y + ' años';
   }
 }
