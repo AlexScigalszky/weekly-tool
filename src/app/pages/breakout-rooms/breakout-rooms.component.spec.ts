@@ -56,5 +56,8 @@ describe('BreakoutRoomsComponent', () => {
     tick(2301);
     fixture.detectChanges();
     hasText(fixture, '#breakout-link', 'Entrar');
+
+    const plenaryLink = findEl(fixture, '#plenary-link');
+    expect(plenaryLink).toBeTruthy();
   }));
 });
