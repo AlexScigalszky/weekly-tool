@@ -1,4 +1,4 @@
-<div>
+<div class="aniversary-section">
   <app-aniversaries [aniversaries]="aniversaries$ | async"></app-aniversaries>
 </div>
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">

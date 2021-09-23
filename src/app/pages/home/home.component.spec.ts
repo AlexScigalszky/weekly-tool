@@ -106,13 +106,14 @@ describe('HomeComponent', () => {
     hasText(fixture, '#votes-counter', '0');
   }));
 
-  // it('should show aniversary section', fakeAsync(() => {
-  //   fixture = TestBed.createComponent(HomeComponent);
-  //   wait(fixture);
-  //   const topicSection = findEl(fixture, '.aniversary-section');
+  it('should show aniversary section', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    wait(fixture);
+    tick(800);
+    const topicSection = findEl(fixture, '.aniversary-section');
 
-  //   expect(topicSection).toBeTruthy();
-  // }));
+    expect(topicSection).toBeTruthy();
+  }));
 
   it('hs new topic button', fakeAsync(() => {
     fixture = TestBed.createComponent(HomeComponent);
