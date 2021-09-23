@@ -18,6 +18,7 @@ import { AniversariesService } from 'src/app/services/aniversaries.service';
 export type ApiData = {
   room: Room;
   questions: Question[];
+  totalVotes: number;
 };
 
 @Component({
@@ -80,6 +81,10 @@ export class HomeComponent implements OnInit {
       map(([room, questions]) => ({
         room: room,
         questions: questions,
+        totalVotes: questions.reduce(
+          (total: number, question: Question) => (total += question.votes),
+          0,
+        ),
       })),
       tap((data) => console.log('refresh room', data)),
       tap((data) => this.setCurrentQuestion(data.room)),

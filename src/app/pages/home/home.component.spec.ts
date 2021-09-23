@@ -30,7 +30,7 @@ import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { environment } from 'src/environments/environment';
-import { containText, findEl } from 'src/test.helpers';
+import { containText, findEl, hasText } from 'src/test.helpers';
 
 import { HomeComponent } from './home.component';
 
@@ -94,6 +94,16 @@ describe('HomeComponent', () => {
 
     tick(800);
     containText(fixture, '#topics-section', 'Temas a conversar');
+  }));
+
+  
+  it('should show votes counter', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    wait(fixture);
+    fixture.detectChanges();
+
+    tick(800);
+    hasText(fixture, '#votes-counter', '0');
   }));
 
   // it('should show aniversary section', fakeAsync(() => {
