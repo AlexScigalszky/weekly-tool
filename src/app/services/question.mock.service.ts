@@ -40,4 +40,9 @@ export class QuestionMockService {
     question.id = currentQuestionId;
     return of(question);
   }
+
+  update(question: Question): Promise<void> {
+    return new Promise(r => r());
+  }
+
 }

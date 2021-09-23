@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppModule } from 'src/app/app.module';
@@ -30,7 +31,7 @@ import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { environment } from 'src/environments/environment';
-import { containText, findEl, hasText } from 'src/test.helpers';
+import { containText, findEl, findEls, hasText } from 'src/test.helpers';
 
 import { HomeComponent } from './home.component';
 
@@ -96,7 +97,6 @@ describe('HomeComponent', () => {
     containText(fixture, '#topics-section', 'Temas a conversar');
   }));
 
-  
   it('should show votes counter', fakeAsync(() => {
     fixture = TestBed.createComponent(HomeComponent);
     wait(fixture);
@@ -139,39 +139,83 @@ describe('HomeComponent', () => {
     flush();
   }));
 
-  // it('should vote a question', fakeAsync(() => {
-  //   fixture = TestBed.createComponent(HomeComponent);
-  //   component = fixture.componentInstance;
-  //   wait(fixture);
-  //   fixture.detectChanges();
-  //   const buttons = findEls(fixture, '.vote-button');
-  //   expect(buttons.length).toBeGreaterThan(0);
-  //   const voteButton = buttons[0];
-  //   expect(voteButton).toBeTruthy();
-  //   voteButton.triggerEventHandler('click', null);
-  //   fixture.detectChanges();
-  //   containText(fixture, '#topics-section', '1 votos');
-  // }));
+  it('should vote a question', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    wait(fixture);
+    tick(800);
+    fixture.detectChanges();
+    const buttons = findEls(fixture, '.vote-button');
+    expect(buttons.length).toBeGreaterThan(0);
+    const voteButton = buttons[0];
+    expect(voteButton).toBeTruthy();
 
-  // it('should unvote a question', fakeAsync(() => {
-  //   fail();
-  // }));
+    const voteSpy = spyOn(component, 'vote');
 
-  // it('select a topic', fakeAsync(() => {
-  //   fail();
-  // }));
+    voteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    wait(fixture);
+    tick(800);
 
-  // it('select a topic and start a timer', fakeAsync(() => {
-  //   fail();
-  // }));
+    expect(voteSpy).toHaveBeenCalled();
+  }));
 
-  // it('should reset all votes', fakeAsync(() => {
-  //   fail();
-  // }));
+  it('should unvote a question', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    wait(fixture);
+    tick(800);
+    fixture.detectChanges();
+    const buttons = findEls(fixture, '.vote-button');
+    expect(buttons.length).toBeGreaterThan(0);
+    const voteButton = buttons[0];
+    expect(voteButton).toBeTruthy();
+    voteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    wait(fixture);
+    tick(800);
+    containText(fixture, '#topics-section', '0 votos');
+  }));
 
-  // it('should open edit question dialog', fakeAsync(() => {
-  //   fail();
-  // }));
+  it('should reset all votes', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    wait(fixture);
+    tick(800);
+    fixture.detectChanges();
+    const resetVotes = findEl(fixture, '#reset-votes');
+    expect(resetVotes).toBeTruthy();
+
+    const resetVotesSpy = spyOn(component, 'resetVotes');
+
+    resetVotes.triggerEventHandler('click', null);
+
+    expect(resetVotesSpy).toHaveBeenCalled();
+  }));
+
+  it('should open edit question dialog', fakeAsync(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    wait(fixture);
+    tick(800);
+    fixture.detectChanges();
+
+    const moreButtons = findEls(fixture, '.more-button');
+    const moreButton = moreButtons[0];
+    expect(moreButton).toBeTruthy();
+    moreButton.triggerEventHandler('click', null);
+
+    const editButton = moreButton.query(By.css('.edit-button'));
+
+    expect(editButton).toBeTruthy();
+
+    const editQuestionSpy = spyOn(component, 'editQuestion');
+    editButton.triggerEventHandler('click', null);
+
+    expect(editQuestionSpy).toHaveBeenCalled();
+    wait(fixture);
+    tick(800);
+  }));
 });
 
 function wait(fixture: ComponentFixture<HomeComponent>): void {
