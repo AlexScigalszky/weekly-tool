@@ -5,8 +5,8 @@
   [aniversaries]="aniversaries$ | async"></app-aniversaries>
 </div>
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
-  <div>
-    <mat-card tdMediaToggle="gt-xs" id="topics-section" class="main-card" *ngIf="sections.quiestionLists">
+  <div id="topics-section" *ngIf="sections.quiestionLists">
+    <mat-card tdMediaToggle="gt-xs" class="main-card">
       <mat-card-header>
         <mat-card-title> Temas a conversar </mat-card-title>
         <mat-card-subtitle>
