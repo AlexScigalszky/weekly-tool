@@ -12,10 +12,14 @@ import { QuestionService } from 'src/app/services/question.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { Timestamp } from 'firebase-firestore-timestamp';
+import { PartnersService } from 'src/app/services/partners.service';
+import { AniversariesService } from 'src/app/services/aniversaries.service';
+import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.service';
 
 export type ApiData = {
   room: Room;
   questions: Question[];
+  totalVotes: number;
 };
 
 @Component({
@@ -34,6 +38,9 @@ export class HomeComponent implements OnInit {
   timeStartTime: Nullable<Date> = null;
   currentQuestion$: Observable<Question>;
   showStartButton$: Observable<boolean> = of(true);
+  aniversaries$ = this.partnersService
+    .list()
+    .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +48,9 @@ export class HomeComponent implements OnInit {
     private votingService: VotingService,
     public dialog: MatDialog,
     private timer: TimerService,
+    private partnersService: PartnersService,
+    private aniversariesService: AniversariesService,
+    public sections: SectionsAvaliablesService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {
@@ -50,6 +60,9 @@ export class HomeComponent implements OnInit {
     this.timer.onTimerTick().subscribe((ticks: number) => {
       this.calculateMinutes();
     });
+    // this.partnersService.updateList();
+    const ayearago = new Date();
+    ayearago.setFullYear(ayearago.getFullYear() - 1);
   }
 
   async ngOnInit(): Promise<void> {
@@ -70,6 +83,10 @@ export class HomeComponent implements OnInit {
       map(([room, questions]) => ({
         room: room,
         questions: questions,
+        totalVotes: questions.reduce(
+          (total: number, question: Question) => (total += question.votes),
+          0,
+        ),
       })),
       tap((data) => console.log('refresh room', data)),
       tap((data) => this.setCurrentQuestion(data.room)),

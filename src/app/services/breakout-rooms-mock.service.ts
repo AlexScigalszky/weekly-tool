@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { BreakoutRoom } from 'src/app/models/breackout-room';
 
 export class BreakoutRoomsServiceMock {
@@ -44,12 +45,11 @@ export class BreakoutRoomsServiceMock {
     cocina: string,
     pisoDeArriba: string,
   ): Promise<void> {
-    console.log('promise ejeutated');
     return new Promise<void>((resolve) => resolve());
   }
 
   getRandomLink(): Observable<BreakoutRoom> {
-    return of(new BreakoutRoom());
+    return of(new BreakoutRoom()).pipe(delay(800));
   }
 
   getCountRooms() {

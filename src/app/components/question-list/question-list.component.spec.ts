@@ -80,7 +80,7 @@ describe('QuestionListComponent', () => {
     expect(elements.length).toEqual(1);
 
     const item = elements[0];
-    const voteButton = item.query(By.css('#vote-button'));
+    const voteButton = item.query(By.css('.vote-button'));
     expect(voteButton).toBeTruthy();
 
     let spy = spyOn(component.voted, 'emit');
@@ -90,7 +90,7 @@ describe('QuestionListComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should emit vote event', () => {
+  it('should emit edit event', () => {
     component.questions = [question];
     fixture.detectChanges();
 
@@ -98,11 +98,11 @@ describe('QuestionListComponent', () => {
     expect(elements.length).toEqual(1);
 
     const item = elements[0];
-    const moreButton = item.query(By.css('#more-button'));
+    const moreButton = item.query(By.css('.more-button'));
     expect(moreButton).toBeTruthy();
     moreButton.triggerEventHandler('click', null);
 
-    const editButton = item.query(By.css('#edit-button'));
+    const editButton = item.query(By.css('.edit-button'));
     let spy = spyOn(component.editButtonClicked, 'emit');
     editButton.triggerEventHandler('click', null);
 

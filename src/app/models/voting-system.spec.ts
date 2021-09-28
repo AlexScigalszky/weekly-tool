@@ -11,13 +11,6 @@ describe('VotingSystem', () => {
     title: 'title1',
     description: 'description1',
   };
-  // let questionTwo = {
-  //   id: 'question-2',
-  //   name: 'name',
-  //   votes: 0,
-  //   title: 'title2',
-  //   description: 'description2',
-  // };
   newVotingSystem.questionsUp = [questionOne];
   newVotingSystem.maxVotesAvaliables = 32;
 
@@ -43,15 +36,32 @@ describe('VotingSystem', () => {
     );
   });
 
-  it('vote up', () => {
+  it('vote up must return true and add new question voted', () => {
     const service = new VotingSystem();
     expect(service.voteUp(questionOne)).toBeTrue();
     expect(service.questionsUp.length).toEqual(1);
   });
 
-  it('vote down', () => {
+  it("vote down on vote up (because it's already voted)", () => {
+    const service = new VotingSystem();
+    service.voteUp(questionOne);
+    expect(service.questionsUp.length).toEqual(1);
+
+    expect(service.voteUp(questionOne)).toBeTrue();
+    expect(service.questionsUp.length).toEqual(0);
+  });
+
+  it('vote down  return true and add remove the question of questionUp list', () => {
     const service = new VotingSystem();
     expect(service.voteDown(questionOne)).toBeTrue();
+    expect(service.questionsUp.length).toEqual(0);
+  });
+
+  it('vote down of unvoted question', () => {
+    const service = new VotingSystem();
+
+    expect(service.voteDown(questionOne)).toBeTrue();
+
     expect(service.questionsUp.length).toEqual(0);
   });
 });

@@ -1,5 +1,6 @@
 #home-container {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   gap: 1rem;
 }
 @media (min-width: 960px) {

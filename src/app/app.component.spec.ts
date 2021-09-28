@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 import { VersionComponent } from './components/version/version.component';
 import { QuestionService } from './services/question.service';
 
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        AppModule,
         RouterTestingModule,
         MatDialogModule,
         MatMenuModule,
@@ -33,4 +35,16 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+
+  // it('should call newRoom', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+
+  //   const newRoomSpy = spyOn(app, 'newRoom');
+
+  //   const newRoomButton = findEl(fixture, '#new-room-button');
+  //   newRoomButton.triggerEventHandler('click', null);
+
+  //   expect(newRoomSpy).toHaveBeenCalled();
+  // });
 });

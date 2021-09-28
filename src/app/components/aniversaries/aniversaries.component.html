@@ -1,0 +1,15 @@
+<div class="aniversary-section" *ngIf="aniversaries?.length">
+  <!-- <h1 class="aniversary-title">
+    <span class="aniversary-icon parpadea">🎉</span>
+    ¡Tenemos un aniversario esta semana!
+    <span class="aniversary-icon parpadea">🎊</span>
+  </h1> -->
+  <ul class="aniverary-partner-list">
+    <li class="" *ngFor="let partner of aniversaries">
+      <span class="aniversary-icon parpadea">🎉</span>
+      <b>{{ partner.name }}</b> hace <b>{{ years(partner) }}</b> que está
+      trabajando con nosotros
+      <span class="aniversary-icon parpadea">🎊</span>
+    </li>
+  </ul>
+</div>
