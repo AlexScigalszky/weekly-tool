@@ -14,6 +14,7 @@ import { VotingService } from 'src/app/services/voting.service';
 import { Timestamp } from 'firebase-firestore-timestamp';
 import { PartnersService } from 'src/app/services/partners.service';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
+import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.service';
 
 export type ApiData = {
   room: Room;
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
     private timer: TimerService,
     private partnersService: PartnersService,
     private aniversariesService: AniversariesService,
+    public sections: SectionsAvaliablesService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {

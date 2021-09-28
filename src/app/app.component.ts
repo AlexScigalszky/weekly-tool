@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SectionsAvaliablesService } from './services/sections-avaliables.service';
 
 @Component({
   selector: 'app-root',
@@ -6,23 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  // constructor(public dialog: MatDialog) {}
-  // async newRoom() {
-  //   const dialogRef = this.dialog.open(NewRoomModalComponent, {
-  //     width: '25vw',
-  //     data: {},
-  //   });
-  //   const roomName = await dialogRef.afterClosed().toPromise();
-  //   if (roomName === undefined) {
-  //     return;
-  //   }
-  //   console.log('roomName', roomName);
-  //   this.questions.getRoom(roomName).subscribe((room) => {
-  //     if (room !== undefined) {
-  //       console.log(`room ${room.id} already exist`);
-  //     } else {
-  //       window.open(`/${roomName}`, '_blank');
-  //     }
-  //   });
-  // }
+
+  constructor(public sections: SectionsAvaliablesService) {}
+  
 }

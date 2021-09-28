@@ -61,4 +61,3 @@ describe('BreakoutRoomsComponent', () => {
     expect(plenaryLink).toBeTruthy();
   }));
 });
-

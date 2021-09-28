@@ -11,18 +11,18 @@ export class AniversariesService {
       partners.map((x) => new Date(x.whenWasHired)),
     );
     return partners.filter((x) =>
-      this.hasAniversaryInThisWeek(new Date(x.whenWasHired)),
+      this.hasAniversaryInThisWeek(new Date(x.whenWasHired), x),
     );
   }
 
-  hasAniversaryInThisWeek(date: Date): boolean {
+  hasAniversaryInThisWeek(date: Date, partner: Partner): boolean {
     const today = new Date();
     const diffDays = this.calculateDiffInDays(date, today);
     console.log({ date, today });
     const debt = diffDays % 365;
     const years = diffDays / 365;
     const has = 0 <= debt && debt <= 7 && years > 0;
-    console.log('hasAniversaryInThisWeek', { debt, years, has });
+    // console.log(`hasAniversaryInThisWeek - ${partner.name} - ${debt}`, { debt, years, has });
     return has;
   }
 

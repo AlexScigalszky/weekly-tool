@@ -42,7 +42,6 @@ export class QuestionMockService {
   }
 
   update(question: Question): Promise<void> {
-    return new Promise(r => r());
+    return new Promise((r) => r());
   }
-
 }

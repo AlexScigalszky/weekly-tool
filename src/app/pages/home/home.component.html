@@ -1,9 +1,12 @@
 <div class="aniversary-section">
-  <app-aniversaries [aniversaries]="aniversaries$ | async"></app-aniversaries>
+  <app-aniversaries 
+  
+  *ngIf="sections.aniversary"
+  [aniversaries]="aniversaries$ | async"></app-aniversaries>
 </div>
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
   <div>
-    <mat-card tdMediaToggle="gt-xs" id="topics-section" class="main-card">
+    <mat-card tdMediaToggle="gt-xs" id="topics-section" class="main-card" *ngIf="sections.quiestionLists">
       <mat-card-header>
         <mat-card-title> Temas a conversar </mat-card-title>
         <mat-card-subtitle>
@@ -49,8 +52,8 @@
     </mat-card>
   </div>
 
-  <div id="selected-topic-section">
-    <mat-card>
+  <div id="selected-topic-section" *ngIf="sections.currentQuestion">
+    <mat-card >
       <mat-card-header>
         <mat-card-title> Tiempo de conversación </mat-card-title>
         <mat-card-subtitle> Seguí estos pasos </mat-card-subtitle>

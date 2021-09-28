@@ -37,6 +37,7 @@ import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.co
 import { SettingsComponent } from './pages/settings/settings.component';
 import { BreakoutRoomsFirebaseService } from './services/breakout-rooms-firebase.service';
 import { AniversariesComponent } from './components/aniversaries/aniversaries.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { AniversariesComponent } from './components/aniversaries/aniversaries.co
     MatExpansionModule,
     MatGridListModule,
     MatMenuModule,
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

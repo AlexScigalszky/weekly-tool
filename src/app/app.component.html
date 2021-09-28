@@ -15,13 +15,22 @@
       >
         <mat-icon>more_vert</mat-icon>
       </button>
-      <mat-menu #globalMenu="matMenu" xPosition="before">
+      <mat-menu #globalMenu="matMenu" xPosition="before" [hasBackdrop]="false">
         <a href="/" mat-menu-item> Inicio </a>
         <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>
           Nueva Sala
         </button> -->
         <a href="/breakout" mat-menu-item> Breakout </a>
         <a href="/settings" mat-menu-item> Configuración </a>
+        <div mat-menu-item>
+          <mat-checkbox [(ngModel)]="sections.aniversary">Anivesarios</mat-checkbox>
+        </div>
+        <div mat-menu-item>
+          <mat-checkbox [(ngModel)]="sections.quiestionLists">Temas a conversar</mat-checkbox>
+        </div>
+        <div mat-menu-item>
+          <mat-checkbox [(ngModel)]="sections.currentQuestion">Tiempo de conversación </mat-checkbox>
+        </div>
       </mat-menu>
     </div>
   </h1>

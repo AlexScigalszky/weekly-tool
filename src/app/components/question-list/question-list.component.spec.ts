@@ -9,7 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Question } from 'src/app/models/question';
-import { findEl, findEls  } from 'src/test.helpers';
+import { findEl, findEls } from 'src/test.helpers';
 import { QuestionItemComponent } from '../question-item/question-item.component';
 
 import { QuestionListComponent } from './question-list.component';
@@ -109,5 +109,4 @@ describe('QuestionListComponent', () => {
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
   });
-
 });
