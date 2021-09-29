@@ -1,8 +1,8 @@
 <div class="aniversary-section">
-  <app-aniversaries 
-  
-  *ngIf="sections.aniversary"
-  [aniversaries]="aniversaries$ | async"></app-aniversaries>
+  <app-aniversaries
+    *ngIf="sections.aniversary"
+    [aniversaries]="aniversaries$ | async"
+  ></app-aniversaries>
 </div>
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
   <div id="topics-section" *ngIf="sections.quiestionLists">
@@ -53,7 +53,7 @@
   </div>
 
   <div id="selected-topic-section" *ngIf="sections.currentQuestion">
-    <mat-card >
+    <mat-card>
       <mat-card-header>
         <mat-card-title> Tiempo de conversación </mat-card-title>
         <mat-card-subtitle> Seguí estos pasos </mat-card-subtitle>

@@ -7,7 +7,5 @@ import { SectionsAvaliablesService } from './services/sections-avaliables.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
   constructor(public sections: SectionsAvaliablesService) {}
-  
 }
