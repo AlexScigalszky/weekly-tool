@@ -1,6 +1,6 @@
 <div class="aniversary-section">
-  <app-aniversaries 
-  
+  <app-aniversaries
+
   *ngIf="sections.aniversary"
   [aniversaries]="aniversaries$ | async"></app-aniversaries>
 </div>
@@ -13,9 +13,9 @@
           <p>
             Escribí un idea junto con su descripción para conversarlo entre
             todos. Si querés podés agregar tu nombre. Al momento de votar, sólo
-            podrás hacerlo en 3 items. Hasta el momento:<b id="votes-counter">{{
+            podrás hacerlo en 3 items. Hasta el momento:<strong id="votes-counter">{{
               apiData.totalVotes
-            }}</b>
+            }}</strong>
             votos en total
           </p>
           <button
