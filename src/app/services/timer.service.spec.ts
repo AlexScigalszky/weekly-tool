@@ -23,14 +23,14 @@ describe('TimerService', () => {
     expect(service.hasStarted).toBeFalse();
     expect(service.hasFinished).toBeFalse();
   });
-  
+
   it('should be start', () => {
     service.runTimer = false;
     service.startTimer();
 
     expect(service.runTimer).toBeFalse();
   });
-  
+
   it('should be start running', () => {
     service.runTimer = true;
     service.startTimer();
@@ -38,13 +38,13 @@ describe('TimerService', () => {
     expect(service.runTimer).toBeTrue();
     expect(service.hasStarted).toBeTrue();
   });
-  
+
   it('should be pause', () => {
     service.pauseTimer();
 
     expect(service.runTimer).toBeFalse();
   });
-  
+
   it('should reset', () => {
     service.resetTimer();
 
