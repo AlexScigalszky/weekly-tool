@@ -5,6 +5,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Constants } from '../constants';
 import { BreakoutRoom } from '../models/breackout-room';
 import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
@@ -13,7 +14,7 @@ import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
   providedIn: 'root',
 })
 export class BreakoutRoomsFirebaseService {
-  roomCollectionName = 'breakout-rooms';
+  roomCollectionName = `companies/${environment.companyName}/breakout-rooms`;
   roomName = 'default';
   currentFirebaseRooms$: Observable<BreakoutRoomFirebase>;
   roomCollection: AngularFirestoreCollection<BreakoutRoomFirebase>;

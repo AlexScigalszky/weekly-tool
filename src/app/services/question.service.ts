@@ -8,15 +8,16 @@ import {
 import { Room } from '../models/room';
 import { catchError, map } from 'rxjs/operators';
 import { Nullable } from '../models/nullable';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionService {
-  questionCollectionName = 'questions';
+  questionCollectionName = `companies/${environment.companyName}/questions`;
   questionCollection: AngularFirestoreCollection<Question>;
 
-  roomCollectionName = 'rooms';
+  roomCollectionName = `companies/${environment.companyName}/rooms`;
   roomCollection: AngularFirestoreCollection<Room>;
 
   constructor(private firestore: AngularFirestore) {
@@ -27,7 +28,7 @@ export class QuestionService {
   }
 
   setRoom(room: string): void {
-    this.questionCollectionName = `rooms/${room}/questions`;
+    this.questionCollectionName = `companies/${environment.companyName}/rooms/${room}/questions`;
     this.questionCollection = this.firestore.collection<Question>(
       this.questionCollectionName,
       this.orderByRelevance,
