@@ -65,6 +65,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Temas</mat-label>
           <mat-select [formControl]="currentQuestionControl">
+            <mat-option value="-1"> - </mat-option>
             <mat-option
               *ngFor="let question of apiData.questions"
               [value]="question.id"
