@@ -38,6 +38,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { BreakoutRoomsFirebaseService } from './services/breakout-rooms-firebase.service';
 import { AniversariesComponent } from './components/aniversaries/aniversaries.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RetroModule } from './retro/retro.module';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AniversariesComponent,
   ],
   imports: [
+    RetroModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

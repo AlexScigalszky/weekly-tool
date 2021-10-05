@@ -1,6 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { containText, findEls } from 'src/test.helpers';
+import { containText, findEl, findEls } from 'src/test.helpers';
 
 import { RetroDashboardComponent } from './retro-dashboard.component';
 
@@ -43,5 +43,20 @@ describe('RetroDashboardComponent', () => {
 
   it('have less of', () => {
     containText(fixture, '.less-of', 'Algo malo / Menos de...')!;
+  });
+
+  it('have more-of input', () => {
+    const input = findEl(fixture, '.more-of input');
+    expect(input).toBeTruthy();
+  });
+
+  it('have keep input', () => {
+    const input = findEl(fixture, '.keep input');
+    expect(input).toBeTruthy();
+  });
+
+  it('have less input', () => {
+    const input = findEl(fixture, '.less-of input');
+    expect(input).toBeTruthy();
   });
 });
