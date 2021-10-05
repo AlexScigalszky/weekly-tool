@@ -59,4 +59,28 @@ describe('RetroDashboardComponent', () => {
     const input = findEl(fixture, '.less-of input');
     expect(input).toBeTruthy();
   });
+  /********************************/
+  
+  it('have more-of item list', () => {
+    const input = findEl(fixture, '.more-of ul');
+    expect(input).toBeTruthy();
+  });
+
+  it('have keep item list', () => {
+    const input = findEl(fixture, '.keep ul');
+    expect(input).toBeTruthy();
+  });
+
+  it('have less item list', () => {
+    const input = findEl(fixture, '.less-of ul');
+    expect(input).toBeTruthy();
+  });
+  /********************************/
+  // it('have to add a new opinion in more of section', () => {
+  //   const input = findEl(fixture, '.more-of input');
+  //   setValueTo(input, 'un nuevo comentario');
+  //   fixture.detectChanges();
+
+  // });
+
 });
