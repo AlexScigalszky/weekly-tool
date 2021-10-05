@@ -4,14 +4,15 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/internal/Observable';
-// import { take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Partner } from '../models/partner';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PartnersService {
-  partnerCollectionName = 'partners';
+  partnerCollectionName = `companies/${environment.companyName}/partners`;
   partnerCollection: AngularFirestoreCollection<Partner>;
 
   constructor(private firestore: AngularFirestore) {
@@ -21,7 +22,9 @@ export class PartnersService {
   }
 
   list(): Observable<Partner[]> {
-    return this.partnerCollection.valueChanges();
+    return this.partnerCollection
+      .valueChanges()
+      .pipe(tap((x) => console.log(`partners`, x)));
   }
 
   updateList(): void {
@@ -72,7 +75,6 @@ export class PartnersService {
       new Partner('Viviana Lorena Arancibia', new Date('2021/03/22')),
       new Partner('Jose Antonio Guarecuco', new Date('2021/03/22')),
       new Partner('Emily Solsire Spiritto Lozada', new Date('2021/04/12')),
-      new Partner('Luis Barrios', new Date('2021/04/12')),
       new Partner('Matias Buchniv ', new Date('2021/07/01')),
       new Partner('Lucas Daniel Campaner', new Date('2021/06/01')),
       new Partner('Andrés Álvarez ', new Date('2021/06/01')),

@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  companyName: 'w3itsolutions',
   firebaseConfig: {
     apiKey: 'AIzaSyAXXlYYmw5TPiJmYu3tDQ_WeUMxq5lOoQc',
     authDomain: 'questionanswers-arg.firebaseapp.com',
