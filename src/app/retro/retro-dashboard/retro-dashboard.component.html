@@ -1,65 +1,53 @@
-<div class="retro-column more-of">
-  <h1>Algo bueno / Más de...</h1>
-
-  <ul>
-    <li></li>
-  </ul>
-
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Escribe tu opinión</mat-label>
-    <input matInput type="text" [(ngModel)]="morOfInputValue" />
-    <button
-      *ngIf="morOfInputValue"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="morOfInputValue = ''"
+<div class="before-retro">
+  <mat-form-field appearance="fill">
+    <mat-label>Retro Anterior</mat-label>
+    <mat-select
+      (selectionChange)="selectRetro()"
+      [(ngModel)]="beforeRetroSelected"
     >
-      <mat-icon>close</mat-icon>
-    </button>
+      <mat-option value="empty">Ninguna</mat-option>
+      <mat-option *ngFor="let item of beforeRetros$ | async" [value]="item.id">
+        {{ item.id }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
+
+  <div class="retro-section" *ngIf="sectionsBeforeRetro$ | async as sections">
+    <div class="retro-column more-of">
+      <app-item-list [list]="sections.moreOf"></app-item-list>
+    </div>
+
+    <div class="retro-column keep">
+      <app-item-list [list]="sections.keep"></app-item-list>
+    </div>
+
+    <div class="retro-column less-of">
+      <app-item-list [list]="sections.lessOf"></app-item-list>
+    </div>
+  </div>
 </div>
+<div class="retro-section" *ngIf="sections$ | async as sections">
+  <div class="retro-column more-of">
+    <h1>😍 Más de...</h1>
 
-<div class="retro-column keep">
-  <h1>Algo ni muy muy ni tantan / Mantengamos...</h1>
+    <app-retro-input (onSubmited)="sendMoreOf($event)"></app-retro-input>
 
-  <ul>
-    <li></li>
-  </ul>
+    <app-item-list [list]="sections.moreOf"></app-item-list>
+  </div>
 
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Escribe tu opinión</mat-label>
-    <input matInput type="text" [(ngModel)]="keepInputValue" />
-    <button
-      *ngIf="keepInputValue"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="keepInputValue = ''"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-</div>
+  <div class="retro-column keep">
+    <h1>😇 Mantengamos...</h1>
 
-<div class="retro-column less-of">
-  <h1>Algo malo / Menos de...</h1>
+    <app-retro-input (onSubmited)="sendKeep($event)"></app-retro-input>
 
-  <ul>
-    <li></li>
-  </ul>
+    <app-item-list [list]="sections.keep"></app-item-list>
+  </div>
 
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Escribe tu opinión</mat-label>
-    <input matInput type="text" [(ngModel)]="lessOfInputValue" />
-    <button
-      *ngIf="lessOfInputValue"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="lessOfInputValue = ''"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+  <div class="retro-column less-of">
+    <h1>😫 Menos de...</h1>
+
+    <app-retro-input (onSubmited)="sendLessOf($event)"></app-retro-input>
+
+    <app-item-list [list]="sections.lessOf"></app-item-list>
+  </div>
 </div>

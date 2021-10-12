@@ -48,7 +48,9 @@ export class BreakoutRoomsFirebaseService {
   }
 
   getCountRooms(): Observable<number> {
-    return this.currentFirebaseRooms$.pipe(map((data) => data.rooms.length));
+    return this.currentFirebaseRooms$.pipe(
+      map((data) => data?.rooms?.length ?? 0),
+    );
   }
 
   update(

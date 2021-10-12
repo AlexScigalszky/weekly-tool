@@ -55,7 +55,6 @@ import { RetroModule } from './retro/retro.module';
     AniversariesComponent,
   ],
   imports: [
-    RetroModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -79,6 +78,7 @@ import { RetroModule } from './retro/retro.module';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    RetroModule,
   ],
   providers: [QuestionService, VotingService, BreakoutRoomsFirebaseService],
   bootstrap: [AppComponent],

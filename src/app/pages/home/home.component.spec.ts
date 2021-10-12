@@ -31,7 +31,7 @@ import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { environment } from 'src/environments/environment';
-import { containText, findEl, findEls, hasText } from 'src/test.helpers';
+import { containText, findEl, findEls, hasText, wait } from 'src/test.helpers';
 
 import { HomeComponent } from './home.component';
 
@@ -174,7 +174,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
     wait(fixture);
     tick(800);
-    containText(fixture, '#topics-section', '0 votos');
+    containText(fixture, '#topics-section', '0  votos');
   }));
 
   it('should reset all votes', fakeAsync(() => {
@@ -217,13 +217,3 @@ describe('HomeComponent', () => {
     tick(800);
   }));
 });
-
-function wait(fixture: ComponentFixture<HomeComponent>): void {
-  fixture.detectChanges();
-  tick(800);
-
-  fixture.detectChanges();
-  tick(800);
-
-  fixture.detectChanges();
-}
