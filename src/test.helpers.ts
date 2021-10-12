@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 export function setValueTo(element: DebugElement, value: string) {
@@ -40,7 +40,10 @@ export function containText<T>(
 ): boolean {
   const element = findEl<T>(fixture, testId);
   const textContent = element.nativeElement.textContent.trim();
-  return expect(textContent).toContain(textToEvaluate);
+  return expect(textContent.indexOf(textToEvaluate)).toBeGreaterThan(
+    -1,
+    `"${textContent}" no contiene "${textToEvaluate}"`,
+  );
 }
 
 export function queryByCss<T>(
@@ -53,4 +56,14 @@ export function queryByCss<T>(
     throw new Error(`queryByCss: Element with ${selector} not found`);
   }
   return debugElement;
+}
+
+export function wait(fixture: ComponentFixture<any>): void {
+  fixture.detectChanges();
+  tick(800);
+
+  fixture.detectChanges();
+  tick(800);
+
+  fixture.detectChanges();
 }
