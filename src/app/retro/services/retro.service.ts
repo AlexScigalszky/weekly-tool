@@ -91,13 +91,14 @@ export class RetroService {
       keep.valueChanges(),
       lessOf.valueChanges(),
     ]).pipe(
-      map(([moreOf, keep, lessOf]) => ({
-        id: retro,
-        moreOf,
-        keep,
-        lessOf,
-      }),
-      tap(console.log)
+      map(
+        ([moreOf, keep, lessOf]) => ({
+          id: retro,
+          moreOf,
+          keep,
+          lessOf,
+        }),
+        tap(console.log),
       ),
     );
   }

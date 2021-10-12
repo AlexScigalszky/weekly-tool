@@ -27,7 +27,9 @@ export class RetroDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.room = this.route.snapshot.params.room ?? 'default';
     this.retroService.setRoom(this.room).then(() => {
-      this.sections$ = this.retroService.list().pipe(tap(x => console.log('alex', x)));
+      this.sections$ = this.retroService
+        .list()
+        .pipe(tap((x) => console.log('alex', x)));
     });
   }
 
