@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { RetroData } from '../models/retro-data';
 import { RetroService } from '../services/retro.service';
 
@@ -17,7 +17,7 @@ export class RetroDashboardComponent implements OnInit {
     .pipe(filter((x) => x.id !== this.room));
   sectionsBeforeRetro$: Observable<RetroData>;
   beforeRetroSelected = '';
-  room = 'default';
+  room = 'defaul23t';
 
   constructor(
     private retroService: RetroService,
@@ -27,9 +27,7 @@ export class RetroDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.room = this.route.snapshot.params.room ?? 'default';
     this.retroService.setRoom(this.room).then(() => {
-      this.sections$ = this.retroService
-        .list()
-        .pipe(tap((x) => console.log('alex', x)));
+      this.sections$ = this.retroService.list();
     });
   }
 
@@ -58,6 +56,7 @@ export class RetroDashboardComponent implements OnInit {
   }
 
   selectRetro() {
+    console.log(this.beforeRetroSelected);
     if (this.beforeRetroSelected === 'empty') {
       this.sectionsBeforeRetro$ = of(null);
     } else {

@@ -1,53 +1,72 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { of } from 'rxjs';
-import { findEls, wait } from 'src/test.helpers';
+import { containText, findEl, findEls, wait } from '../../../test.helpers';
 import { RetroData } from '../models/retro-data';
-import { RetroService } from '../services/retro.service';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCommonModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { RetroDashboardComponent } from './retro-dashboard.component';
+import { RetroService } from '../services/retro.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppModule } from '../../app.module';
+import { DebugElement } from '@angular/core';
 
 describe('RetroDashboardComponent', () => {
   let component: RetroDashboardComponent;
   let fixture: ComponentFixture<RetroDashboardComponent>;
-  let retro = new RetroData();
-  retro.keep = [
-    {
-      id: 'string',
-      text: 'keep',
-    },
-  ];
-  retro.lessOf = [
-    {
-      id: 'string',
-      text: 'lessOf',
-    },
-  ];
-  retro.moreOf = [
-    {
-      id: 'string',
-      text: 'moreOf',
-    },
-  ];
+  let retro = {
+    keep: [
+      {
+        id: 'string',
+        text: 'keep',
+      },
+    ],
+    lessOf: [
+      {
+        id: 'string',
+        text: 'lessOf',
+      },
+    ],
+    moreOf: [
+      {
+        id: 'string',
+        text: 'moreOf',
+      },
+    ],
+  } as RetroData;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([])],
+      imports: [
+        RouterModule.forRoot([]),
+        MatFormFieldModule,
+        MatSelectModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        FormsModule,
+        MatCommonModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        AppModule,
+      ],
       declarations: [RetroDashboardComponent],
       providers: [
         {
           provide: RetroService,
           useValue: {
-            list: () => of(retro),
-            retrosIds: () => of([]),
-            setRoom: (_: string) => new Promise<void>((r) => r()),
+            list: (_) => of(retro),
+            retrosIds: () => of(['before']),
+            setRoom: (room: string) => new Promise<void>((r) => r()),
           },
         },
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: { params: { id: 'default' } },
+            snapshot: { params: { room: 'default-test' } },
           },
         },
       ],
@@ -64,69 +83,99 @@ describe('RetroDashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('have three columns', fakeAsync(() => {
-    const columns: DebugElement[] = findEls(fixture, '.retro-column')!;
-    fixture.detectChanges();
+  it('should take route param', () => {
+    expect(component.room).toEqual('default-test');
+  });
+
+  it('should have retro-section', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
     wait(fixture);
-    console.log('alex', columns);
-    expect(columns).toHaveSize(3);
+    const elem = findEl(fixture, '.retro-section');
+    expect(elem).toBeTruthy();
   }));
 
-  // it('have more-of column', () => {
-  //   containText(fixture, '.more-of', 'Algo bueno / Más de...')!;
-  // });
+  it('should have before-retro-input', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    // fixture.componentInstance.beforeRetroSelected = 'default-test';
+    wait(fixture);
+    const elem = findEl(fixture, ' #before-retro-input');
+    expect(elem).toBeTruthy();
+  }));
 
-  // it('have keep column', () => {
-  //   containText(
-  //     fixture,
-  //     '.keep',
-  //     'Algo ni muy muy ni tantan / Mantengamos...',
-  //   )!;
-  // });
+  it('should have before-section', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    fixture.componentInstance.beforeRetroSelected = 'default-test';
+    fixture.componentInstance.selectRetro();
+    wait(fixture);
+    fixture.detectChanges();
+    const elem = findEl(fixture, '.before-section');
+    expect(elem).toBeTruthy();
+  }));
 
-  // it('have less of', () => {
-  //   containText(fixture, '.less-of', 'Algo malo / Menos de...')!;
-  // });
+  it('have three columns', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const columns: DebugElement[] = findEls(fixture, '.retro-column')!;
+    expect(columns.length).toBeGreaterThanOrEqual(3);
+  }));
 
-  // it('have more-of input', () => {
-  //   const input = findEl(fixture, '.more-of input');
-  //   expect(input).toBeTruthy();
-  // });
+  it('have more-of column', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    containText(fixture, '.more-of', '😍 Más de...')!;
+  }));
 
-  // it('have keep input', () => {
-  //   const input = findEl(fixture, '.keep input');
-  //   expect(input).toBeTruthy();
-  // });
+  it('have keep column', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    containText(fixture, '.keep', '😇 Mantengamos...')!;
+  }));
 
-  // it('have less input', () => {
-  //   const input = findEl(fixture, '.less-of input');
-  //   expect(input).toBeTruthy();
-  // });
+  it('have less of', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    containText(fixture, '.less-of', '😫 Menos de...')!;
+  }));
 
-  // it('have more-of item list', () => {
-  //   const list = findEl(fixture, '.more-of .list');
-  //   expect(list).toBeTruthy();
-  // });
+  it('have more-of input', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const input = findEl(fixture, '.more-of input');
+    expect(input).toBeTruthy();
+  }));
 
-  // it('have keep item list', () => {
-  //   const list = findEl(fixture, '.keep .list');
-  //   expect(list).toBeTruthy();
-  // });
+  it('have keep input', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const input = findEl(fixture, '.keep input');
+    expect(input).toBeTruthy();
+  }));
 
-  // it('have less item list', () => {
-  //   const list = findEl(fixture, '.less-of .list');
-  //   expect(list).toBeTruthy();
-  // });
-  // /********************************/
-  // it('have to add a new opinion in more of section', () => {
-  //   const input = findEl(fixture, '.more-of input');
-  //   setValueTo(input, 'un nuevo comentario');
-  //   const event = new KeyboardEvent('keypress', {
-  //     key: 'Enter',
-  //   });
-  //   input.nativeElement.dispatchEvent(event);
-  //   fixture.detectChanges();
-  //   const list = findEl(fixture, '.less-of ul');
-  //   expect(list.children.length).toBeGreaterThan(0);
-  // });
+  it('have less input', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const input = findEl(fixture, '.less-of input');
+    expect(input).toBeTruthy();
+  }));
+
+  it('have more-of item list', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const list = findEl(fixture, '.more-of .list');
+    expect(list).toBeTruthy();
+  }));
+
+  it('have keep item list', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const list = findEl(fixture, '.keep .list');
+    expect(list).toBeTruthy();
+  }));
+
+  it('have less item list', fakeAsync(() => {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    wait(fixture);
+    const list = findEl(fixture, '.less-of .list');
+    expect(list).toBeTruthy();
+  }));
 });

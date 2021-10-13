@@ -2,6 +2,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Retro Anterior</mat-label>
     <mat-select
+      id="before-retro-input"
       (selectionChange)="selectRetro()"
       [(ngModel)]="beforeRetroSelected"
     >
@@ -12,7 +13,10 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="retro-section" *ngIf="sectionsBeforeRetro$ | async as sections">
+  <div
+    class="before-section retro-section"
+    *ngIf="sectionsBeforeRetro$ | async as sections"
+  >
     <div class="retro-column more-of">
       <app-item-list [list]="sections.moreOf"></app-item-list>
     </div>
