@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
-import { combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { RetroData } from '../models/retro-data';
@@ -14,6 +14,9 @@ import { RetroItem } from '../models/retro-item';
 })
 export class RetroService {
   retroName = 'default';
+  retroNameSubject = new BehaviorSubject(this.retroName);
+  public retroName$ = this.retroNameSubject.asObservable();
+
   retrosCollectionName = `companies/${environment.companyName}/retros/`;
   retrosCollection: AngularFirestoreCollection<any> =
     this.firestore.collection<any>(this.retrosCollectionName);
@@ -66,6 +69,7 @@ export class RetroService {
 
   async setRoom(room: string = this.retroName): Promise<void> {
     this.retroName = room;
+    this.retroNameSubject.next(this.retroName);
     var exists = await this.existsRetro(this.retroName);
     if (!exists) {
       await this.createRetro(this.retroName);

@@ -22,6 +22,9 @@
         </button> -->
         <a href="/breakout" mat-menu-item> Breakout </a>
         <a href="/settings" mat-menu-item> Configuración </a>
+        <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
+          Retrospective
+        </a>
         <div mat-menu-item>
           <mat-checkbox [(ngModel)]="sections.aniversary"
             >Anivesarios</mat-checkbox

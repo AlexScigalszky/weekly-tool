@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RetroService } from './retro/services/retro.service';
 import { SectionsAvaliablesService } from './services/sections-avaliables.service';
 
 @Component({
@@ -7,5 +8,10 @@ import { SectionsAvaliablesService } from './services/sections-avaliables.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public sections: SectionsAvaliablesService) {}
+  room$ = this.retro.retroName$;
+
+  constructor(
+    public sections: SectionsAvaliablesService,
+    private retro: RetroService,
+  ) {}
 }

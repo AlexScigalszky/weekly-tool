@@ -15,6 +15,7 @@ import { Timestamp } from 'firebase-firestore-timestamp';
 import { PartnersService } from 'src/app/services/partners.service';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
 import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.service';
+import { RetroService } from 'src/app/retro/services/retro.service';
 
 export type ApiData = {
   room: Room;
@@ -51,6 +52,7 @@ export class HomeComponent implements OnInit {
     private partnersService: PartnersService,
     private aniversariesService: AniversariesService,
     public sections: SectionsAvaliablesService,
+    private retroService: RetroService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {
@@ -75,6 +77,7 @@ export class HomeComponent implements OnInit {
     }
     this.questionService.setRoom(this.room);
     this.votingService.setRoom(this.room);
+    this.retroService.setRoom(this.room);
 
     this.apiData$ = combineLatest([
       this.questionService.getRoom(this.room),
