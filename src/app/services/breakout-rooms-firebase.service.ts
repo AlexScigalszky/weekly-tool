@@ -5,7 +5,6 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { Constants } from '../constants';
 import { BreakoutRoom } from '../models/breackout-room';
 import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
@@ -14,7 +13,8 @@ import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
   providedIn: 'root',
 })
 export class BreakoutRoomsFirebaseService {
-  roomCollectionName = `companies/${environment.companyName}/breakout-rooms`;
+  // this.breackoutRoomCollectionName = `companies/${environment.companyName}/breckout-rooms/${this.roomName}`;
+  roomCollectionName = `breakout-rooms`;
   roomName = 'default';
   currentFirebaseRooms$: Observable<BreakoutRoomFirebase>;
   roomCollection: AngularFirestoreCollection<BreakoutRoomFirebase>;
@@ -36,6 +36,7 @@ export class BreakoutRoomsFirebaseService {
   getRandomLink(): Observable<BreakoutRoom> {
     return this.currentFirebaseRooms$.pipe(
       map((data: BreakoutRoomFirebase) => {
+        console.log({data});
         const urls = data.rooms;
         let urlRoom: BreakoutRoom = undefined;
         do {
