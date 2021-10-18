@@ -36,7 +36,7 @@ export class BreakoutRoomsFirebaseService {
   getRandomLink(): Observable<BreakoutRoom> {
     return this.currentFirebaseRooms$.pipe(
       map((data: BreakoutRoomFirebase) => {
-        console.log({data});
+        console.log({ data });
         const urls = data.rooms;
         let urlRoom: BreakoutRoom = undefined;
         do {

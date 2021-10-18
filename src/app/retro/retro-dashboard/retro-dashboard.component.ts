@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { RetroData } from '../models/retro-data';
 import { RetroService } from '../services/retro.service';
 
@@ -14,7 +14,12 @@ export class RetroDashboardComponent implements OnInit {
   sections$: Observable<RetroData>;
   beforeRetros$: Observable<{ id: string }> = this.retroService
     .retrosIds()
-    .pipe(filter((x) => x.id !== this.room));
+    // .pipe();
+    .pipe(
+      tap(console.log),
+      map((x) => x.filter((r) => r.id !== this.room)),
+      //filter((x) => x.id !== this.room)
+    );
   sectionsBeforeRetro$: Observable<RetroData>;
   beforeRetroSelected = '';
   room = 'defaul23t';

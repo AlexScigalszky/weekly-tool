@@ -107,7 +107,7 @@ export class RetroService {
     );
   }
 
-  retrosIds(): Observable<{ id: string }> {
+  retrosIds(): Observable<{ id: string }[]> {
     // const getId = x => x.payload.doc.id;
     return this.retrosCollection.valueChanges().pipe(
       tap(console.log),
