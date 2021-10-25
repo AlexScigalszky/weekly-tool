@@ -27,7 +27,13 @@
         >
           Breakout
         </a>
-        <a href="/settings/{{ room }}" *ngIf="room$ | async as room" mat-menu-item> Configuración </a>
+        <a
+          href="/settings/{{ room }}"
+          *ngIf="room$ | async as room"
+          mat-menu-item
+        >
+          Configuración
+        </a>
         <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
           Retrospective
         </a>

@@ -25,7 +25,7 @@ export class BreakoutRoomsComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const room = this.route.snapshot.params.room ??  'default';
+    const room = this.route.snapshot.params.room ?? 'default';
     await this.breakoutRooms.setCurrentRoom(room);
     this.retroService.setRoom(room);
     this.countRooms$ = this.breakoutRooms.getCountRooms();

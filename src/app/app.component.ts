@@ -9,7 +9,7 @@ import { SectionsAvaliablesService } from './services/sections-avaliables.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  room$ = this.retro.retroName$.pipe(startWith("default"));
+  room$ = this.retro.retroName$.pipe(startWith('default'));
 
   constructor(
     public sections: SectionsAvaliablesService,

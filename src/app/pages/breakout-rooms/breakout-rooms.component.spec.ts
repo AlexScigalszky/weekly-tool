@@ -16,7 +16,7 @@ import { BreakoutRoomsComponent } from './breakout-rooms.component';
 describe('BreakoutRoomsComponent', () => {
   let component: BreakoutRoomsComponent;
   let fixture: ComponentFixture<BreakoutRoomsComponent>;
-  let breakoutRoomsService = new BreakoutRoomsServiceMock(); 
+  let breakoutRoomsService = new BreakoutRoomsServiceMock();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,7 +42,7 @@ describe('BreakoutRoomsComponent', () => {
         {
           provide: Window,
           useValue: {
-            open: () =>{},
+            open: () => {},
           },
         },
       ],
