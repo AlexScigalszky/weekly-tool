@@ -6,8 +6,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { RetroDashboardComponent } from './retro/retro-dashboard/retro-dashboard.component';
 
 const routes: Routes = [
-  { path: 'settings', component: SettingsComponent },
-  { path: 'breakout', component: BreakoutRoomsComponent },
+  { path: 'settings/:rooms', component: SettingsComponent },
+  { path: 'breakout/:room', component: BreakoutRoomsComponent },
   { path: 'retro/:room', component: RetroDashboardComponent },
   { path: ':room', component: HomeComponent },
   { path: '', component: HomeComponent },

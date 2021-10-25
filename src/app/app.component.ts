@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { startWith } from 'rxjs/operators';
 import { RetroService } from './retro/services/retro.service';
 import { SectionsAvaliablesService } from './services/sections-avaliables.service';
 
@@ -8,7 +9,7 @@ import { SectionsAvaliablesService } from './services/sections-avaliables.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  room$ = this.retro.retroName$;
+  room$ = this.retro.retroName$.pipe(startWith("default"));
 
   constructor(
     public sections: SectionsAvaliablesService,

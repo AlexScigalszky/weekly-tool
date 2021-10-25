@@ -20,8 +20,14 @@
         <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>
           Nueva Sala
         </button> -->
-        <a href="/breakout" mat-menu-item> Breakout </a>
-        <a href="/settings" mat-menu-item> Configuración </a>
+        <a
+          href="/breakout/{{ room }}"
+          *ngIf="room$ | async as room"
+          mat-menu-item
+        >
+          Breakout
+        </a>
+        <a href="/settings/{{ room }}" *ngIf="room$ | async as room" mat-menu-item> Configuración </a>
         <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
           Retrospective
         </a>

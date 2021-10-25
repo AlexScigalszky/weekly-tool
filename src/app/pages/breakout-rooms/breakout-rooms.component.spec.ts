@@ -4,6 +4,8 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { RetroService } from 'src/app/retro/services/retro.service';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 import { BreakoutRoomsServiceMock } from 'src/app/services/breakout-rooms-mock.service';
 import { BreakoutRoomsService } from 'src/app/services/breakout-rooms.service';
@@ -14,7 +16,7 @@ import { BreakoutRoomsComponent } from './breakout-rooms.component';
 describe('BreakoutRoomsComponent', () => {
   let component: BreakoutRoomsComponent;
   let fixture: ComponentFixture<BreakoutRoomsComponent>;
-  let breakoutRoomsService = new BreakoutRoomsServiceMock();
+  let breakoutRoomsService = new BreakoutRoomsServiceMock(); 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,6 +26,24 @@ describe('BreakoutRoomsComponent', () => {
         {
           provide: BreakoutRoomsFirebaseService,
           useValue: breakoutRoomsService,
+        },
+        {
+          provide: RetroService,
+          useValue: {
+            setRoom: (name: string) => {},
+          },
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: { room: 'default-test' } },
+          },
+        },
+        {
+          provide: Window,
+          useValue: {
+            open: () =>{},
+          },
         },
       ],
     }).compileComponents();
@@ -45,13 +65,6 @@ describe('BreakoutRoomsComponent', () => {
 
     const link = findEl(fixture, '#breakout-link');
     expect(link).toBeTruthy();
-
-    tick(450);
-    hasText(fixture, '#breakout-link', 'Creando salas');
-
-    tick(100);
-    fixture.detectChanges();
-    hasText(fixture, '#breakout-link', 'Seleccionando sala al azar');
 
     tick(2301);
     fixture.detectChanges();

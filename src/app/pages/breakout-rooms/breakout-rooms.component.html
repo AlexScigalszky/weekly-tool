@@ -4,13 +4,10 @@
 
     <a
       id="breakout-link"
-      *ngIf="urlRoom$ | async as urlRoom; else noLink"
       mat-raised-button
       color="accent"
-      [href]="urlRoom.url"
-      target="_blank"
+      (click)="enterToRandomRoom()"
     >
-      <!-- Entrar a {{ urlRoom.name }} -->
       Entrar
     </a>
 

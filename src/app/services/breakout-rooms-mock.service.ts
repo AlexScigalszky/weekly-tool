@@ -1,6 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { BreakoutRoom } from 'src/app/models/breackout-room';
+import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
 
 export class BreakoutRoomsServiceMock {
   currentFirebaseRooms$: Observable<any>;
@@ -37,6 +38,13 @@ export class BreakoutRoomsServiceMock {
     });
   }
 
+  createRoom(): Promise<BreakoutRoomFirebase> {
+    return new Promise<BreakoutRoomFirebase>((resolve) => resolve(null));
+  }
+
+  setCurrentRoom(name: string): Promise<void> {
+    return new Promise<void>((resolve) => resolve());
+  }
   update(
     patio: string,
     cafeteria: string,

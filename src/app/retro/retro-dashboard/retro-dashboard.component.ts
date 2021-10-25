@@ -14,11 +14,9 @@ export class RetroDashboardComponent implements OnInit {
   sections$: Observable<RetroData>;
   beforeRetros$: Observable<{ id: string }> = this.retroService
     .retrosIds()
-    // .pipe();
     .pipe(
       tap(console.log),
       map((x) => x.filter((r) => r.id !== this.room)),
-      //filter((x) => x.id !== this.room)
     );
   sectionsBeforeRetro$: Observable<RetroData>;
   beforeRetroSelected = '';

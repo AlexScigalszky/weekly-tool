@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Constants } from 'src/app/constants';
 import { BreakoutRoom } from 'src/app/models/breackout-room';
@@ -10,11 +12,15 @@ import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-fi
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
   model = null;
+  subscriptions: Subscription[] = [];
 
-  constructor(private breakoutRooms: BreakoutRoomsFirebaseService) {
-    this.breakoutRooms.currentFirebaseRooms$
+  constructor(
+    private route: ActivatedRoute,
+    private breakoutRooms: BreakoutRoomsFirebaseService,
+  ) {
+    const subs = this.breakoutRooms.currentFirebaseRooms$
       .pipe(
         filter((x) => !!x),
         take(1),
@@ -41,13 +47,21 @@ export class SettingsComponent implements OnInit {
           ),
         };
       });
+    this.subscriptions.push(subs);
   }
 
-  getRoomWithNameSafely(rooms: BreakoutRoom[], roomName: string) {
+  async ngOnInit(): Promise<void> {
+    const room = this.route.snapshot.params.room ?? 'default';
+    await this.breakoutRooms.setCurrentRoom(room);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((x) => x.unsubscribe());
+  }
+
+  getRoomWithNameSafely(rooms: BreakoutRoom[], roomName: string): string {
     return rooms.find((x) => x.name === roomName)?.url ?? '';
   }
-
-  ngOnInit(): void {}
 
   save(): Promise<void> {
     return this.breakoutRooms.update(

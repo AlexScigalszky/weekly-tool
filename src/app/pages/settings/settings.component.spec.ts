@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { findEl, setValueTo } from 'src/test.helpers';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 import { BreakoutRoomsServiceMock } from '../../services/breakout-rooms-mock.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -47,6 +48,12 @@ describe('SettingsComponent', () => {
         {
           provide: BreakoutRoomsFirebaseService,
           useValue: breakoutRoomsService,
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: { room: 'default-test' } },
+          },
         },
       ],
     }).compileComponents();

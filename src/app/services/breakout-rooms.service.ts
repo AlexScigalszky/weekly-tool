@@ -15,12 +15,12 @@ export class BreakoutRoomsService {
   pisoDeArriba = 'https://meet.google.com/tqr-ersq-bwy';
 
   private rooms: Nullable<BreakoutRoom[]> = [
-    { url: this.patio, name: 'patio' },
-    { url: this.cafetería, name: 'cafetería' },
-    { url: this.salaDeReuniones, name: 'sala de reuniones' },
-    { url: this.pisoDeAbajo, name: 'piso de abajo' },
-    { url: this.cocina, name: 'cocina' },
-    { url: this.pisoDeArriba, name: 'piso de arriba' },
+    { url: this.patio, name: 'patio', participants: 0 },
+    { url: this.cafetería, name: 'cafetería', participants: 0 },
+    { url: this.salaDeReuniones, name: 'sala de reuniones', participants: 0 },
+    { url: this.pisoDeAbajo, name: 'piso de abajo', participants: 0 },
+    { url: this.cocina, name: 'cocina', participants: 0 },
+    { url: this.pisoDeArriba, name: 'piso de arriba', participants: 0 },
   ];
 
   getRandomLink(): Observable<BreakoutRoom> {
@@ -52,12 +52,12 @@ export class BreakoutRoomsService {
     this.pisoDeArriba = pisoDeArriba;
 
     this.rooms = [
-      { url: this.patio, name: 'patio' },
-      { url: this.cafetería, name: 'cafetería' },
-      { url: this.salaDeReuniones, name: 'sala de reuniones' },
-      { url: this.pisoDeAbajo, name: 'piso de abajo' },
-      { url: this.cocina, name: 'cocina' },
-      { url: this.pisoDeArriba, name: 'piso de arriba' },
+      { url: this.patio, name: 'patio', participants: 0 },
+      { url: this.cafetería, name: 'cafetería', participants: 0 },
+      { url: this.salaDeReuniones, name: 'sala de reuniones', participants: 0 },
+      { url: this.pisoDeAbajo, name: 'piso de abajo', participants: 0 },
+      { url: this.cocina, name: 'cocina', participants: 0 },
+      { url: this.pisoDeArriba, name: 'piso de arriba', participants: 0 },
     ];
     return new Promise<void>((resolve) => resolve());
   }

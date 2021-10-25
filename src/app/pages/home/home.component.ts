@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.room = this.route.snapshot.paramMap.get('room') ?? 'default';
+    this.room = this.route.snapshot.params.room ?? 'default';
 
     var exists = await this.questionService.existsRooom(this.room);
     if (!exists) {

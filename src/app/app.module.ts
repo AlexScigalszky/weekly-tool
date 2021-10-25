@@ -80,7 +80,12 @@ import { RetroModule } from './retro/retro.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     RetroModule,
   ],
-  providers: [QuestionService, VotingService, BreakoutRoomsFirebaseService],
+  providers: [
+    QuestionService,
+    VotingService,
+    BreakoutRoomsFirebaseService,
+    { provide: Window, useValue: window },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
