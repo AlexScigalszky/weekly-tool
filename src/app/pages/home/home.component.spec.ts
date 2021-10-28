@@ -4,7 +4,6 @@ import {
   flush,
   TestBed,
   tick,
-  waitForAsync,
 } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -79,7 +78,7 @@ describe('HomeComponent', () => {
 
   it(
     'should create and show waiting',
-    waitForAsync(() => {
+    fakeAsync(() => {
       expect(component).toBeTruthy();
       const waitingComponent = findEl(fixture, '#spinner');
       expect(waitingComponent).toBeTruthy();

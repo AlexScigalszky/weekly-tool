@@ -97,9 +97,7 @@
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p>
-          {{ currentQuestion.description }}
-        </p>
+        <p [innerHTML]="currentQuestion.description"></p>
         <h3 *ngIf="timeStartTime">
           {{ minutes }} minutos y contando...
           {{ startTime | date: 'HH:mm:ss' }}

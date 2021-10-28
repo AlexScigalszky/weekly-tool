@@ -5,15 +5,25 @@
     <input matInput id="title" [(ngModel)]="question.title" />
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Descripción</mat-label>
-    <textarea
+  <div class="form-group">
+    <mat-label class="wt-label">Descripción</mat-label>
+
+    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+    <ngx-editor
+      [editor]="editor"
+      [(ngModel)]="question.description"
+      id="description"
+      matInput
+      [disabled]="false"
+      [placeholder]="'Type here...'"
+    ></ngx-editor>
+    <!-- <textarea
       matInput
       id="description"
       [(ngModel)]="question.description"
       rows="5"
-    ></textarea>
-  </mat-form-field>
+    ></textarea> -->
+  </div>
 
   <mat-form-field appearance="outline">
     <mat-label>Tu nombre (opcional)</mat-label>
