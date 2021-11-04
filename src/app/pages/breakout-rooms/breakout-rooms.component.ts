@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -18,10 +18,8 @@ export class BreakoutRoomsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    // private router: Router,
     private retroService: RetroService,
     private breakoutRooms: BreakoutRoomsFirebaseService,
-    @Inject(Window) private win: Window,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -43,7 +41,10 @@ export class BreakoutRoomsComponent implements OnInit {
         this.message = `Entrando a ${room.name}`;
         this.breakoutRooms.plusOneParticipant(room).then(() => {
           console.log('participant updated', room);
-          this.win.open(room.url, '_blank');
+          Object.assign(document.createElement('a'), {
+            target: '_blank',
+            href: room.url,
+          }).click();
         });
       });
   }
