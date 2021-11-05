@@ -30,9 +30,14 @@ describe('NewRoomModalComponent', () => {
         MatDialogModule,
         MatIconModule,
       ],
-      providers: [{ provide: MatDialogRef, useValue: {
-        close: () => {},
-      } }],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {
+            close: () => {},
+          },
+        },
+      ],
     }).compileComponents();
   });
 

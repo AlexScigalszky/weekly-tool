@@ -76,14 +76,11 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it(
-    'should create and show waiting',
-    fakeAsync(() => {
-      expect(component).toBeTruthy();
-      const waitingComponent = findEl(fixture, '#spinner');
-      expect(waitingComponent).toBeTruthy();
-    }),
-  );
+  it('should create and show waiting', fakeAsync(() => {
+    expect(component).toBeTruthy();
+    const waitingComponent = findEl(fixture, '#spinner');
+    expect(waitingComponent).toBeTruthy();
+  }));
 
   it('should show topics section', fakeAsync(() => {
     fixture = TestBed.createComponent(HomeComponent);

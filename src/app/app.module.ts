@@ -39,7 +39,7 @@ import { BreakoutRoomsFirebaseService } from './services/breakout-rooms-firebase
 import { AniversariesComponent } from './components/aniversaries/aniversaries.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RetroModule } from './retro/retro.module';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
@@ -81,7 +81,7 @@ import { NgxEditorModule } from 'ngx-editor';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     RetroModule,
-    HttpClientModule, 
+    HttpClientModule,
     NgxEditorModule,
   ],
   providers: [

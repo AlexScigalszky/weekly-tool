@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Constants } from '../constants';
 import { BreakoutRoom } from '../models/breackout-room';
 import { BreakoutRoomFirebase } from '../models/breackout-room-firebase';
+import { Balancer } from '../utils/balancer';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class BreakoutRoomsFirebaseService {
   roomDocumentName = `companies/${environment.companyName}/breakout-rooms/${this.roomName}`;
   roomsLinksCollectionName = `${this.roomDocumentName}/rooms`;
   currentFirebaseRooms$: Observable<BreakoutRoomFirebase>;
-  // roomCollection: AngularFirestoreCollection<BreakoutRoomFirebase>;
+  balancer = new Balancer();
 
   constructor(private firestore: AngularFirestore) {
     this.setCurrentRoom('default');
@@ -59,24 +60,8 @@ export class BreakoutRoomsFirebaseService {
       .valueChanges()
       .pipe(
         map((room: BreakoutRoomFirebase) => room.rooms),
-        map(this.extractRandomLink),
+        map((rooms: BreakoutRoom[]) => this.balancer.extractRandomLink(rooms)),
       );
-  }
-
-  extractRandomLink(rooms: BreakoutRoom[]): BreakoutRoom {
-    console.log({ rooms });
-    // rooms.sort((a, b) => a.participants < b.participants ? -1: 1);
-    rooms = rooms.sort((a, b) => a.participants - b.participants);
-
-    var urlRoom: BreakoutRoom;
-    var index = -1;
-    do {
-      index++;
-      // const index = Math.floor(Math.random() * 4);
-      urlRoom = rooms[index];
-    } while (urlRoom === undefined);
-
-    return urlRoom;
   }
 
   getCountRooms(): Observable<number> {
