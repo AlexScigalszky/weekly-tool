@@ -30,48 +30,53 @@ describe('AniversariesComponent', () => {
   });
 
   it('should show aniversary icon', () => {
-    expect(component).toBeTruthy();
-    component.aniversaries = aniversaries;
-
-    fixture.detectChanges();
-
-    const aniversaryIcon = findEl(fixture, '.aniversary-icon');
-    expect(aniversaryIcon).toBeTruthy();
+    givenAComponentWithAniversaries();
+    whenTheComponentIsRefresh();
+    thenExistsAniversaryIcon();
   });
 
-  // it('should show aniversary title', () => {
-  //   expect(component).toBeTruthy();
-  //   component.aniversaries = aniversaries;
-
-  //   fixture.detectChanges();
-
-  //   const aniversaryIcon = findEl(fixture, '.aniversary-title');
-  //   expect(aniversaryIcon).toBeTruthy();
-  // });
-
   it('should show aniversary partners list', () => {
-    expect(component).toBeTruthy();
-    component.aniversaries = aniversaries;
-
-    fixture.detectChanges();
-
-    const aniversaryIcon = findEl(fixture, '.aniverary-partner-list');
-    expect(aniversaryIcon).toBeTruthy();
+    givenAComponentWithAniversaries();
+    whenTheComponentIsRefresh();
+    thenExistsAListOfAniversaries();
   });
 
   it('should show aniversary partners items', () => {
+    givenAComponentWithAniversaries();
+    whenTheComponentIsRefresh();
+    thenExistAnAniveraryItem();
+    andContentAniversaryText();
+  });
+
+  function givenAComponentWithAniversaries() {
     expect(component).toBeTruthy();
     component.aniversaries = aniversaries;
+  }
 
+  function whenTheComponentIsRefresh() {
     fixture.detectChanges();
+  }
 
+  function thenExistsAniversaryIcon() {
+    const aniversaryIcon = findEl(fixture, '.aniversary-icon');
+    expect(aniversaryIcon).toBeTruthy();
+  }
+
+  function thenExistsAListOfAniversaries() {
+    const aniversaryIcon = findEl(fixture, '.aniverary-partner-list');
+    expect(aniversaryIcon).toBeTruthy();
+  }
+
+  function thenExistAnAniveraryItem() {
     const aniversaryIcon = findEl(fixture, '.aniverary-partner-list');
     expect(aniversaryIcon.children.length).toEqual(1);
+  }
 
+  function andContentAniversaryText() {
     containText(
       fixture,
       '.aniverary-partner-list',
       'Alguien hace 0 años que está trabajando con nosotros',
     );
-  });
+  }
 });

@@ -19,10 +19,31 @@ describe('VersionComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-    fixture.detectChanges();
+    givenAAComponent();
+    thenExists();
     expect(fixture.debugElement.nativeElement.textContent.trim()).toContain(
       'v',
     );
   });
+
+  it('should show version', () => {
+    givenAAComponent();
+    thenShowVersionText();
+  });
+
+  function givenAAComponent() {
+    fixture = TestBed.createComponent(VersionComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenShowVersionText() {
+    expect(fixture.debugElement.nativeElement.textContent.trim()).toContain(
+      'v',
+    );
+  }
 });

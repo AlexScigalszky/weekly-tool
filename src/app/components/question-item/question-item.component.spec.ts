@@ -54,31 +54,47 @@ describe('QuestionItemComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    givenAAComponent();
+    thenExistTheComponent();
   });
 
   it('show question data', () => {
-    component.question = question;
-    fixture.detectChanges();
-
-    hasText(fixture, '.question-title h3', question.title);
-    hasText(fixture, '.question-name', question.name);
-    hasText(fixture, '.question-description', question.description);
-  });
-
-  it('emit edit event', () => {
-    component.question = question;
-    fixture.detectChanges();
-
-    hasText(fixture, '.question-title h3', question.title);
-    hasText(fixture, '.question-name', question.name);
-    hasText(fixture, '.question-description', question.description);
+    givenAAComponentWithAQuestion();
+    thenQuestionDataIsShown();
   });
 
   it('should emit edit event', () => {
+    givenAAComponentWithAQuestion();
+    whenClickOnEditButtonThenVotedIsEmitted();
+  });
+
+  it('should emit vote event', () => {
+    givenAAComponentWithAQuestion();
+    whenClickOnEditButtonThenEditButtonClickedIsEmitted();
+  });
+
+  function givenAAComponent() {
+    fixture = TestBed.createComponent(QuestionItemComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function givenAAComponentWithAQuestion() {
     component.question = question;
     fixture.detectChanges();
+  }
 
+  function thenExistTheComponent() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenQuestionDataIsShown() {
+    hasText(fixture, '.question-title h3', question.title);
+    hasText(fixture, '.question-name', question.name);
+    hasText(fixture, '.question-description', question.description);
+  }
+
+  function whenClickOnEditButtonThenVotedIsEmitted() {
     const voteButton = findEl(fixture, '.vote-button');
     expect(voteButton).toBeTruthy();
 
@@ -87,12 +103,9 @@ describe('QuestionItemComponent', () => {
 
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
-  });
+  }
 
-  it('should emit vote event', () => {
-    component.question = question;
-    fixture.detectChanges();
-
+  function whenClickOnEditButtonThenEditButtonClickedIsEmitted() {
     const moreButton = findEl(fixture, '.more-button');
     expect(moreButton).toBeTruthy();
     moreButton.triggerEventHandler('click', null);
@@ -103,5 +116,5 @@ describe('QuestionItemComponent', () => {
 
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
-  });
+  }
 });

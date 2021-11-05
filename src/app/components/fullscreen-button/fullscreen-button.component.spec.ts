@@ -23,28 +23,67 @@ describe('FullscreenButtonComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-    expect(component.isFullScreen).toBeFalse();
-    fixture.detectChanges();
-    const button = fixture.debugElement.query(By.css('.fullscreen'));
-    expect(button.nativeElement.textContent.trim()).toBe('Pantalla completa');
+    givenAAComponent();
+    thenIsFullscreenDisabled();
+    whenTheComponentIsRefresh();
+    thenFullscreenButtonShowPantallCompleta();
   });
 
   it('open fullscreen', () => {
+    givenAAComponent();
+    whenOpenFullscreen();
+    thenFullscreenIsEnabled();
+    whenTheComponentIsRefresh();
+    thenFullscreenButtonShowSalirDePantallCompleta();
+  });
+
+  it('exit fullscreen', () => {
+    givenAAComponentOpened();
+    whenCloseFullscreen();
+    thenIsFullscreenDisabled();
+    whenTheComponentIsRefresh();
+    thenFullscreenButtonShowPantallCompleta();
+  });
+
+  function givenAAComponent() {
+    expect(component).toBeTruthy();
+  }
+
+  function givenAAComponentOpened() {
+    expect(component).toBeTruthy();
     component.openFullscreen();
-    expect(component.isFullScreen).toBeTrue();
     fixture.detectChanges();
+  }
+
+  function thenIsFullscreenDisabled() {
+    expect(component.isFullScreen).toBeFalse();
+  }
+
+  function whenTheComponentIsRefresh() {
+    fixture.detectChanges();
+  }
+
+  function thenFullscreenButtonShowPantallCompleta() {
+    const button = fixture.debugElement.query(By.css('.fullscreen'));
+    expect(button.nativeElement.textContent.trim()).toBe('Pantalla completa');
+  }
+
+  function whenOpenFullscreen() {
+    component.openFullscreen();
+  }
+
+  function thenFullscreenIsEnabled() {
+    expect(component.isFullScreen).toBeTrue();
+  }
+
+  function thenFullscreenButtonShowSalirDePantallCompleta() {
     const button = fixture.debugElement.query(By.css('.fullscreen'));
     expect(button.nativeElement.textContent.trim()).toBe(
       'Salir de pantalla completa',
     );
-  });
+  }
 
-  it('exit fullscreen', () => {
+  function whenCloseFullscreen() {
     component.closeFullscreen();
-    expect(component.isFullScreen).toBeFalse();
-    fixture.detectChanges();
-    const button = fixture.debugElement.query(By.css('.fullscreen'));
-    expect(button.nativeElement.textContent.trim()).toBe('Pantalla completa');
-  });
+  }
 });

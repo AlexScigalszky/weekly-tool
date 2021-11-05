@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { findEl, setValueTo, wait } from 'src/test.helpers';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
 
 describe('QuestionItemModalComponent', () => {
@@ -41,8 +41,8 @@ describe('QuestionItemModalComponent', () => {
         BrowserAnimationsModule,
         MatIconModule,
         MatListModule,
-        HttpClientModule, 
-        NgxEditorModule
+        HttpClientModule,
+        NgxEditorModule,
       ],
       providers: [
         { provide: MatDialogRef, useValue: dialogMock },
@@ -53,39 +53,89 @@ describe('QuestionItemModalComponent', () => {
     fixture = TestBed.createComponent(QuestionItemModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    givenAAComponent();
+    thenThereAreInputs();
+  });
+
+  it('should show question data to edit', fakeAsync(() => {
+    givenAAComponentWithAQuestion();
+    whenTheComponentIsRefresh();
+    thenThereAreInputsWithData();
+  }));
+
+  it('create must return a new question', () => {
+    givenAAComponent();
+    whenInputAreFilled();
+    thenANewQuestionIsEmited();
+  });
+
+  it('create must NO return any question', async () => {
+    givenAAComponentWithAQuestion();
+    whenCancelButtonIsClickedThenNotEmitValue();
+  });
+
+  it('should close the dialog on cancel ', async () => {
+    givenAAComponentWithAQuestion();
+    whenCancelButtonIsClickedThenCloseTheDialog();
+  });
+
+  it('should close the dialog with data on  confirm', async () => {
+    givenAAComponentWithAQuestion();
+    whenCreateThenReturnQuestion();
+  });
+
+  function givenAAComponent() {
+    fixture = TestBed.createComponent(QuestionItemModalComponent);
+    component = fixture.componentInstance;
     titleInput = findEl(fixture, '#title')!;
     descriptionInput = findEl(fixture, '#description')!;
     nameInput = findEl(fixture, '#name')!;
     createButton = findEl(fixture, '#create-button')!;
     cancelButton = findEl(fixture, '#cancel-button')!;
-  });
+    fixture.detectChanges();
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  function givenAAComponentWithAQuestion() {
+    fixture = TestBed.createComponent(QuestionItemModalComponent);
+    component = fixture.componentInstance;
+    titleInput = findEl(fixture, '#title')!;
+    descriptionInput = findEl(fixture, '#description')!;
+    nameInput = findEl(fixture, '#name')!;
+    createButton = findEl(fixture, '#create-button')!;
+    cancelButton = findEl(fixture, '#cancel-button')!;
+    component.question = question;
+    fixture.detectChanges();
+  }
+
+  function thenThereAreInputs() {
     expect(titleInput.nativeElement).toBeTruthy();
     expect(descriptionInput.nativeElement).toBeTruthy();
     expect(nameInput.nativeElement).toBeTruthy();
     expect(createButton.nativeElement).toBeTruthy();
     expect(cancelButton.nativeElement).toBeTruthy();
-  });
+  }
 
-  it('should show question data to edit', fakeAsync(() => {
-    component.question = question;
+  function whenTheComponentIsRefresh() {
     wait(fixture);
     fixture.detectChanges();
+  }
 
+  function thenThereAreInputsWithData() {
     expect(titleInput.nativeElement.value).toBe(question.title);
-    // expect(descriptionInput.nativeElement.value).toBe(question.description);
     expect(nameInput.nativeElement.value).toBe(question.name);
-  }));
+  }
 
-  it('create must return a new question', () => {
+  function whenInputAreFilled() {
     setValueTo(titleInput, question.title);
     setValueTo(descriptionInput, question.description);
     setValueTo(nameInput, question.name);
-
     fixture.detectChanges();
+  }
 
+  function thenANewQuestionIsEmited() {
     expect(titleInput.nativeElement.value).toBe(question.title);
     expect(descriptionInput.nativeElement.value).toBe(question.description);
     expect(nameInput.nativeElement.value).toBe(question.name);
@@ -96,31 +146,26 @@ describe('QuestionItemModalComponent', () => {
 
     expect(createSpy).toHaveBeenCalled();
     expect(component.question).toEqual(question);
-  });
+  }
 
-  it('create must NO return any question', async () => {
+  function whenCancelButtonIsClickedThenNotEmitValue() {
     let onNoClickSpy = spyOn(component, 'onNoClick');
-
     cancelButton.triggerEventHandler('click', null);
     fixture.detectChanges();
-
     expect(onNoClickSpy).toHaveBeenCalled();
-  });
+  }
 
-  it('should close the dialog on cancel ', async () => {
+  function whenCancelButtonIsClickedThenCloseTheDialog() {
     let closeSpy = spyOn(component.dialogRef, 'close');
-
     component.onNoClick();
-
+    fixture.detectChanges();
     expect(closeSpy).toHaveBeenCalled();
-  });
+  }
 
-  it('should close the dialog with data on  confirm', async () => {
+  function whenCreateThenReturnQuestion() {
     let closeSpy = spyOn(component.dialogRef, 'close');
-
     component.question = question;
     component.create();
-
     expect(closeSpy).toHaveBeenCalledWith(question);
-  });
+  }
 });

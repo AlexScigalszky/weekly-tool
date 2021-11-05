@@ -49,36 +49,63 @@ describe('QuestionListComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    givenAAComponent();
+    thenExists();
   });
 
   it('show empty list', () => {
-    const list = findEl(fixture, '#question-list');
-    expect(list.children.length).toEqual(0);
-    expect(list).toBeTruthy();
+    givenAAComponent();
+    thenQuestionListIsEmpty();
   });
 
   it('show list with items', () => {
-    component.questions = [question];
-    fixture.detectChanges();
-    const list = findEl(fixture, '#question-list');
-    expect(list.children.length).toEqual(1);
-  });
-
-  it('show list with items not voted', () => {
-    component.questions = [question];
-    fixture.detectChanges();
-    const list = findEl(fixture, '#question-list');
-    expect(list.children.length).toEqual(1);
+    givenAAComponentWithOneQuestion();
+    thenQuestionListHasOneItem();
   });
 
   it('should emit edit event', () => {
-    component.questions = [question];
+    givenAAComponentWithOneQuestion();
+    whenClickOnVoteButtonThenVotedIsEmited();
+  });
+
+  it('should emit edit event', () => {
+    givenAAComponentWithOneQuestion();
+    whenClickOnEditButtonThenEditButtonClickedIsEmited();
+  });
+
+  function givenAAComponent() {
+    fixture = TestBed.createComponent(QuestionListComponent);
+    component = fixture.componentInstance;
+    component.questions = [];
+    component.highlight = [];
     fixture.detectChanges();
+  }
 
+  function givenAAComponentWithOneQuestion() {
+    fixture = TestBed.createComponent(QuestionListComponent);
+    component = fixture.componentInstance;
+    component.questions = [question];
+    component.highlight = [];
+    fixture.detectChanges();
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenQuestionListIsEmpty() {
+    const list = findEl(fixture, '#question-list');
+    expect(list.children.length).toEqual(0);
+    expect(list).toBeTruthy();
+  }
+
+  function thenQuestionListHasOneItem() {
+    const list = findEl(fixture, '#question-list');
+    expect(list.children.length).toEqual(1);
+  }
+
+  function whenClickOnVoteButtonThenVotedIsEmited() {
     const elements = findEls(fixture, '.question-list-item');
-    expect(elements.length).toEqual(1);
-
     const item = elements[0];
     const voteButton = item.query(By.css('.vote-button'));
     expect(voteButton).toBeTruthy();
@@ -88,15 +115,10 @@ describe('QuestionListComponent', () => {
 
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
-  });
+  }
 
-  it('should emit edit event', () => {
-    component.questions = [question];
-    fixture.detectChanges();
-
+  function whenClickOnEditButtonThenEditButtonClickedIsEmited() {
     const elements = findEls(fixture, '.question-list-item');
-    expect(elements.length).toEqual(1);
-
     const item = elements[0];
     const moreButton = item.query(By.css('.more-button'));
     expect(moreButton).toBeTruthy();
@@ -108,5 +130,5 @@ describe('QuestionListComponent', () => {
 
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
-  });
+  }
 });
