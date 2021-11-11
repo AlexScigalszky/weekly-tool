@@ -38,6 +38,7 @@ export class RetroDashboardComponent implements OnInit {
     const item = {
       id: null,
       text: text,
+      whenWasHired: new Date().getTime(),
     };
     this.retroService.addMoreOf(item);
   }
@@ -46,6 +47,7 @@ export class RetroDashboardComponent implements OnInit {
     const item = {
       id: null,
       text: text,
+      whenWasHired: new Date().getTime(),
     };
     this.retroService.addKeep(item);
   }
@@ -54,6 +56,7 @@ export class RetroDashboardComponent implements OnInit {
     const item = {
       id: null,
       text: text,
+      whenWasHired: new Date().getTime(),
     };
     this.retroService.addLessOf(item);
   }

@@ -3,4 +3,10 @@
   padding: 1rem;
   border-radius: 0.5rem;
   margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.float-rigth {
+  float: rigth;
 }

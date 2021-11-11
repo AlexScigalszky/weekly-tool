@@ -1,5 +1,6 @@
 <div class="list">
   <div class="retro-item" *ngFor="let item of list">
     {{ item.text }}
+    <small class="float-rigth">{{ date(item) | date: 'dd/MMMM' }}</small>
   </div>
 </div>

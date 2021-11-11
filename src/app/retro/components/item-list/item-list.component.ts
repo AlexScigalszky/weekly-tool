@@ -8,4 +8,8 @@ import { RetroItem } from '../../models/retro-item';
 })
 export class ItemListComponent {
   @Input() list: RetroItem[] = [];
+
+  date(item: RetroItem): Date {
+    return new Date(item.whenWasHired ?? new Date().getTime());
+  }
 }
