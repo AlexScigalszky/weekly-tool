@@ -33,7 +33,18 @@ describe('RetroInputComponent', () => {
   });
 
   it('should create', () => {
+    givenAComponent();
+    thenExists();
+  });
+
+  function givenAComponent() {
+    fixture = TestBed.createComponent(RetroInputComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function thenExists() {
     expect(component).toBeTruthy();
     fixture.detectChanges();
-  });
+  }
 });

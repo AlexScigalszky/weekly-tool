@@ -15,6 +15,15 @@ describe('PartnersService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    givenAService();
+    thenExists();
   });
+
+  function givenAService() {
+    service = TestBed.inject(PartnersService);
+  }
+
+  function thenExists() {
+    expect(service).toBeTruthy();
+  }
 });

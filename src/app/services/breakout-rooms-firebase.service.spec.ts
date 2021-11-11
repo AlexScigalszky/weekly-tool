@@ -5,6 +5,7 @@ import { BreakoutRoomsFirebaseService } from './breakout-rooms-firebase.service'
 
 describe('BreakoutRoomsFirebaseService', () => {
   let service: BreakoutRoomsFirebaseService;
+  let roomCounts;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,9 +17,32 @@ describe('BreakoutRoomsFirebaseService', () => {
   it(
     'should be created',
     waitForAsync(async () => {
-      expect(service).toBeTruthy();
-      const roomCounts = await service.getCountRooms().toPromise();
-      expect(roomCounts).toBeGreaterThan(0);
+      givenAService();
+      thenExists();
     }),
   );
+
+  it(
+    'should return a promise with zero count rooms',
+    waitForAsync(async () => {
+      givenAService();
+      await thenGetCountRooms();
+      thenReturnZero();
+    }),
+  );
+  function givenAService() {
+    service = TestBed.inject(BreakoutRoomsFirebaseService);
+  }
+
+  function thenExists() {
+    expect(service).toBeTruthy();
+  }
+
+  async function thenGetCountRooms() {
+    roomCounts = await service.getCountRooms().toPromise();
+  }
+
+  function thenReturnZero() {
+    expect(roomCounts).toBeGreaterThan(0);
+  }
 });

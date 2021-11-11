@@ -75,63 +75,109 @@ describe('SettingsComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    givenAComponent();
+    thenExists();
   });
 
   it('should have 6 rooms inputs', () => {
-    expect(patioInput.nativeElement).toBeTruthy();
-    expect(cafeteriaInput.nativeElement).toBeTruthy();
-    expect(salaDeReunionesInput.nativeElement).toBeTruthy();
-    expect(pisoDeAbajoInput.nativeElement).toBeTruthy();
-    expect(cocinaInput.nativeElement).toBeTruthy();
-    expect(pisoDeArribaInput.nativeElement).toBeTruthy();
-
-    expect(createButton.nativeElement).toBeTruthy();
+    givenAComponent();
+    thenHaveInputs();
+    thenHaveCreateButton();
   });
 
   it(
     'should call to create function',
     waitForAsync(() => {
-      let spy = spyOn(component, 'save');
-      createButton.triggerEventHandler('click', null);
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalled();
+      givenAComponent();
+      whenCreateButtonIsClickedThenSaveIsCalled();
     }),
   );
 
   it(
     'should call to update function with empty values',
     waitForAsync(() => {
-      let spy = spyOn(breakoutRoomsService, 'update');
-      createButton.triggerEventHandler('click', null);
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith('', '', '', '', '', '');
+      givenAComponent();
+      whenCreateeButtonIsClickedThenUpdateIsCalled();
     }),
   );
 
   it(
     'should call to update function with new values values',
     waitForAsync(() => {
-      setValueTo(patioInput, patio);
-      setValueTo(cafeteriaInput, cafeteria);
-      setValueTo(salaDeReunionesInput, salaDeReuniones);
-      setValueTo(pisoDeAbajoInput, pisoDeAbajo);
-      setValueTo(cocinaInput, cocina);
-      setValueTo(pisoDeArribaInput, pisoDeArriba);
-
-      fixture.detectChanges();
-
-      let spy = spyOn(breakoutRoomsService, 'update');
-      createButton.triggerEventHandler('click', null);
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith(
-        patio,
-        cafeteria,
-        salaDeReuniones,
-        pisoDeAbajo,
-        cocina,
-        pisoDeArriba,
-      );
+      givenAComponent();
+      whenInputAreFilled();
+      thenUpdateIsCalledWithInputValues();
     }),
   );
+
+  function givenAComponent() {
+    fixture = TestBed.createComponent(SettingsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    patioInput = findEl(fixture, '#patio')!;
+    cafeteriaInput = findEl(fixture, '#cafeteria')!;
+    salaDeReunionesInput = findEl(fixture, '#sala-de-reuniones')!;
+    pisoDeAbajoInput = findEl(fixture, '#piso-de-abajo')!;
+    cocinaInput = findEl(fixture, '#cocina')!;
+    pisoDeArribaInput = findEl(fixture, '#piso-de-arriba')!;
+
+    createButton = findEl(fixture, '#create-button')!;
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenHaveInputs() {
+    expect(patioInput.nativeElement).toBeTruthy();
+    expect(cafeteriaInput.nativeElement).toBeTruthy();
+    expect(salaDeReunionesInput.nativeElement).toBeTruthy();
+    expect(pisoDeAbajoInput.nativeElement).toBeTruthy();
+    expect(cocinaInput.nativeElement).toBeTruthy();
+    expect(pisoDeArribaInput.nativeElement).toBeTruthy();
+  }
+
+  function thenHaveCreateButton() {
+    expect(createButton.nativeElement).toBeTruthy();
+  }
+
+  function whenCreateButtonIsClickedThenSaveIsCalled() {
+    let spy = spyOn(component, 'save');
+    createButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalled();
+  }
+
+  function whenCreateeButtonIsClickedThenUpdateIsCalled() {
+    let spy = spyOn(breakoutRoomsService, 'update');
+    createButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledWith('', '', '', '', '', '');
+  }
+
+  function whenInputAreFilled() {
+    setValueTo(patioInput, patio);
+    setValueTo(cafeteriaInput, cafeteria);
+    setValueTo(salaDeReunionesInput, salaDeReuniones);
+    setValueTo(pisoDeAbajoInput, pisoDeAbajo);
+    setValueTo(cocinaInput, cocina);
+    setValueTo(pisoDeArribaInput, pisoDeArriba);
+
+    fixture.detectChanges();
+  }
+
+  function thenUpdateIsCalledWithInputValues() {
+    let spy = spyOn(breakoutRoomsService, 'update');
+    createButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledWith(
+      patio,
+      cafeteria,
+      salaDeReuniones,
+      pisoDeAbajo,
+      cocina,
+      pisoDeArriba,
+    );
+  }
 });

@@ -77,128 +77,181 @@ describe('HomeComponent', () => {
   });
 
   it('should create and show waiting', fakeAsync(() => {
-    expect(component).toBeTruthy();
-    const waitingComponent = findEl(fixture, '#spinner');
-    expect(waitingComponent).toBeTruthy();
+    givenAComponent();
+    thenExists();
+  }));
+
+  it('should create and show waiting', fakeAsync(() => {
+    givenAComponent();
+    thenHasWaiting();
   }));
 
   it('should show topics section', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    wait(fixture);
-    const topicSection = findEl(fixture, '#topics-section');
-
-    expect(topicSection).toBeTruthy();
-
-    tick(800);
-    containText(fixture, '#topics-section', 'Temas a conversar');
+    givenAComponent();
+    thenHasTopicsSection();
+    thenHasTopicsSectionTitle();
   }));
 
   it('should show votes counter', fakeAsync(() => {
+    givenAComponent();
+    thenHasVotesCounter();
+  }));
+
+  it('should show aniversary section', fakeAsync(() => {
+    givenAComponentAfter8Seconds();
+    thenHasAniversarySection();
+  }));
+
+  it('hs new topic button', fakeAsync(() => {
+    givenAComponent();
+    thenHasNewTopicButton();
+  }));
+
+  it('should open dialog to add new topic', fakeAsync(() => {
+    givenAComponent();
+    whenNewTopicButtonClickThenOpenIsCalled();
+  }));
+
+  it('should vote a question', fakeAsync(() => {
+    givenAComponentAfter8Seconds();
+    thenOneVoteButton();
+    whenVoteButtonClickThenVoteIsCalled();
+  }));
+
+  it('should unvote a question', fakeAsync(() => {
+    givenAComponentAfter8Seconds();
+    whenVoteButtonClickThenHave0votes();
+  }));
+
+  it('should reset all votes', fakeAsync(() => {
+    givenAComponentAfter8Seconds();
+    thenHaveResetButton();
+    whenResetButtonClickThenResetVotesIsCalled();
+  }));
+
+  it('should open edit question dialog', fakeAsync(() => {
+    givenAComponentAfter8Seconds();
+    thenHaveOneMoreButton();
+    whenEditButtonClickThenEditQuestionIsCalled();
+  }));
+
+  function givenAComponent() {
     fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenHasWaiting() {
+    const waitingComponent = findEl(fixture, '#spinner');
+    expect(waitingComponent).toBeTruthy();
+  }
+
+  function thenHasTopicsSection() {
+    wait(fixture);
+    const topicSection = findEl(fixture, '#topics-section');
+    expect(topicSection).toBeTruthy();
+  }
+
+  function thenHasTopicsSectionTitle() {
+    tick(800);
+    containText(fixture, '#topics-section', 'Temas a conversar');
+  }
+
+  function thenHasVotesCounter() {
     wait(fixture);
     fixture.detectChanges();
 
     tick(800);
     hasText(fixture, '#votes-counter', '0');
-  }));
+  }
 
-  it('should show aniversary section', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    wait(fixture);
-    tick(800);
+  function thenHasAniversarySection() {
     const topicSection = findEl(fixture, '.aniversary-section');
-
     expect(topicSection).toBeTruthy();
-  }));
+  }
 
-  it('hs new topic button', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+  function thenHasNewTopicButton() {
     wait(fixture);
     const newTopicButton = findEl(fixture, '#new-topic-button');
     expect(newTopicButton).toBeTruthy();
     fixture.detectChanges();
     fixture.destroy();
-  }));
+  }
 
-  it('should open dialog to add new topic', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+  function whenNewTopicButtonClickThenOpenIsCalled() {
     wait(fixture);
     fixture.detectChanges();
     const button = findEl(fixture, '#new-topic-button');
-
     const openDialogSpy = spyOn(component.dialog, 'open');
     button.triggerEventHandler('click', null);
-
     expect(openDialogSpy).toHaveBeenCalled();
     fixture.detectChanges();
     fixture.destroy();
     flush();
-  }));
+  }
 
-  it('should vote a question', fakeAsync(() => {
+  function givenAComponentAfter8Seconds() {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
     wait(fixture);
     tick(800);
     fixture.detectChanges();
+  }
+
+  function thenOneVoteButton() {
     const buttons = findEls(fixture, '.vote-button');
     expect(buttons.length).toBeGreaterThan(0);
     const voteButton = buttons[0];
     expect(voteButton).toBeTruthy();
+  }
 
+  function whenVoteButtonClickThenVoteIsCalled() {
     const voteSpy = spyOn(component, 'vote');
-
+    const buttons = findEls(fixture, '.vote-button');
+    const voteButton = buttons[0];
     voteButton.triggerEventHandler('click', null);
     fixture.detectChanges();
     wait(fixture);
     tick(800);
-
     expect(voteSpy).toHaveBeenCalled();
-  }));
+  }
 
-  it('should unvote a question', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    wait(fixture);
-    tick(800);
-    fixture.detectChanges();
+  function whenVoteButtonClickThenHave0votes() {
     const buttons = findEls(fixture, '.vote-button');
-    expect(buttons.length).toBeGreaterThan(0);
     const voteButton = buttons[0];
-    expect(voteButton).toBeTruthy();
     voteButton.triggerEventHandler('click', null);
     fixture.detectChanges();
     wait(fixture);
     tick(800);
     containText(fixture, '#topics-section', '0  votos');
-  }));
+  }
 
-  it('should reset all votes', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    wait(fixture);
-    tick(800);
-    fixture.detectChanges();
+  function thenHaveResetButton() {
     const resetVotes = findEl(fixture, '#reset-votes');
     expect(resetVotes).toBeTruthy();
+  }
 
+  function whenResetButtonClickThenResetVotesIsCalled() {
+    const resetVotes = findEl(fixture, '#reset-votes');
     const resetVotesSpy = spyOn(component, 'resetVotes');
-
     resetVotes.triggerEventHandler('click', null);
-
     expect(resetVotesSpy).toHaveBeenCalled();
-  }));
+  }
 
-  it('should open edit question dialog', fakeAsync(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    wait(fixture);
-    tick(800);
-    fixture.detectChanges();
-
+  function thenHaveOneMoreButton() {
     const moreButtons = findEls(fixture, '.more-button');
     const moreButton = moreButtons[0];
     expect(moreButton).toBeTruthy();
+  }
+
+  function whenEditButtonClickThenEditQuestionIsCalled() {
+    const moreButtons = findEls(fixture, '.more-button');
+    const moreButton = moreButtons[0];
     moreButton.triggerEventHandler('click', null);
 
     const editButton = moreButton.query(By.css('.edit-button'));
@@ -211,5 +264,5 @@ describe('HomeComponent', () => {
     expect(editQuestionSpy).toHaveBeenCalled();
     wait(fixture);
     tick(800);
-  }));
+  }
 });

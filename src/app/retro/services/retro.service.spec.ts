@@ -32,11 +32,25 @@ describe('RetroService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    givenAService();
+    thenExists();
   });
 
   it('should return an obserble of lists', () => {
+    givenAService();
+    thenReturnAnObservableList();
+  });
+
+  function givenAService() {
+    service = TestBed.inject(RetroService);
+  }
+
+  function thenExists() {
+    expect(service).toBeTruthy();
+  }
+
+  function thenReturnAnObservableList() {
     const list$ = service.list();
     expect(list$).toBeTruthy();
-  });
+  }
 });

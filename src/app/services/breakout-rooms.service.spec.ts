@@ -4,6 +4,7 @@ import { BreakoutRoomsService } from './breakout-rooms.service';
 
 describe('BreakoutRoomsService', () => {
   let service: BreakoutRoomsService;
+  let roomCounts;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -11,8 +12,29 @@ describe('BreakoutRoomsService', () => {
   });
 
   it('should be created', async () => {
-    expect(service).toBeTruthy();
-    const roomCounts = await service.getCountRooms().toPromise();
-    expect(roomCounts).toBeGreaterThan(0);
+    givenAService();
+    thenExists();
   });
+
+  it('should be return zero rooms', async () => {
+    givenAService();
+    await thenGetCountRooms();
+    thenReturnZero();
+  });
+
+  function givenAService() {
+    service = TestBed.inject(BreakoutRoomsService);
+  }
+
+  function thenExists() {
+    expect(service).toBeTruthy();
+  }
+
+  async function thenGetCountRooms() {
+    roomCounts = await service.getCountRooms().toPromise();
+  }
+
+  function thenReturnZero() {
+    expect(roomCounts).toBeGreaterThan(0);
+  }
 });

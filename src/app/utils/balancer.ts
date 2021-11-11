@@ -2,9 +2,7 @@ import { BreakoutRoom } from '../models/breackout-room';
 
 export class Balancer {
   extractRandomLink(rooms: BreakoutRoom[]): BreakoutRoom {
-    console.log({ rooms });
     rooms = this.sortRoomsByParticipants(rooms);
-    console.error({ rooms });
     var urlRoom: BreakoutRoom;
     var index = -1;
     do {

@@ -19,7 +19,17 @@ describe('ItemListComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-    fixture.detectChanges();
+    givenAComponent();
+    thenExists();
   });
+
+  function givenAComponent() {
+    fixture = TestBed.createComponent(ItemListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
 });

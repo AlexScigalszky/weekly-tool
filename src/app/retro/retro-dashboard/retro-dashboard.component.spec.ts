@@ -80,102 +80,166 @@ describe('RetroDashboardComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    givenAComponent();
+    thenExists();
   });
 
   it('should take route param', () => {
-    expect(component.room).toEqual('default-test');
+    givenAComponent();
+    thenHaveDefaultRoomName();
   });
 
   it('should have retro-section', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
-    const elem = findEl(fixture, '.retro-section');
-    expect(elem).toBeTruthy();
+    givenAComponentAndWait();
+    thenHaveRetroSection();
   }));
 
   it('should have before-retro-input', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    // fixture.componentInstance.beforeRetroSelected = 'default-test';
-    wait(fixture);
-    const elem = findEl(fixture, ' #before-retro-input');
-    expect(elem).toBeTruthy();
+    givenAComponentAndWait();
+    thenHaveBeforeRetroInput();
   }));
 
   it('should have before-section', fakeAsync(() => {
+    givenAComponentWithBeforeRetroSelected();
+    thenHaveBeforeSectionInput();
+  }));
+
+  it('have three columns', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveThreeRetroColumns();
+  }));
+
+  it('have more-of column', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveMoreOfColumn();
+  }));
+
+  it('have keep column', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveKeepColumn();
+  }));
+
+  it('have less of', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveLessOfColumn();
+  }));
+
+  it('have more-of input', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveMoreOfInput();
+  }));
+
+  it('have keep input', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveKeepInput();
+  }));
+
+  it('have less input', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveLessOfInput();
+  }));
+
+  it('have more-of item list', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveMoreOfItemList();
+  }));
+
+  it('have keep item list', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveKeepItemList();
+  }));
+
+  it('have less item list', fakeAsync(() => {
+    givenAComponentAndWait();
+    thenHaveLessOfItemList();
+  }));
+
+  function givenAComponent() {
+    fixture = TestBed.createComponent(RetroDashboardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function givenAComponentAndWait() {
+    givenAComponent();
+    wait(fixture);
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenHaveDefaultRoomName() {
+    expect(component.room).toEqual('default-test');
+  }
+
+  function thenHaveRetroSection() {
+    const elem = findEl(fixture, '.retro-section');
+    expect(elem).toBeTruthy();
+  }
+
+  function thenHaveBeforeRetroInput() {
+    const elem = findEl(fixture, ' #before-retro-input');
+    expect(elem).toBeTruthy();
+  }
+
+  function givenAComponentWithBeforeRetroSelected() {
     fixture = TestBed.createComponent(RetroDashboardComponent);
     fixture.componentInstance.beforeRetroSelected = 'default-test';
     fixture.componentInstance.selectRetro();
     wait(fixture);
     fixture.detectChanges();
+  }
+
+  function thenHaveBeforeSectionInput() {
     const elem = findEl(fixture, '.before-section');
     expect(elem).toBeTruthy();
-  }));
+  }
 
-  it('have three columns', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveThreeRetroColumns() {
     const columns: DebugElement[] = findEls(fixture, '.retro-column')!;
     expect(columns.length).toBeGreaterThanOrEqual(3);
-  }));
+  }
 
-  it('have more-of column', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveMoreOfColumn() {
     containText(fixture, '.more-of', '😍 Más de...')!;
-  }));
+  }
 
-  it('have keep column', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveKeepColumn() {
     containText(fixture, '.keep', '😇 Mantengamos...')!;
-  }));
+  }
 
-  it('have less of', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveLessOfColumn() {
     containText(fixture, '.less-of', '😫 Menos de...')!;
-  }));
+  }
 
-  it('have more-of input', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveMoreOfInput() {
     const input = findEl(fixture, '.more-of input');
     expect(input).toBeTruthy();
-  }));
+  }
 
-  it('have keep input', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveKeepInput() {
     const input = findEl(fixture, '.keep input');
     expect(input).toBeTruthy();
-  }));
+  }
 
-  it('have less input', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveLessOfInput() {
     const input = findEl(fixture, '.less-of input');
     expect(input).toBeTruthy();
-  }));
+  }
 
-  it('have more-of item list', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveMoreOfItemList() {
     const list = findEl(fixture, '.more-of .list');
     expect(list).toBeTruthy();
-  }));
+  }
 
-  it('have keep item list', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveKeepItemList() {
     const list = findEl(fixture, '.keep .list');
     expect(list).toBeTruthy();
-  }));
+  }
 
-  it('have less item list', fakeAsync(() => {
-    fixture = TestBed.createComponent(RetroDashboardComponent);
-    wait(fixture);
+  function thenHaveLessOfItemList() {
     const list = findEl(fixture, '.less-of .list');
     expect(list).toBeTruthy();
-  }));
+  }
 });

@@ -11,6 +11,15 @@ describe('SectionsAvaliablesService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    givenAService();
+    thenExists();
   });
+
+  function givenAService() {
+    service = TestBed.inject(SectionsAvaliablesService);
+  }
+
+  function thenExists() {
+    expect(service).toBeTruthy();
+  }
 });

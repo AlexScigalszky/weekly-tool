@@ -27,81 +27,140 @@ describe('VotingService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
+  });
+
+  it('should be created', () => {
+    givenAService();
+    thenExists();
+  });
+
+  it('voting system property should be exists', () => {
+    givenAService();
+    thenHaveVotingSystem();
+  });
+
+  it('should start with default values', (done: DoneFn) => {
+    givenAService();
+    thenHaveDefaultRoom();
+    thenHaveNotHighlightedQuestion(done);
+  });
+
+  it('should change room name', () => {
+    givenAService();
+    whenSetNewRoomName();
+    thenHaveNewRoomName();
+    thenHaveVotingSystem();
+  });
+
+  it('should change room name', (done: DoneFn) => {
+    givenAService();
+    whenSetNewRoomName();
+    thenHaveZeroHighlightedQuestion(done);
+  });
+
+  it('vote question one', (done: DoneFn) => {
+    givenAService();
+    const result = whenVoteQuestionOne();
+    thenReturnTrue(result);
+    thenHaveOneHighlightedQuestion(done);
+  });
+
+  it('vote question two', (done: DoneFn) => {
+    givenAServiceWithQuestionOneVoted();
+    const result = whenVoteQuestionTwo();
+    thenReturnTrue(result);
+    thenHaveTwoHighlightedQuestion(done);
+  });
+
+  it('vote up repeated and expect vote down', (done: DoneFn) => {
+    givenAServiceWithQuestionOneVoted();
+    const result = whenVoteQuestionOne();
+    thenReturnTrue(result);
+    thenHaveNotHighlightedQuestion(done);
+  });
+
+  function givenAService() {
     service = new VotingService();
     spyOn(localStorage, 'getItem').and.callFake((key) => store[key]);
     spyOn(localStorage, 'setItem').and.callFake(
       (key, value) => (store[key] = value + ''),
     );
     localStorage.clear();
-  });
+  }
 
-  it('should be created', () => {
+  function thenExists() {
     expect(service).toBeTruthy();
-  });
+  }
 
-  it('voting system property should be exists', () => {
+  function thenHaveVotingSystem() {
     expect(service.votingSystem).toBeTruthy();
-  });
+  }
 
-  it('should start with default values', (done: DoneFn) => {
+  function thenHaveDefaultRoom() {
     expect(service.room == 'default').toBeTruthy();
-    // expect(
-    //   store['voting-system-default']
-    // ).toBeTruthy();
+  }
+
+  function thenHaveNotHighlightedQuestion(done: DoneFn) {
     service.highlightSubject.subscribe((value) => {
       expect(value).toEqual([]);
       done();
     });
-  });
+  }
 
-  it('should create a new VotingSystem for new room', () => {
-    expect(service.room == 'default').toBeTruthy();
-  });
-
-  it('should change room name', () => {
+  function whenSetNewRoomName() {
     service.setRoom('new');
+  }
+
+  function thenHaveNewRoomName() {
     expect(service.room == 'new').toBeTruthy();
-    expect(service.votingSystem).toBeTruthy();
-  });
+  }
 
-  it('should change room name', (done: DoneFn) => {
-    service.setRoom('new');
+  function thenHaveZeroHighlightedQuestion(done: DoneFn) {
     service.highlightSubject.subscribe((value) => {
       expect(value.length).toEqual(0);
       done();
     });
-  });
+  }
 
-  it('vote question one', (done: DoneFn) => {
-    const result = service.voteUp(JSON.parse(JSON.stringify(questionOne)));
+  function whenVoteQuestionOne(): boolean {
+    return service.voteUp(JSON.parse(JSON.stringify(questionOne)));
+  }
+
+  function whenVoteQuestionTwo(): boolean {
+    return service.voteUp(questionTwo);
+  }
+
+  function thenReturnTrue(result: boolean) {
     expect(result).toBeTrue();
+  }
+
+  function thenHaveOneHighlightedQuestion(done: DoneFn) {
     service.highlightSubject.subscribe((value) => {
       expect(value.length).toEqual(1);
       const question1 = value.find((x) => x.id === questionOne.id);
       expect(question1.votes).toBeGreaterThanOrEqual(1);
       done();
     });
-  });
+  }
 
-  it('vote question two', (done: DoneFn) => {
+  function givenAServiceWithQuestionOneVoted() {
+    service = new VotingService();
+    spyOn(localStorage, 'getItem').and.callFake((key) => store[key]);
+    spyOn(localStorage, 'setItem').and.callFake(
+      (key, value) => (store[key] = value + ''),
+    );
+    localStorage.clear();
     service.voteUp(JSON.parse(JSON.stringify(questionOne)));
-    const result = service.voteUp(questionTwo);
-    expect(result).toBeTrue();
-    service.highlightSubject.subscribe((value) => {
-      expect(value.length).toEqual(2);
-      const question2 = value.find((x) => x.id === questionTwo.id);
-      expect(question2.votes).toEqual(1);
-      done();
-    });
-  });
+  }
 
-  it('vote up repeated and expect vote down', (done: DoneFn) => {
-    service.voteUp(JSON.parse(JSON.stringify(questionOne)));
-    const result = service.voteUp(JSON.parse(JSON.stringify(questionOne)));
-    expect(result).toBeTrue();
+  function thenHaveTwoHighlightedQuestion(done: DoneFn) {
     service.highlightSubject.subscribe((value) => {
-      expect(value.length).toEqual(0);
-      done();
+      service.highlightSubject.subscribe((value) => {
+        expect(value.length).toEqual(2);
+        const question2 = value.find((x) => x.id === questionTwo.id);
+        expect(question2.votes).toEqual(1);
+        done();
+      });
     });
-  });
+  }
 });

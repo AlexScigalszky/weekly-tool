@@ -31,20 +31,15 @@ describe('AppComponent', () => {
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    const app = givenAComponent();
+    thenExists(app);
   });
 
-  // it('should call newRoom', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.componentInstance;
-
-  //   const newRoomSpy = spyOn(app, 'newRoom');
-
-  //   const newRoomButton = findEl(fixture, '#new-room-button');
-  //   newRoomButton.triggerEventHandler('click', null);
-
-  //   expect(newRoomSpy).toHaveBeenCalled();
-  // });
+  function givenAComponent() {
+    const fixture = TestBed.createComponent(AppComponent);
+    return fixture.componentInstance;
+  }
+  function thenExists(app) {
+    expect(app).toBeTruthy();
+  }
 });

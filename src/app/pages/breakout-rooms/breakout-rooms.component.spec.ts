@@ -56,21 +56,40 @@ describe('BreakoutRoomsComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    givenAComponent();
+    thenExists();
   });
 
   it('should show a link to breakout room', fakeAsync(() => {
-    fixture = TestBed.createComponent(BreakoutRoomsComponent);
-    fixture.detectChanges();
+    givenAComponent();
+    thenHaveLinkToRoom();
+    thenHasEntrarText();
+    thenHasPlenaryLink();
+  }));
 
+  function givenAComponent() {
+    fixture = TestBed.createComponent(BreakoutRoomsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }
+
+  function thenExists() {
+    expect(component).toBeTruthy();
+  }
+
+  function thenHaveLinkToRoom() {
     const link = findEl(fixture, '#breakout-link');
     expect(link).toBeTruthy();
-
     tick(2301);
     fixture.detectChanges();
-    hasText(fixture, '#breakout-link', 'Entrar');
+  }
 
+  function thenHasEntrarText() {
+    hasText(fixture, '#breakout-link', 'Entrar');
+  }
+
+  function thenHasPlenaryLink() {
     const plenaryLink = findEl(fixture, '#plenary-link');
     expect(plenaryLink).toBeTruthy();
-  }));
+  }
 });
