@@ -1,0 +1,11 @@
+<div class="aniversary-section" *ngIf="topics?.length">
+  <ul class="aniverary-partner-list">
+    <li class="pinned-topic-item" *ngFor="let topic of topics">
+      <!-- <span class="aniversary-icon parpadea">🎉</span>
+      <strong>{{ partner.name }}</strong> hace
+      <strong>{{ years(partner) }}</strong> que está trabajando con nosotros
+      <span class="aniversary-icon parpadea">🎊</span> -->
+      {{ topic | json }}
+    </li>
+  </ul>
+</div>

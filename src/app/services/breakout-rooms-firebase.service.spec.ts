@@ -24,10 +24,11 @@ describe('BreakoutRoomsFirebaseService', () => {
 
   it(
     'should return a promise with zero count rooms',
-    waitForAsync(async () => {
+    waitForAsync(async (done: DoneFn) => {
       givenAService();
       await thenGetCountRooms();
       thenReturnZero();
+      done();
     }),
   );
   function givenAService() {

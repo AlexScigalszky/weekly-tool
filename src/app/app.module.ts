@@ -41,6 +41,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RetroModule } from './retro/retro.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
+import { PinnedTopicsComponent } from './components/pinned-topics/pinned-topics.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NgxEditorModule } from 'ngx-editor';
     BreakoutRoomsComponent,
     SettingsComponent,
     AniversariesComponent,
+    PinnedTopicsComponent,
   ],
   imports: [
     BrowserModule,

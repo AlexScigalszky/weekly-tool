@@ -4,6 +4,9 @@
     [aniversaries]="aniversaries$ | async"
   ></app-aniversaries>
 </div>
+<div class="pinned-topic-section" *ngIf="pinned$ | async as pinnedTopics">
+  <app-pinned-topics [topics]="pinnedtopis"></app-pinned-topics>
+</div>
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
   <div id="topics-section" *ngIf="sections.quiestionLists">
     <mat-card tdMediaToggle="gt-xs" class="main-card">

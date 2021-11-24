@@ -16,6 +16,7 @@ import { PartnersService } from 'src/app/services/partners.service';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
 import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.service';
 import { RetroService } from 'src/app/retro/services/retro.service';
+import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
 
 export type ApiData = {
   room: Room;
@@ -42,6 +43,10 @@ export class HomeComponent implements OnInit {
   aniversaries$ = this.partnersService
     .list()
     .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
+  pinned$ = this.pinnedService.list().pipe(
+    tap(x => console.log('alex alex alex PABLO PABLO PABLO', x)),
+    filter((x) => x && x.length > 0),
+  );
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +58,7 @@ export class HomeComponent implements OnInit {
     private aniversariesService: AniversariesService,
     public sections: SectionsAvaliablesService,
     private retroService: RetroService,
+    public pinnedService: PinnedTopicsService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {

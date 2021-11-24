@@ -20,10 +20,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { of } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
+import { PinnedItem } from 'src/app/models/pinned-item';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
 import { PartnersMockService } from 'src/app/services/partners-mock.service';
 import { PartnersService } from 'src/app/services/partners.service';
+import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
 import { QuestionMockService } from 'src/app/services/question.mock.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { TimerMockService } from 'src/app/services/timer-mock.service';
@@ -66,6 +69,12 @@ describe('HomeComponent', () => {
         { provide: VotingService, useClass: VotingService },
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
+        {
+          provide: PinnedTopicsService,
+          useValue: {
+            list: () => of([]),
+          },
+        },
       ],
     }).compileComponents();
   });
@@ -102,7 +111,7 @@ describe('HomeComponent', () => {
     thenHasAniversarySection();
   }));
 
-  it('hs new topic button', fakeAsync(() => {
+  it('has new topic button', fakeAsync(() => {
     givenAComponent();
     thenHasNewTopicButton();
   }));
@@ -135,7 +144,12 @@ describe('HomeComponent', () => {
     whenEditButtonClickThenEditQuestionIsCalled();
   }));
 
-  function givenAComponent() {
+  it('should not show pinned topics', fakeAsync(() => {
+    givenAComponent();
+    thenHaveNoPinnedTopicSection();
+  }));
+
+  async function givenAComponent() {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -264,5 +278,81 @@ describe('HomeComponent', () => {
     expect(editQuestionSpy).toHaveBeenCalled();
     wait(fixture);
     tick(800);
+  }
+
+  function thenHaveNoPinnedTopicSection() {
+    const pinnedTopics = findEls(fixture, '.pinned-topic-section');
+    expect(pinnedTopics.length).toBe(0);
+  }
+});
+
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [HomeComponent],
+      imports: [
+        RouterModule.forRoot([]),
+        MatCardModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatListModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatOptionModule,
+        AppModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+      ],
+      providers: [
+        { provide: MatDialog, useValue: { close: () => {}, open: () => {} } },
+        { provide: MatDialogRef, useValue: {} },
+        { provide: QuestionService, useClass: QuestionMockService },
+        { provide: TimerService, useClass: TimerMockService },
+        { provide: VotingService, useClass: VotingService },
+        { provide: PartnersService, useClass: PartnersMockService },
+        { provide: AniversariesService, useClass: AniversariesService },
+        {
+          provide: PinnedTopicsService,
+          useValue: {
+            list: () => of([]),
+          },
+        },
+      ],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should show pinned topics', fakeAsync(() => {
+    givenAComponentWithPinnedTopics();
+    thenHavePinnedTopicSection();
+  }));
+
+  async function givenAComponentWithPinnedTopics() {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    component.pinnedService = {
+      list: () => of([new PinnedItem()]),
+    } as PinnedTopicsService;
+    fixture.detectChanges();
+    wait(fixture);
+    tick(800);
+    fixture.detectChanges();
+  }
+
+  function thenHavePinnedTopicSection() {
+    const pinnedTopics = findEls(fixture, '.pinned-topic-section');
+    expect(pinnedTopics.length).toBe(1);
   }
 });

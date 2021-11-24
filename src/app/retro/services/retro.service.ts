@@ -98,6 +98,7 @@ export class RetroService {
       map(
         ([moreOf, keep, lessOf]) => ({
           id: retro,
+          created: new Date().getTime(),
           moreOf,
           keep,
           lessOf,
