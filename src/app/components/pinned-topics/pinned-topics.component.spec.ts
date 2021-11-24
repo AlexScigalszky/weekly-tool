@@ -40,7 +40,7 @@ describe('PinnedTopicsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   }
-  
+
   function givenAComponentWithPinnedTopics() {
     fixture = TestBed.createComponent(PinnedTopicsComponent);
     component = fixture.componentInstance;

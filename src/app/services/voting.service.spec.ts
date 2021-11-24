@@ -101,8 +101,7 @@ describe('VotingService', () => {
   }
 
   function thenHaveNotHighlightedQuestion(done: DoneFn) {
-    service.highlightSubject
-    .subscribe((value) => {
+    service.highlightSubject.subscribe((value) => {
       expect(value).toEqual([]);
       done();
     });
