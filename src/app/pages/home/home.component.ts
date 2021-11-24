@@ -43,13 +43,9 @@ export class HomeComponent implements OnInit {
   aniversaries$ = this.partnersService
     .list()
     .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
-  pinned$ = this.pinnedService.list().pipe(
-    map((x) => x.length == 0 ? null : x),
-    map(x => {
-      console.log('alex alex alex PABLO PABLO PABLO', x)
-      return x;
-    })
-  );
+  pinned$ = this.pinnedService
+    .list()
+    .pipe(map((x) => (x.length == 0 ? null : x)));
 
   constructor(
     private route: ActivatedRoute,
