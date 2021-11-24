@@ -287,7 +287,6 @@ describe('HomeComponent', () => {
 });
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async () => {
@@ -321,17 +320,11 @@ describe('HomeComponent', () => {
         {
           provide: PinnedTopicsService,
           useValue: {
-            list: () => of([]),
+            list: () => of([new PinnedItem()]),
           },
         },
       ],
     }).compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should show pinned topics', fakeAsync(() => {
@@ -341,10 +334,6 @@ describe('HomeComponent', () => {
 
   async function givenAComponentWithPinnedTopics() {
     fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    component.pinnedService = {
-      list: () => of([new PinnedItem()]),
-    } as PinnedTopicsService;
     fixture.detectChanges();
     wait(fixture);
     tick(800);

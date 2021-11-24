@@ -44,8 +44,11 @@ export class HomeComponent implements OnInit {
     .list()
     .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
   pinned$ = this.pinnedService.list().pipe(
-    tap(x => console.log('alex alex alex PABLO PABLO PABLO', x)),
-    filter((x) => x && x.length > 0),
+    map((x) => x.length == 0 ? null : x),
+    map(x => {
+      console.log('alex alex alex PABLO PABLO PABLO', x)
+      return x;
+    })
   );
 
   constructor(
