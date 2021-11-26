@@ -37,6 +37,8 @@
         <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
           Retrospective
         </a>
+        <button (click)="addPinnedTopic()" mat-menu-item>Temas Fijos</button>
+        <mat-divider></mat-divider>
         <div mat-menu-item>
           <mat-checkbox [(ngModel)]="sections.aniversary"
             >Anivesarios</mat-checkbox

@@ -4,6 +4,7 @@ import {
   flush,
   TestBed,
   tick,
+  waitForAsync,
 } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
 import { PinnedItem } from 'src/app/models/pinned-item';
+import { RetroService } from 'src/app/retro/services/retro.service';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
 import { PartnersMockService } from 'src/app/services/partners-mock.service';
 import { PartnersService } from 'src/app/services/partners.service';
@@ -73,6 +75,14 @@ describe('HomeComponent', () => {
           provide: PinnedTopicsService,
           useValue: {
             list: () => of([]),
+          },
+        },
+        {
+          provide: RetroService,
+          useValue: {
+            setRoom: (_: string) => {
+              return new Promise((r) => r(false));
+            },
           },
         },
       ],
@@ -327,16 +337,19 @@ describe('HomeComponent', () => {
     }).compileComponents();
   });
 
-  it('should show pinned topics', fakeAsync(() => {
-    givenAComponentWithPinnedTopics();
-    thenHavePinnedTopicSection();
-  }));
+  it(
+    'should show pinned topics',
+    waitForAsync(() => {
+      givenAComponentWithPinnedTopics();
+      thenHavePinnedTopicSection();
+    }),
+  );
 
   async function givenAComponentWithPinnedTopics() {
     fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
-    wait(fixture);
-    tick(800);
+    // wait(fixture);
+    // tick(800);
     fixture.detectChanges();
   }
 

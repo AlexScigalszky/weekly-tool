@@ -22,7 +22,6 @@ export class AniversariesService {
     const debt = diffDays % 365;
     const years = diffDays / 365;
     const has = 0 <= debt && debt <= 7 && years > 0;
-    // console.log(`hasAniversaryInThisWeek - ${partner.name} - ${debt}`, { debt, years, has });
     return has;
   }
 

@@ -26,4 +26,19 @@ export class PinnedTopicsService {
       .valueChanges()
       .pipe(tap((x) => console.log(`pinned-topics`, x)));
   }
+
+  add(pinnedItem: PinnedItem): void {
+    const id = this.firestore.createId();
+    pinnedItem = {
+      text: pinnedItem.text,
+      id,
+    };
+    this.pinnedTopicCollection.doc(id).set(pinnedItem);
+  }
+
+  update(pinnedItem: PinnedItem): Promise<void> {
+    return this.pinnedTopicCollection
+      .doc(pinnedItem.id)
+      .set(pinnedItem, { merge: true });
+  }
 }

@@ -19,7 +19,7 @@ module.exports = function (config) {
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
         // or set a specific seed with `seed: 4321`
-        timeoutInterval: 20000,
+        timeoutInterval: 220000,
       },
       // captureConsole: false,
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
@@ -46,7 +46,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Firefox'],
+    browsers: ['ChromeHeadlessCI'],
     // browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessCI','Firefox'],
     customLaunchers: {
       Firefox: {

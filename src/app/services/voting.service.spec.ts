@@ -1,28 +1,16 @@
 import { TestBed } from '@angular/core/testing';
+import { Question } from '../models/question';
 import { VotingSystem } from '../models/voting-system';
 
 import { VotingService } from './voting.service';
 
 describe('VotingService', () => {
   let service: VotingService;
-  let newVotingSystem = new VotingSystem();
-  let questionOne = {
-    id: 'question-1',
-    name: 'name',
-    votes: 0,
-    title: 'title1',
-    description: 'description1',
-  };
-  let questionTwo = {
-    id: 'question-2',
-    name: 'name',
-    votes: 0,
-    title: 'title2',
-    description: 'description2',
-  };
-  newVotingSystem.questionsUp = [];
-  let store = {
-    'voting-system-new': JSON.stringify(newVotingSystem),
+  let newVotingSystem: VotingSystem;
+  let questionOne: Question;
+  let questionTwo: Question;
+  let store: {
+    'voting-system-new': string;
   };
 
   beforeEach(() => {
@@ -81,6 +69,25 @@ describe('VotingService', () => {
 
   function givenAService() {
     service = new VotingService();
+    newVotingSystem = new VotingSystem();
+    questionOne = {
+      id: 'question-1',
+      name: 'name',
+      votes: 0,
+      title: 'title1',
+      description: 'description1',
+    };
+    questionTwo = {
+      id: 'question-2',
+      name: 'name',
+      votes: 0,
+      title: 'title2',
+      description: 'description2',
+    };
+    newVotingSystem.questionsUp = [];
+    store = {
+      'voting-system-new': JSON.stringify(newVotingSystem),
+    };
     spyOn(localStorage, 'getItem').and.callFake((key) => store[key]);
     spyOn(localStorage, 'setItem').and.callFake(
       (key, value) => (store[key] = value + ''),
@@ -145,22 +152,40 @@ describe('VotingService', () => {
 
   function givenAServiceWithQuestionOneVoted() {
     service = new VotingService();
+    newVotingSystem = new VotingSystem();
+    questionOne = {
+      id: 'question-1',
+      name: 'name',
+      votes: 0,
+      title: 'title1',
+      description: 'description1',
+    };
+    questionTwo = {
+      id: 'question-2',
+      name: 'name',
+      votes: 0,
+      title: 'title2',
+      description: 'description2',
+    };
+    newVotingSystem.questionsUp = [];
+    store = {
+      'voting-system-new': JSON.stringify(newVotingSystem),
+    };
     spyOn(localStorage, 'getItem').and.callFake((key) => store[key]);
     spyOn(localStorage, 'setItem').and.callFake(
       (key, value) => (store[key] = value + ''),
     );
     localStorage.clear();
     service.voteUp(JSON.parse(JSON.stringify(questionOne)));
+    console.log('ALEX ALEX', service.highlightSubject.value);
   }
 
   function thenHaveTwoHighlightedQuestion(done: DoneFn) {
     service.highlightSubject.subscribe((value) => {
-      service.highlightSubject.subscribe((value) => {
-        expect(value.length).toEqual(2);
-        const question2 = value.find((x) => x.id === questionTwo.id);
-        expect(question2.votes).toEqual(1);
-        done();
-      });
+      expect(value.length).toEqual(2);
+      const question2 = value.find((x) => x.id === questionTwo.id);
+      expect(question2.votes).toEqual(1);
+      done();
     });
   }
 });

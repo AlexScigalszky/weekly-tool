@@ -42,6 +42,7 @@ import { RetroModule } from './retro/retro.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
 import { PinnedTopicsComponent } from './components/pinned-topics/pinned-topics.component';
+import { PinnedTopicModalComponent } from './components/pinned-topic-modal/pinned-topic-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { PinnedTopicsComponent } from './components/pinned-topics/pinned-topics.
     SettingsComponent,
     AniversariesComponent,
     PinnedTopicsComponent,
+    PinnedTopicModalComponent,
   ],
   imports: [
     BrowserModule,

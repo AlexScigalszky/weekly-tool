@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Temas Fijos</h1>
+<div mat-dialog-content>
+  <div class="form-group">
+    <mat-label class="wt-label">Descripción</mat-label>
+
+    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+    <ngx-editor
+      [editor]="editor"
+      [(ngModel)]="pinnedTopics"
+      id="pinned-topics"
+      matInput
+      [disabled]="false"
+      [placeholder]="'Type here...'"
+    ></ngx-editor>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button id="cancel-button" (click)="onNoClick()" mat-button color="primary">
+    Cancelar
+  </button>
+  <button id="create-button" (click)="create()" mat-flat-button color="primary">
+    Crear
+  </button>
+</div>
