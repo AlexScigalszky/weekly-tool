@@ -17,7 +17,8 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "npm": "8.x"
   },
   "private": true,
   "dependencies": {
