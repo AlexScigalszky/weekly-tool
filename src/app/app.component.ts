@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { first, startWith } from 'rxjs/operators';
+import { first, startWith, tap } from 'rxjs/operators';
 import { PinnedTopicModalComponent } from './components/pinned-topic-modal/pinned-topic-modal.component';
 import { PinnedItem } from './models/pinned-item';
 import { RetroService } from './retro/services/retro.service';
@@ -14,7 +14,10 @@ import { SectionsAvaliablesService } from './services/sections-avaliables.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
-  room$ = this.retro.retroName$.pipe(startWith('default'));
+  room$ = this.retro.retroName$.pipe(
+    startWith('default'),
+    tap((x) => this.pinnedService.setRoom(x)),
+  );
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -43,6 +46,9 @@ export class AppComponent implements OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((pinnedTopicStr) => {
+          if (!pinnedTopicStr) {
+            return;
+          }
           if (alreadyExists) {
             this.pinnedService.update({
               id: x[0].id,

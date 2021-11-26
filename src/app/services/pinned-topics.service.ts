@@ -12,10 +12,17 @@ import { PinnedItem } from '../models/pinned-item';
   providedIn: 'root',
 })
 export class PinnedTopicsService {
-  pinnedTopicCollectionName = `companies/${environment.companyName}/pinned-topics`;
+  pinnedTopicCollectionName = `companies/${environment.companyName}/pinned-topics/default/list`;
   pinnedTopicCollection: AngularFirestoreCollection<PinnedItem>;
 
   constructor(private firestore: AngularFirestore) {
+    this.pinnedTopicCollection = this.firestore.collection<PinnedItem>(
+      this.pinnedTopicCollectionName,
+    );
+  }
+
+  setRoom(roomName: string) {
+    this.pinnedTopicCollectionName = `companies/${environment.companyName}/pinned-topics/${roomName}/list`;
     this.pinnedTopicCollection = this.firestore.collection<PinnedItem>(
       this.pinnedTopicCollectionName,
     );

@@ -17,6 +17,7 @@ import { AniversariesService } from 'src/app/services/aniversaries.service';
 import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.service';
 import { RetroService } from 'src/app/retro/services/retro.service';
 import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
+import { PinnedItem } from 'src/app/models/pinned-item';
 
 export type ApiData = {
   room: Room;
@@ -43,9 +44,7 @@ export class HomeComponent implements OnInit {
   aniversaries$ = this.partnersService
     .list()
     .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
-  pinned$ = this.pinnedService
-    .list()
-    .pipe(map((x) => (x.length == 0 ? null : x)));
+  pinned$: Observable<PinnedItem[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,6 +82,7 @@ export class HomeComponent implements OnInit {
     this.questionService.setRoom(this.room);
     this.votingService.setRoom(this.room);
     this.retroService.setRoom(this.room);
+    this.pinnedService.setRoom(this.room);
 
     this.apiData$ = combineLatest([
       this.questionService.getRoom(this.room),
@@ -117,6 +117,10 @@ export class HomeComponent implements OnInit {
         return apiData.room.currentQuestionId !== currentQuestionSelected;
       }),
     );
+
+    this.pinned$ = this.pinnedService
+      .list()
+      .pipe(map((x) => (x.length == 0 ? null : x)));
   }
 
   private setCurrentQuestion(room: Room): void {
