@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  pr-greeter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Greeter"
+        uses: JJ/pr-greeting-action@releases/v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          greeting: "Hey **#** welcome to this repo"
