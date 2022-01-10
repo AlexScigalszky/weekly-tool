@@ -4,6 +4,12 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
+
+    captureTimeout: 210000,
+    browserDisconnectTolerance: 3,
+    browserDisconnectTimeout: 210000,
+    browserNoActivityTimeout: 210000,
+
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
@@ -21,6 +27,7 @@ module.exports = function (config) {
         // or set a specific seed with `seed: 4321`
         timeoutInterval: 220000,
       },
+
       // captureConsole: false,
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },

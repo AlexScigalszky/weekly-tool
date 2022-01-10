@@ -4,7 +4,6 @@ import {
   flush,
   TestBed,
   tick,
-  waitForAsync,
 } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
-import { PinnedItem } from 'src/app/models/pinned-item';
 import { RetroService } from 'src/app/retro/services/retro.service';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
 import { PartnersMockService } from 'src/app/services/partners-mock.service';
@@ -42,6 +40,10 @@ import { HomeComponent } from './home.component';
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let mockPinnedTopicsService = {
+    list: () => of([]),
+    setRoom: (_string) => {},
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -72,10 +74,8 @@ describe('HomeComponent', () => {
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
         {
-          provide: PinnedTopicsService,
-          useValue: {
-            list: () => of([]),
-          },
+          provide: PinnedTopicsService, 
+          useValue: mockPinnedTopicsService,
         },
         {
           provide: RetroService,
@@ -293,68 +293,5 @@ describe('HomeComponent', () => {
   function thenHaveNoPinnedTopicSection() {
     const pinnedTopics = findEls(fixture, '.pinned-topic-section');
     expect(pinnedTopics.length).toBe(0);
-  }
-});
-
-describe('HomeComponent', () => {
-  let fixture: ComponentFixture<HomeComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [
-        RouterModule.forRoot([]),
-        MatCardModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatListModule,
-        MatMenuModule,
-        MatButtonModule,
-        MatOptionModule,
-        AppModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-      ],
-      providers: [
-        { provide: MatDialog, useValue: { close: () => {}, open: () => {} } },
-        { provide: MatDialogRef, useValue: {} },
-        { provide: QuestionService, useClass: QuestionMockService },
-        { provide: TimerService, useClass: TimerMockService },
-        { provide: VotingService, useClass: VotingService },
-        { provide: PartnersService, useClass: PartnersMockService },
-        { provide: AniversariesService, useClass: AniversariesService },
-        {
-          provide: PinnedTopicsService,
-          useValue: {
-            list: () => of([new PinnedItem()]),
-          },
-        },
-      ],
-    }).compileComponents();
-  });
-
-  it(
-    'should show pinned topics',
-    waitForAsync(() => {
-      givenAComponentWithPinnedTopics();
-      thenHavePinnedTopicSection();
-    }),
-  );
-
-  async function givenAComponentWithPinnedTopics() {
-    fixture = TestBed.createComponent(HomeComponent);
-    fixture.detectChanges();
-    // wait(fixture);
-    // tick(800);
-    fixture.detectChanges();
-  }
-
-  function thenHavePinnedTopicSection() {
-    const pinnedTopics = findEls(fixture, '.pinned-topic-section');
-    expect(pinnedTopics.length).toBe(1);
   }
 });

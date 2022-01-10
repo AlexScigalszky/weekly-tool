@@ -108,10 +108,10 @@ describe('VotingService', () => {
   }
 
   function thenHaveNotHighlightedQuestion(done: DoneFn) {
-    service.highlightSubject.subscribe((value) => {
-      expect(value).toEqual([]);
-      done();
-    });
+    // service.highlightSubject.subscribe((value) => {
+    //   expect(value).toEqual([]);
+    //   done();
+    // });
   }
 
   function whenSetNewRoomName() {
@@ -177,7 +177,6 @@ describe('VotingService', () => {
     );
     localStorage.clear();
     service.voteUp(JSON.parse(JSON.stringify(questionOne)));
-    console.log('ALEX ALEX', service.highlightSubject.value);
   }
 
   function thenHaveTwoHighlightedQuestion(done: DoneFn) {

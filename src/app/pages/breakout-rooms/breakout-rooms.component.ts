@@ -15,6 +15,8 @@ export class BreakoutRoomsComponent implements OnInit {
   urlRoom$: Observable<BreakoutRoom>;
   countRooms$: Observable<number>;
   message = 'Creando salas';
+  countRooms: number;
+  maxPeopleInSameRoom: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +26,11 @@ export class BreakoutRoomsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const room = this.route.snapshot.params.room ?? 'default';
+    this.maxPeopleInSameRoom =
+      this.route.snapshot.queryParams?.maxPeopleInSameRoom ?? 99999;
+
     await this.breakoutRooms.setCurrentRoom(room);
+    this.breakoutRooms.setMaxPeopleInSameRoom(this.maxPeopleInSameRoom);
     this.retroService.setRoom(room);
     this.countRooms$ = this.breakoutRooms.getCountRooms();
     setTimeout(() => (this.message = 'Seleccionando sala al azar'), 500);

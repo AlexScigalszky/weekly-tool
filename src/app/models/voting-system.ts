@@ -36,21 +36,9 @@ export class VotingSystem {
     if (question.votes < 0) {
       question.votes = 0;
     }
-    console.log(
-      `QUESTION A QUITAR`,
-      this.questionsUp.find((x) => x.id === question.id),
-    );
-
-    console.log(`VALORES ANTES DE QUITAR`, {
-      question,
-      questionsUp: this.questionsUp,
-    });
 
     this.questionsUp = this.questionsUp.filter((x) => x.id !== question.id);
-    console.log(`VALORES DESPUES DE QUITAR`, {
-      question,
-      questionsUp: this.questionsUp,
-    });
+    
     console.log(`voted down`, question);
     return true;
   }

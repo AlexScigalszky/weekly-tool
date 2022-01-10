@@ -61,7 +61,7 @@ describe('VotingService', () => {
       {
         url: 'http:void.void',
         name: 'void',
-        participants: 0,
+        participants: 2,
       },
     ];
   }

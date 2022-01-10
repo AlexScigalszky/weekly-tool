@@ -63,4 +63,6 @@ export class BreakoutRoomsServiceMock {
   getCountRooms() {
     return of(2);
   }
+
+  setMaxPeopleInSameRoom(_: number): void {}
 }
