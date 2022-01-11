@@ -43,7 +43,7 @@ describe('HomeComponent', () => {
   let mockPinnedTopicsService = {
     list: () => of([]),
     setRoom: (_string) => {},
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -74,7 +74,7 @@ describe('HomeComponent', () => {
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
         {
-          provide: PinnedTopicsService, 
+          provide: PinnedTopicsService,
           useValue: mockPinnedTopicsService,
         },
         {

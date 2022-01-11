@@ -120,7 +120,7 @@ export class HomeComponent implements OnInit {
 
     this.pinned$ = this.pinnedService
       .list()
-      .pipe(tap(x => console.log('ALEX ALEX ALEX', x)))
+      .pipe(tap((x) => console.log('ALEX ALEX ALEX', x)))
       .pipe(map((x) => (x.length == 0 ? null : x)));
   }
 

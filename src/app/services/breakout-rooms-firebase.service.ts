@@ -121,5 +121,4 @@ export class BreakoutRoomsFirebaseService {
   setMaxPeopleInSameRoom(maxPeopleInSameRoom: number): void {
     this.balancer.maxPeopleInSameRoom = maxPeopleInSameRoom;
   }
-
 }

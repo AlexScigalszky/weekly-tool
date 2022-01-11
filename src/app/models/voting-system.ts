@@ -38,7 +38,7 @@ export class VotingSystem {
     }
 
     this.questionsUp = this.questionsUp.filter((x) => x.id !== question.id);
-    
+
     console.log(`voted down`, question);
     return true;
   }
