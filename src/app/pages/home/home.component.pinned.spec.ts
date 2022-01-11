@@ -65,6 +65,7 @@
 //         { provide: VotingService, useClass: VotingService },
 //         { provide: PartnersService, useClass: PartnersMockService },
 //         { provide: AniversariesService, useClass: AniversariesService },
+//         { provide: SimpsonService, useClass: SimpsonService },
 //         {
 //           provide: PinnedTopicsService,
 //           useValue: mockPinnedTopicsService,

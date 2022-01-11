@@ -29,6 +29,7 @@ import { PartnersService } from 'src/app/services/partners.service';
 import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
 import { QuestionMockService } from 'src/app/services/question.mock.service';
 import { QuestionService } from 'src/app/services/question.service';
+import { SimpsonService } from 'src/app/services/simpson.service';
 import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
@@ -73,6 +74,7 @@ describe('HomeComponent', () => {
         { provide: VotingService, useClass: VotingService },
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
+        { provide: SimpsonService, useClass: SimpsonService },
         {
           provide: PinnedTopicsService,
           useValue: mockPinnedTopicsService,

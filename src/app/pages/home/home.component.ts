@@ -18,6 +18,7 @@ import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.
 import { RetroService } from 'src/app/retro/services/retro.service';
 import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
 import { PinnedItem } from 'src/app/models/pinned-item';
+import { SimpsonService } from 'src/app/services/simpson.service';
 
 export type ApiData = {
   room: Room;
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit {
     .list()
     .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
   pinned$: Observable<PinnedItem[]>;
+  simpsonQuote = this.simpsonService.getOne();
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +59,7 @@ export class HomeComponent implements OnInit {
     public sections: SectionsAvaliablesService,
     private retroService: RetroService,
     public pinnedService: PinnedTopicsService,
+    private simpsonService: SimpsonService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {

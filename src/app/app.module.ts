@@ -43,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
 import { PinnedTopicsComponent } from './components/pinned-topics/pinned-topics.component';
 import { PinnedTopicModalComponent } from './components/pinned-topic-modal/pinned-topic-modal.component';
+import { SimpsonService } from './services/simpson.service';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { PinnedTopicModalComponent } from './components/pinned-topic-modal/pinne
     QuestionService,
     VotingService,
     BreakoutRoomsFirebaseService,
+    SimpsonService,
     { provide: Window, useValue: window },
   ],
   bootstrap: [AppComponent],
