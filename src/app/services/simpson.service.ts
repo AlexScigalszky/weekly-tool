@@ -207,8 +207,7 @@ export class SimpsonService {
       author: 'Lisa Simpson',
     },
     {
-      quote:
-        'De la sociedad aprendí que es mejor ponerse los audífonos.',
+      quote: 'De la sociedad aprendí que es mejor ponerse los audífonos.',
       author: 'Lisa Simpson',
     },
     {
@@ -217,18 +216,15 @@ export class SimpsonService {
       author: 'Lisa Simpson',
     },
     {
-      quote:
-        '¡Bart, deja de molestar a Satanás!',
+      quote: '¡Bart, deja de molestar a Satanás!',
       author: 'Marge Simpson',
     },
     {
-      quote:
-        'No puedes esconderte de mí, paso 23 horas diarias aqui.',
+      quote: 'No puedes esconderte de mí, paso 23 horas diarias aqui.',
       author: 'Marge Simpson',
     },
     {
-      quote:
-        'Yo creía que buscarse en Google significaba otra cosa.',
+      quote: 'Yo creía que buscarse en Google significaba otra cosa.',
       author: 'Marge Simpson',
     },
     {
@@ -252,8 +248,7 @@ export class SimpsonService {
       author: 'Marge Simpson',
     },
     {
-      quote:
-        'Si ambicionas poco, nadie te estorbará.',
+      quote: 'Si ambicionas poco, nadie te estorbará.',
       author: 'Marge Simpson',
     },
     {
@@ -302,8 +297,7 @@ export class SimpsonService {
       author: 'Bart Simpson',
     },
     {
-      quote:
-        '¿Qué te paso Viejo? Antes eras chévere',
+      quote: '¿Qué te paso Viejo? Antes eras chévere',
       author: 'Bart Simpson',
     },
     {
@@ -317,8 +311,7 @@ export class SimpsonService {
       author: 'Bart Simpson',
     },
     {
-      quote:
-        'Vive deprisa, muere joven y deja un cadáver obeso.',
+      quote: 'Vive deprisa, muere joven y deja un cadáver obeso.',
       author: 'Bart Simpson',
     },
     {
