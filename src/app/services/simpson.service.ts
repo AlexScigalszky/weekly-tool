@@ -153,6 +153,141 @@ export class SimpsonService {
     },
     {
       quote:
+        'Tres pequeñas frases que te ayudarán a lo largo de tu vida: la primera ¡Cúbreme!, la segunda ¡Buena idea Jefe!, y la tercera; Estaba así cuando llegué.',
+      author: 'Homero Simpson',
+    },
+    {
+      quote:
+        'Si yo me muriera, reencarnarí­a en mariposa, nadie sospecharí­a de una mariposa.',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        'Familia, amistad y religión, tres demonios a destruir si quieres triunfar en los negocios.',
+      author: 'Mongomery Burns',
+    },
+    {
+      quote:
+        'Mira, sea o no sea científicamente real, el alma es el símbolo de todo lo bueno que hay en nosotros.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'Bart, como nunca recibí palabras de ánimo, no estoy muy segura de cómo deben sonar pero aquí va, yo creo en ti.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'Su vida fue tuvo éxitos desenfrenados hasta que se dio cuenta que era un Simpson.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'No sé muy bien quién es Dios, sólo sé que es más poderoso que papá y mamá juntos.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'Hoy no va a llegar el fin del mundo, tan solo 100 años más de calentamiento global y ¡adiós!',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'Antes de cantar el himno nacional me gustaría decir que el fútbol utiliza mal recursos que podrían servir para la educación y las artes.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        '¿No deberíamos atacar las raíces de los problemas sociales en vez de atestar las prisiones del país?',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'Pueden aceptar la ciencia y enfrentar la realidad o pueden creer en ángeles y vivir en un mundo infantil de fantasías.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'De la sociedad aprendí que es mejor ponerse los audífonos.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        'La policía sólo sirve para mantener el status quo de las clases dominantes.',
+      author: 'Lisa Simpson',
+    },
+    {
+      quote:
+        '¡Bart, deja de molestar a Satanás!',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'No puedes esconderte de mí, paso 23 horas diarias aqui.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'Yo creía que buscarse en Google significaba otra cosa.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'Homero, me dijiste que no ibas a usar al muñeco para fingir tu muerte.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'Mmm... quiero nena pero no puedo (hablar con Homero por su plan de engordar para no ir a trabajar). Tu padre es muy sensible a veces ¿Recuerdas cuando me reí de su gorra de Sherlock Holmes? Lloró una semana y cerró su agencia de detectives...',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        '¿Sabes, Lisa? Cuando conocí a tu padre era soéz, vulgar y cochino. Pero ahora es una persona diferente... (Lisa: ¡Pero mamá....!) ¡Es una persona diferente, Lisa!.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'A veces siento que la familia me vuelve loca ¡y quiero estallar! .',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'Si ambicionas poco, nadie te estorbará.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'Haz como decía mi madre: No hables, no digas nada, no llames la atención y sé fuerte.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'El mundo va mucho mejor ahora que los científicos han inventado la magia.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'El mundo va mucho mejor ahora que los científicos han inventado la magia.',
+      author: 'Marge Simpson',
+    },
+    {
+      quote:
+        'Oye, Otto, ¡tengo un examen hoy y no estoy listo! ¿Podrías estrellar el autobús o algo?',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        'Aw, vamos papá, este puede ser el milagro que salve la navidad de los Simpsons. Si la TV me ha enseñado algo es que los milagros les pueden suceder a niños pobres en navidad. Le pasó al pequeño Tim, le pasó a Charlie Brown, le pasó a los pitufos y ¡también a nosotros!',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        'Damas y caballeros, al contrario de lo que acaban de ver, la guerra no es glamorosa ni divertida. No hay ganadores, solo perdedores. No hay guerras buenas, salvo las siguientes excepciones: la Revolución Norteamericana, la Segunda Guerra Mundial y la trilogía de Star Wars.',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
         'Si yo me muriera, reencarnarí­a en mariposa, nadie sospecharí­a de una mariposa.',
       author: 'Bart Simpson',
     },
@@ -160,6 +295,71 @@ export class SimpsonService {
       quote:
         'Oye, Otto, ¡tengo un examen hoy y no estoy listo! ¿Podrías estrellar el autobús o algo?',
       author: 'Bart Simpson',
+    },
+    {
+      quote:
+        'Lisa, tu tienes la inteligencia para llegar hasta donde quieras. Y cuando llegues, yo estaré contigo para pedirte prestado.',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        '¿Qué te paso Viejo? Antes eras chévere',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        'Su nombre es Gordov, la mascota oficial de los próximos juegos invernales, representa el espíritu ruso de pereza y alcoholismo..... ',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        '¡Milhouse, ¿como es que alguien que usa lentes puede ser tan tonto?!',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        'Vive deprisa, muere joven y deja un cadáver obeso.',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        '"Viagra 5 dólares la pildora". Sea lo que sea, irá directo al café de Skinner.',
+      author: 'Bart Simpson',
+    },
+    {
+      quote:
+        '¿Cuándo voy a aprender? La solución a todos los problemas de la vida no está en el fondo de una botella. ¡Está en la TV!',
+      author: 'Homero Jay Simpson',
+    },
+    {
+      quote:
+        'Los viejos no necesitan amor, tienen que ser aislados y estudiados para ver qué nutrientes se les pueden sacar para nuestro beneficio personal.',
+      author: 'Homero Jay Simpson',
+    },
+    {
+      quote:
+        'Hay algo peor que ser un perdedor, es ser uno de esos tipos que se sienta en un bar, contando la historia de cómo se convirtió en un perdedor y no quiero que eso me pase a mí',
+      author: 'Homero Jay Simpson',
+    },
+    {
+      quote:
+        'Trabajo mucho y quiero a mis hijos, ¿por qué voy a pasar la mitad del domingo oyendo que me voy a ir al infierno?',
+      author: 'Homero Jay Simpson',
+    },
+    {
+      quote:
+        'No vayas a decir que es un bar ¿Pero qué más abre a esa hora? Es una tienda de pornografía, estaba comprando pornografía. Jejejeje, que buenas ideas tengo.',
+      author: 'Homero Jay Simpson',
+    },
+    {
+      quote:
+        'Yuju, ya soy universitario. ya no necesito el diploma de la escuela secundaria. Soy intelectual, muy inteligente. Soy intelectual, muy inteligente, hay que bonito soy.',
+      author: 'Homero Jay Simpson',
+    },
+    {
+      quote:
+        'Voy por la escopeta. Bart no quiero asustarte pero tal vez el Coco, el Coco esta en la casa.',
+      author: 'Homero Jay Simpson',
     },
     {
       quote:

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, of } from 'rxjs';
-import { filter, map, mergeMap, tap } from 'rxjs/operators';
+import { delay, filter, map, mergeMap, tap } from 'rxjs/operators';
 import { QuestionItemModalComponent } from 'src/app/components/question-item-modal/question-item-modal.component';
 import { Nullable } from 'src/app/models/nullable';
 import { Question } from 'src/app/models/question';
@@ -91,6 +91,7 @@ export class HomeComponent implements OnInit {
       this.questionService.getRoom(this.room),
       this.questionService.list(),
     ]).pipe(
+      delay(1000),
       map(([room, questions]) => ({
         room: room,
         questions: questions,
