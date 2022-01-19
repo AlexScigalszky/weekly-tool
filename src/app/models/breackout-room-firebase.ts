@@ -5,32 +5,32 @@ export class BreakoutRoomFirebase {
   name: string = 'default';
   rooms: BreakoutRoom[] = [
     {
-      url: 'https://meet.google.com/pyu-hzsm-dwj',
+      url: 'https://meet.google.com/tmu-wewq-qzi',
       name: 'patio',
       participants: 0,
     },
     {
-      url: 'https://meet.google.com/mog-sshc-dps',
+      url: 'https://meet.google.com/boq-mejk-kzj',
       name: 'cafetería',
       participants: 0,
     },
     {
-      url: 'https://meet.google.com/iev-ruwr-sbw',
+      url: 'https://meet.google.com/gyt-srdq-ozw',
       name: 'sala de reuniones',
       participants: 0,
     },
     {
-      url: 'https://meet.google.com/jrf-svbf-ham',
+      url: 'https://meet.google.com/coh-tncc-bzw',
       name: 'piso de abajo',
       participants: 0,
     },
     {
-      url: 'https://meet.google.com/pcf-rwmu-ufk',
+      url: 'https://meet.google.com/fxz-ogtj-hsu',
       name: 'cocina',
       participants: 0,
     },
     {
-      url: 'https://meet.google.com/zuy-eogv-zxw',
+      url: 'https://meet.google.com/syo-urjh-nzw',
       name: 'piso de arriba',
       participants: 0,
     },
