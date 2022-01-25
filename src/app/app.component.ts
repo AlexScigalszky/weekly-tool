@@ -7,6 +7,7 @@ import { PinnedItem } from './models/pinned-item';
 import { RetroService } from './retro/services/retro.service';
 import { PinnedTopicsService } from './services/pinned-topics.service';
 import { SectionsAvaliablesService } from './services/sections-avaliables.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnDestroy {
     tap((x) => this.pinnedService.setRoom(x)),
   );
   subscriptions: Subscription[] = [];
+  companyName: string = environment.companyName;
 
   constructor(
     public sections: SectionsAvaliablesService,
