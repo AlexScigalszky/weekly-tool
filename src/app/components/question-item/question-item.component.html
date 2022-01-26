@@ -13,12 +13,13 @@
     </div>
 
     <div class="topic-column">
+      <h3 *ngIf="question.name" class="question-name">
+        👤
+        {{ question.name }}
+      </h3>
       <h2 class="question-title">
         {{ question.title }}
       </h2>
-      <h3 *ngIf="question.name" class="question-name">
-        {{ question.name }}
-      </h3>
       <div class="question-description">
         <div [innerHTML]="question.description"></div>
       </div>
