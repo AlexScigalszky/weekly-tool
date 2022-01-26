@@ -1,6 +1,78 @@
-# QuestionAnswer
+# Weekly tool
 
-This is a tool for any company who create a dynamic weekly meeting with all employees. At the moment is only avaliable in Spanish
+A tool for any company who create a dynamic weekly meeting with all employees. At the moment is only avaliable in Spanish.
+
+## Getting Started
+
+Follow the steps below:
+
+### ⏳ Installation
+
+```
+npm install
+```
+
+or
+
+```
+yarn install
+```
+
+### Usage
+
+#### Local
+
+In local machine
+
+```
+npm run serve
+
+#or
+
+yarn serve
+```
+
+#### Server
+
+In a server
+
+```
+npm run start
+
+#or
+
+yarn start
+```
+
+#### Tests
+
+Run all tests
+
+```
+npm run cmd:test
+```
+
+Enjoy 🎉
+
+## Features
+
+- **Topics to talk:** A section where employees can write all ideas they want to talk. Then everyone can vote what the prefer (the most efective version is vote only 3 times but this is on pleople in the meeting).
+- **Topic conversation time:** This section was thinking to keep the focus just in one topic. Meanwhile the topic is present, the timer will be shared to all members. A good idea is take 7 minutes for each topic. Again this is on people in the meetting.
+- **Retrospective:** This section is for take notes about the meeting finish. It have three columns (more of, keep, less of) fot organice and visualize what pleople want to improve, keep and remove from weekly meetting).
+- **Breakout:** This section is a free versionof breckout using a set of google meet room. each member will have a random link.
+
+## Contributing
+
+- Feature Requests https://github.com/AlexScigalszky/weekly-tool/discussions/new
+- Issues https://github.com/AlexScigalszky/weekly-tool/issues/new
+
+1. Take fork of this repo.
+2. Clone the forked one into your system.
+3. Check that all tests run are green. (`npm run test`)
+4. Create a new branch and work on your changes.
+5. Push your changes and raise a PR.
+
+> **_IMPORTANT NOTE:_** Before raising a PR, make sure your code compiles and the command `npm run prittier:fix` must be executed.
 
 ## Features
 
@@ -25,37 +97,3 @@ This section is for take notes about the meeting finish. It have three columns (
 
 This section is a free versionof breckout using a set of google meet room. each member will have a random link
 ![image](https://user-images.githubusercontent.com/20727215/150141665-f77cc951-ff37-4031-bd63-b1fbfa088d9f.png)
-
-# How to run
-
-```
-npm install
-```
-
-Run all tests
-
-```
-npm run cmd:test
-```
-
-In local machine
-
-```
-npm run serve
-```
-
-In a server
-
-```
-npm run start
-```
-
-#How to contribute?
-
-1. Take fork of this repo.
-2. Clone the forked one into your system.
-3. Check that all tests run are green. (`npm run test`)
-4. Create a new branch and work on your changes.
-5. Push your changes and raise a PR.
-
-> **_IMPORTANT NOTE:_** Before raising a PR, make sure your code compiles and the command `npm run prittier:fix` must be executed.

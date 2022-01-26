@@ -46,22 +46,7 @@ header {
     margin-bottom: 0 !important;
   }
 }
-footer {
-  margin-top: auto;
-  padding: 1rem;
-  @media (min-width: 960px) {
-    padding: 1.5rem 2rem;
-  }
-  background-color: darken(#5ecaec, 20%);
-  color: rgb(255, 255, 255, 0.7);
-  a {
-    color: rgb(255, 255, 255, 1);
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
+
 
 mat-form-field {
   width: 100%;
@@ -69,6 +54,52 @@ mat-form-field {
 
 mat-sidenav-container {
   background-color: transparent !important;
+}
+
+// Footer
+#main-footer {
+  padding: 1rem;
+  background-color: darken(#5ecaec, 20%);
+  color: rgb(255, 255, 255, 0.7);
+
+  @media (min-width: 960px) {
+    padding: 1.5rem 2rem;
+  }
+
+  a {
+    color: rgb(255, 255, 255, 1);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+
+// Navbar
+.navbar {
+  display: flex;
+  position: relative;
+}
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap
+}
+.navbar-right {
+  margin-left: auto;
+}
+
+.maintitle {
+  margin: 0 !important;
+  .tagline {
+    display: block;
+    font-size: 1.3rem;
+  }
 }
 
 // Card
@@ -131,6 +162,11 @@ mat-card {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+}
+
+// Editor
+.NgxEditor__Content {
+  min-height: 100px;
 }
 
 .center-items {

@@ -1,95 +1,96 @@
 <header id="header">
-  <img
-    src="./assets/companyName_logotransparencia.svg"
-    alt="company icon"
-    class="logo to_left"
-  />
-  <h1>
-    Weekly Tool
-    <div style="float: right" class="center-items">
-      <button
+  <div class="navbar">
+    <div class="navbar-left">
+      <img
+      src="./assets/companyName_logotransparencia.svg"
+      alt="company icon"
+      class="logo to_left"
+      />
+      <h1 class="maintitle">
+        Weekly Tool
+        <span class="tagline">
+          Herramienta para encuestas
+        </span>
+      </h1>
+    </div>
+
+    <div class="navbar-right center-items2">
+        <button
         mat-icon-button
         class="margin-zero"
         [matMenuTriggerFor]="globalMenu"
         aria-label="dropdown menu"
-      >
+        >
         <mat-icon>more_vert</mat-icon>
       </button>
+
       <mat-menu #globalMenu="matMenu" xPosition="before" [hasBackdrop]="false">
-        <a href="/" mat-menu-item> Inicio </a>
-        <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>
-          Nueva Sala
-        </button> -->
-        <a
-          href="/breakout/{{ room }}"
-          *ngIf="room$ | async as room"
-          mat-menu-item
-        >
-          Breakout
-        </a>
-        <a
-          href="/settings/{{ room }}"
-          *ngIf="room$ | async as room"
-          mat-menu-item
-        >
-          Configuración
-        </a>
-        <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
-          Retrospective
-        </a>
-        <button (click)="addPinnedTopic()" mat-menu-item>Temas Fijos</button>
-        <mat-divider></mat-divider>
-        <div mat-menu-item>
-          <mat-checkbox [(ngModel)]="sections.aniversary"
+              <a href="/" mat-menu-item> Inicio </a>
+              <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>Nueva Sala</button> -->
+
+              <a
+              href="/breakout/{{ room }}"
+              *ngIf="room$ | async as room"
+              mat-menu-item
+              >
+              Breakout
+            </a>
+
+            <a
+            href="/settings/{{ room }}"
+            *ngIf="room$ | async as room"
+            mat-menu-item
+            >
+            Configuración
+          </a>
+
+          <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
+            Retrospective
+          </a>
+
+          <button (click)="addPinnedTopic()" mat-menu-item>Temas Fijos</button>
+
+          <mat-divider></mat-divider>
+
+          <div mat-menu-item>
+            <mat-checkbox [(ngModel)]="sections.aniversary"
             >Anivesarios</mat-checkbox
-          >
-        </div>
-        <div mat-menu-item>
-          <mat-checkbox [(ngModel)]="sections.quiestionLists"
+            >
+          </div>
+          <div mat-menu-item>
+            <mat-checkbox [(ngModel)]="sections.quiestionLists"
             >Temas a conversar</mat-checkbox
-          >
-        </div>
-        <div mat-menu-item>
-          <mat-checkbox [(ngModel)]="sections.currentQuestion"
+            >
+          </div>
+          <div mat-menu-item>
+            <mat-checkbox [(ngModel)]="sections.currentQuestion"
             >Tiempo de conversación
           </mat-checkbox>
-        </div>
+          </div>
       </mat-menu>
     </div>
-  </h1>
-  <h2>Herramienta para encuestas</h2>
+</div>
+
+
 </header>
+
 <section class="main-container">
   <router-outlet></router-outlet>
 </section>
-<footer>
-  <app-version></app-version> - Desarrollado por
-  <a href="https://github.com/AlexScigalszky" target="_blank" rel="noopener">
-    Alex P. Scigalszky.
-  </a>
 
-  Tu granito de arena
-  <a
-    href="https://github.com/AlexScigalszky/qa/issues/new"
-    target="_blank"
-    rel="noopener"
-  >
-    aquí.
-  </a>
-
-  Discutamos
-  <a
-    href="https://github.com/AlexScigalszky/qa/discussions/new"
-    target="_blank"
-  >
-    Aquí
-  </a>
-
-  Issues
-  <a
-    href="https://github.com/AlexScigalszky/weekly-tool/issues"
-    target="_blank"
-  >
-    Aquí
-  </a>
+<footer id="main-footer">
+  <p>
+    <app-version></app-version> - Desarrollado por
+    <a href="https://github.com/AlexScigalszky" target="_blank" rel="noopener">
+      Alex P. Scigalszky
+    </a>
+   - 
+    <a
+      href="https://github.com/AlexScigalszky/weekly-tool"
+      target="_blank"
+      rel="noopener"
+      >
+      Documentación y aportes
+    </a>
+  </p>
 </footer>
