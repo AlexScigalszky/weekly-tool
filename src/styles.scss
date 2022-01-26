@@ -103,15 +103,23 @@ mat-sidenav-container {
 }
 
 // Card
+.card-list {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  .mat-card-content {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+  }
+}
+.mat-list-base {
+  padding-top: 0 !important;
+}
 mat-card {
   + mat-card {
     margin-top: 1rem;
   }
 }
-.mat-list-base .mat-list-item .mat-list-item-content,
-.mat-list-base .mat-list-option .mat-list-item-content {
-  //padding: 0 !important;
-}
+
 .mat-card-header-text {
   margin-left: 0 !important;
 }
