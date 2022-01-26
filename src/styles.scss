@@ -71,6 +71,36 @@ mat-sidenav-container {
   background-color: transparent !important;
 }
 
+// Footer
+#main-footer {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+// Navbar
+.navbar {
+  display: flex;
+  position: relative;
+}
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap
+}
+.navbar-right {
+  margin-left: auto;
+}
+
+.maintitle {
+  margin: 0 !important;
+  .tagline {
+    display: block;
+    font-size: 1.3rem;
+  }
+}
+
 // Card
 mat-card {
   + mat-card {
@@ -131,6 +161,11 @@ mat-card {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+}
+
+// Editor
+.NgxEditor__Content {
+    min-height: 100px;
 }
 
 .center-items {
