@@ -24,7 +24,6 @@ export class AppComponent implements OnDestroy {
   companyName: string = environment.companyName;
   wordOfTheDay$ = this.randomWordsService.getWordOfTheDay();
   wordDefinitionURL = environment.palabrasAleatoriasURL + '/#/specific-word/';
-  
 
   constructor(
     public sections: SectionsAvaliablesService,

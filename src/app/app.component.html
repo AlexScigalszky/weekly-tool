@@ -8,7 +8,10 @@
     </div>
 
     <div class="nav-bar-center">
-      <span class="tagline navbar-item"  *ngIf="wordOfTheDay$ | async as wordOfTheDay">
+      <span
+        class="tagline navbar-item"
+        *ngIf="wordOfTheDay$ | async as wordOfTheDay"
+      >
         Palabra del día:
         <a
           href="{{ wordDefinitionURL + wordOfTheDay?.body?.Word }}"
