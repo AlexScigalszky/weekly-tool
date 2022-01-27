@@ -6,21 +6,17 @@ A tool for any company who create a dynamic weekly meeting with all employees. A
 
 Follow the steps below:
 
-### ⏳ Installation
+### Installation
 
 ```
 npm install
-```
 
-or
+# or
 
-```
 yarn install
 ```
 
 ### Usage
-
-#### Local
 
 In local machine
 
@@ -32,8 +28,6 @@ npm run serve
 yarn serve
 ```
 
-#### Server
-
 In a server
 
 ```
@@ -44,7 +38,7 @@ npm run start
 yarn start
 ```
 
-#### Tests
+### Tests
 
 Run all tests
 
