@@ -3,20 +3,21 @@
     <div class="navbar-left">
       <a href="/" class="navbar-item logo">
         <img src="./assets/companyLogo.svg" alt="company logo" />
-        <h1 class="maintitle">
-          Weekly Tool
-          <span class="tagline" *ngIf="wordOfTheDay$ | async as wordOfTheDay">
-            Palabra del día:
-            <a
-              href="{{ wordDefinitionURL + wordOfTheDay?.body?.Word }}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {{ wordOfTheDay?.body?.Word }}</a
-            >
-          </span>
-        </h1>
+        <h1 class="maintitle">Weekly Tool</h1>
       </a>
+    </div>
+
+    <div class="nav-bar-center">
+      <span class="tagline navbar-item"  *ngIf="wordOfTheDay$ | async as wordOfTheDay">
+        Palabra del día:
+        <a
+          href="{{ wordDefinitionURL + wordOfTheDay?.body?.Word }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ wordOfTheDay?.body?.Word }}</a
+        >
+      </span>
     </div>
 
     <div class="navbar-right center-items2">
