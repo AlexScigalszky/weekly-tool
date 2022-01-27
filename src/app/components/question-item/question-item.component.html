@@ -5,9 +5,8 @@
 >
   <div class="grid grid-item">
     <div class="vote-column">
-      <div class="vote-list" [color]="highlight ? 'accent' : 'primary'">
+      <div class="vote-list">
         <span class="vote-number">{{ question.votes }}</span>
-        votos
       </div>
 
       <button
@@ -21,9 +20,10 @@
     </div>
 
     <div class="topic-column">
-      <h3 *ngIf="question.name" class="question-name">
+      <h3 class="question-name">
         👤
-        {{ question.name }}
+        <span *ngIf="question.name; else elseBlock">{{ question.name }}</span>
+        <ng-template #elseBlock>Anonimo</ng-template>
       </h3>
       <h2 class="question-title">
         {{ question.title }}
