@@ -13,6 +13,7 @@ import { AppModule } from './app.module';
 import { VersionComponent } from './components/version/version.component';
 import { PinnedTopicsService } from './services/pinned-topics.service';
 import { QuestionService } from './services/question.service';
+import { RandomWordsService } from './services/random-words.service';
 
 describe('AppComponent', () => {
   /**
@@ -35,6 +36,7 @@ describe('AppComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: QuestionService, useValue: {} },
         { provide: PinnedTopicsService, useValue: {} },
+        { provide: RandomWordsService, useValue: {} },
       ],
     }).compileComponents();
   });

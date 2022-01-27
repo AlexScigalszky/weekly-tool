@@ -2,76 +2,81 @@
   <div class="navbar">
     <div class="navbar-left">
       <img
-      src="./assets/companyName_logotransparencia.svg"
-      alt="company icon"
-      class="logo to_left"
+        src="./assets/companyName_logotransparencia.svg"
+        alt="company icon"
+        class="logo to_left"
       />
       <h1 class="maintitle">
         Weekly Tool
-        <span class="tagline">
-          Herramienta para encuestas
+        <span class="tagline" *ngIf="wordOfTheDay$ | async as wordOfTheDay">
+          Palabra del día:
+          <a
+            href="{{ wordDefinitionURL + wordOfTheDay?.body?.Word }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ wordOfTheDay?.body?.Word }}</a
+          >
         </span>
       </h1>
     </div>
 
     <div class="navbar-right center-items2">
-        <button
+      <button
         mat-icon-button
         class="margin-zero"
         [matMenuTriggerFor]="globalMenu"
         aria-label="dropdown menu"
-        >
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
 
       <mat-menu #globalMenu="matMenu" xPosition="before" [hasBackdrop]="false">
-              <a href="/" mat-menu-item> Inicio </a>
-              <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>Nueva Sala</button> -->
+        <a href="/" mat-menu-item> Inicio </a>
+        <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>Nueva Sala</button> -->
 
-              <a
-              href="/breakout/{{ room }}"
-              *ngIf="room$ | async as room"
-              mat-menu-item
-              >
-              Breakout
-            </a>
+        <a
+          href="/breakout/{{ room }}"
+          *ngIf="room$ | async as room"
+          mat-menu-item
+        >
+          Breakout
+        </a>
 
-            <a
-            href="/settings/{{ room }}"
-            *ngIf="room$ | async as room"
-            mat-menu-item
-            >
-            Configuración
-          </a>
+        <a
+          href="/settings/{{ room }}"
+          *ngIf="room$ | async as room"
+          mat-menu-item
+        >
+          Configuración
+        </a>
 
-          <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
-            Retrospective
-          </a>
+        <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
+          Retrospective
+        </a>
 
-          <button (click)="addPinnedTopic()" mat-menu-item>Temas Fijos</button>
+        <button (click)="addPinnedTopic()" mat-menu-item>Temas Fijos</button>
 
-          <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-          <div mat-menu-item>
-            <mat-checkbox [(ngModel)]="sections.aniversary"
+        <div mat-menu-item>
+          <mat-checkbox [(ngModel)]="sections.aniversary"
             >Anivesarios</mat-checkbox
-            >
-          </div>
-          <div mat-menu-item>
-            <mat-checkbox [(ngModel)]="sections.quiestionLists"
+          >
+        </div>
+        <div mat-menu-item>
+          <mat-checkbox [(ngModel)]="sections.quiestionLists"
             >Temas a conversar</mat-checkbox
-            >
-          </div>
-          <div mat-menu-item>
-            <mat-checkbox [(ngModel)]="sections.currentQuestion"
+          >
+        </div>
+        <div mat-menu-item>
+          <mat-checkbox [(ngModel)]="sections.currentQuestion"
             >Tiempo de conversación
           </mat-checkbox>
-          </div>
+        </div>
       </mat-menu>
     </div>
-</div>
-
-
+  </div>
 </header>
 
 <section class="main-container">
@@ -84,12 +89,12 @@
     <a href="https://github.com/AlexScigalszky" target="_blank" rel="noopener">
       Alex P. Scigalszky
     </a>
-   - 
+    -
     <a
       href="https://github.com/AlexScigalszky/weekly-tool"
       target="_blank"
       rel="noopener"
-      >
+    >
       Documentación y aportes
     </a>
   </p>

@@ -8,6 +8,7 @@ import { RetroService } from './retro/services/retro.service';
 import { PinnedTopicsService } from './services/pinned-topics.service';
 import { SectionsAvaliablesService } from './services/sections-avaliables.service';
 import { environment } from 'src/environments/environment';
+import { RandomWordsService } from './services/random-words.service';
 
 @Component({
   selector: 'app-root',
@@ -21,11 +22,15 @@ export class AppComponent implements OnDestroy {
   );
   subscriptions: Subscription[] = [];
   companyName: string = environment.companyName;
+  wordOfTheDay$ = this.randomWordsService.getWordOfTheDay();
+  wordDefinitionURL = environment.palabrasAleatoriasURL + '/#/specific-word/';
+  
 
   constructor(
     public sections: SectionsAvaliablesService,
     private pinnedService: PinnedTopicsService,
     private retro: RetroService,
+    private randomWordsService: RandomWordsService,
     private dialog: MatDialog,
   ) {}
 

@@ -1,6 +1,8 @@
 export const environment = {
   production: false,
   companyName: 'w3itsolutions',
+  baseRandomWordsApiUrl: 'https://palabras-aleatorias-public-api.herokuapp.com',
+  palabrasAleatoriasURL: 'https://palabrasaleatorias.ar',
   firebaseConfig: {
     apiKey: 'AIzaSyAXXlYYmw5TPiJmYu3tDQ_WeUMxq5lOoQc',
     authDomain: 'questionanswers-arg.firebaseapp.com',
