@@ -44,6 +44,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { PinnedTopicsComponent } from './components/pinned-topics/pinned-topics.component';
 import { PinnedTopicModalComponent } from './components/pinned-topic-modal/pinned-topic-modal.component';
 import { SimpsonService } from './services/simpson.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SimpsonService } from './services/simpson.service';
     AniversariesComponent,
     PinnedTopicsComponent,
     PinnedTopicModalComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
