@@ -1,55 +1,61 @@
 <header id="header">
   <div class="navbar">
     <div class="navbar-left">
-      <img
-        src="./assets/companyName_logotransparencia.svg"
-        alt="company icon"
-        class="logo to_left"
-      />
-      <h1 class="maintitle">
-        Weekly Tool
-        <span class="tagline"> Herramienta para encuestas </span>
-      </h1>
+      <a href="/" class="navbar-item logo">
+        <img src="./assets/companyLogo.svg" alt="company logo" />
+        <h1 class="maintitle">
+          Weekly Tool
+          <span class="tagline"> Herramienta para encuestas </span>
+        </h1>
+      </a>
     </div>
 
     <div class="navbar-right center-items2">
+      <ul class="navbar-nav">
+        <li>
+          <a href="/" mat-menu-item> Inicio </a>
+        </li>
+        <li>
+          <a
+            href="/breakout/{{ room }}"
+            *ngIf="room$ | async as room"
+            mat-menu-item
+          >
+            Breakout
+          </a>
+        </li>
+        <li>
+          <a
+            href="/settings/{{ room }}"
+            *ngIf="room$ | async as room"
+            mat-menu-item
+          >
+            Configuración
+          </a>
+        </li>
+        <li>
+          <a
+            href="/retro/{{ room }}"
+            *ngIf="room$ | async as room"
+            mat-menu-item
+          >
+            Retrospective
+          </a>
+        </li>
+        <li>
+          <a href="#" (click)="addPinnedTopic()"> Temas Fijos </a>
+        </li>
+      </ul>
       <button
         mat-icon-button
         class="margin-zero"
         [matMenuTriggerFor]="globalMenu"
         aria-label="dropdown menu"
       >
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon>settings</mat-icon>
       </button>
 
       <mat-menu #globalMenu="matMenu" xPosition="before" [hasBackdrop]="false">
-        <a href="/" mat-menu-item> Inicio </a>
-        <!-- <button id="new-room-button" (click)="newRoom()" mat-menu-item>Nueva Sala</button> -->
-
-        <a
-          href="/breakout/{{ room }}"
-          *ngIf="room$ | async as room"
-          mat-menu-item
-        >
-          Breakout
-        </a>
-
-        <a
-          href="/settings/{{ room }}"
-          *ngIf="room$ | async as room"
-          mat-menu-item
-        >
-          Configuración
-        </a>
-
-        <a href="/retro/{{ room }}" *ngIf="room$ | async as room" mat-menu-item>
-          Retrospective
-        </a>
-
-        <button (click)="addPinnedTopic()" mat-menu-item>Temas Fijos</button>
-
-        <mat-divider></mat-divider>
-
         <div mat-menu-item>
           <mat-checkbox [(ngModel)]="sections.aniversary"
             >Anivesarios</mat-checkbox
