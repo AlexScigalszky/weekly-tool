@@ -1,13 +1,21 @@
-<article *ngIf="question" [class.question-voted]="highlight" class="question-item">
+<article
+  *ngIf="question"
+  [class.question-voted]="highlight"
+  class="question-item"
+>
   <div class="grid grid-item">
-
     <div class="vote-column">
       <div class="vote-list" [color]="highlight ? 'accent' : 'primary'">
         <span class="vote-number">{{ question.votes }}</span>
         votos
       </div>
 
-      <button class="vote-button" mat-stroked-button [color]="highlight ? 'accent' : 'primary'" (click)="vote()" >
+      <button
+        class="vote-button"
+        mat-stroked-button
+        [color]="highlight ? 'accent' : 'primary'"
+        (click)="vote()"
+      >
         Votar
       </button>
     </div>
@@ -24,15 +32,17 @@
         <div [innerHTML]="question.description"></div>
       </div>
     </div>
-
   </div>
 
-  <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu2" aria-label="dropdown menu">
+  <button
+    mat-icon-button
+    class="more-button"
+    [matMenuTriggerFor]="menu2"
+    aria-label="dropdown menu"
+  >
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu2="matMenu" xPosition="before">
-    <button class="edit-button" mat-menu-item (click)="edit()">
-      Editar
-    </button>
+    <button class="edit-button" mat-menu-item (click)="edit()">Editar</button>
   </mat-menu>
 </article>

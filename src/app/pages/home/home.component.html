@@ -1,7 +1,7 @@
 <div class="aniversary-section">
   <app-aniversaries
-  *ngIf="sections.aniversary"
-  [aniversaries]="aniversaries$ | async"
+    *ngIf="sections.aniversary"
+    [aniversaries]="aniversaries$ | async"
   ></app-aniversaries>
 </div>
 <div class="pinned-topic-section" *ngIf="pinned$ | async as data">
@@ -9,41 +9,47 @@
 </div>
 
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
-  
   <!-- First column -->
   <div id="topics-section" *ngIf="sections.quiestionLists">
-
     <mat-card tdMediaToggle="gt-xs">
-      <h2>
-        Temas a conversar
-      </h2>
+      <h2>Temas a conversar</h2>
       <p>
-        Escribí un idea junto con su descripción para conversarlo entre
-        todos. Si querés podés agregar tu nombre. Al momento de votar, sólo
-        podrás hacerlo en 3 items. Hasta el momento:
+        Escribí un idea junto con su descripción para conversarlo entre todos.
+        Si querés podés agregar tu nombre. Al momento de votar, sólo podrás
+        hacerlo en 3 items. Hasta el momento:
         <strong id="votes-counter">
           {{ apiData.totalVotes }}
         </strong>
         votos en total.
       </p>
 
-      <button id="new-topic-button" (click)="openDialog()" mat-flat-button color="primary">
+      <button
+        id="new-topic-button"
+        (click)="openDialog()"
+        mat-flat-button
+        color="primary"
+      >
         Nuevo tema
       </button>
 
-      <button (click)="resetVotes(apiData.questions)" mat-stroked-button color="primary" id="reset-votes">
+      <button
+        (click)="resetVotes(apiData.questions)"
+        mat-stroked-button
+        color="primary"
+        id="reset-votes"
+      >
         Limpiar votos
       </button>
     </mat-card>
 
-    <mat-card tdMediaToggle="gt-xs"  class="card-list">
+    <mat-card tdMediaToggle="gt-xs" class="card-list">
       <mat-card-content>
         <app-question-list
-        *ngIf="questionsHighlight$ | async as questionsHighlight"
-        [questions]="apiData.questions"
-        [highlight]="questionsHighlight"
-        (voted)="vote($event, questionsHighlight)"
-        (editButtonClicked)="editQuestion($event)"
+          *ngIf="questionsHighlight$ | async as questionsHighlight"
+          [questions]="apiData.questions"
+          [highlight]="questionsHighlight"
+          (voted)="vote($event, questionsHighlight)"
+          (editButtonClicked)="editQuestion($event)"
         ></app-question-list>
       </mat-card-content>
     </mat-card>
@@ -64,11 +70,11 @@
           <mat-select [formControl]="currentQuestionControl">
             <mat-option value="-1"> - </mat-option>
             <mat-option
-            *ngFor="let question of apiData.questions"
-            [value]="question.id"
+              *ngFor="let question of apiData.questions"
+              [value]="question.id"
             >
-            {{ question.title }}
-          </mat-option>
+              {{ question.title }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -105,7 +111,6 @@
       </mat-card-actions>
     </mat-card>
   </div>
-
 </div>
 
 <ng-template #spinner>
