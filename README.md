@@ -45,6 +45,8 @@ Run all tests
 ```
 npm run cmd:test
 ```
+![image](https://user-images.githubusercontent.com/20727215/151627076-8c9b080a-7a26-4d2b-b356-8064c914b22d.png)
+
 
 Enjoy 🎉
 
