@@ -28,7 +28,7 @@ module.exports = function (config) {
         timeoutInterval: 220000,
       },
 
-      // captureConsole: false,
+      captureConsole: false,
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
