@@ -3,6 +3,7 @@ import { SimpsonService } from './simpson.service';
 
 describe('SimpsonService', () => {
   let service: SimpsonService;
+  let quote = null;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -13,7 +14,7 @@ describe('SimpsonService', () => {
     thenExists();
   });
 
-  it('voting system property should be exists', () => {
+  it('should return a quote', () => {
     givenAService();
     whenGetOneIsCalled();
     thenReturnAQuote();
@@ -28,10 +29,12 @@ describe('SimpsonService', () => {
   }
 
   function whenGetOneIsCalled() {
-    this.quote = service.getOne();
+    quote = service.getOne();
+    console.log(quote);
+    
   }
 
   function thenReturnAQuote() {
-    expect(this.quote).toBeTruthy();
+    expect(quote).toBeTruthy();
   }
 });

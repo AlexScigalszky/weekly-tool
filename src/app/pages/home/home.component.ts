@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
       mergeMap((room: Room) =>
         this.questionService.getQuestion(room.currentQuestionId),
       ),
-      tap(console.log),
+      tap((x) => console.log('ALEXPA EX', x)),
     );
 
     this.showStartButton$ = combineLatest([
@@ -124,7 +124,6 @@ export class HomeComponent implements OnInit {
 
     this.pinned$ = this.pinnedService
       .list()
-      .pipe(tap((x) => console.log('ALEX ALEX ALEX', x)))
       .pipe(map((x) => (x.length == 0 ? null : x)));
   }
 

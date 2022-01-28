@@ -29,12 +29,18 @@ import { PartnersService } from 'src/app/services/partners.service';
 import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
 import { QuestionMockService } from 'src/app/services/question.mock.service';
 import { QuestionService } from 'src/app/services/question.service';
+import { SectionsAvaliablesService } from 'src/app/services/sections-avaliables.service';
 import { SimpsonService } from 'src/app/services/simpson.service';
 import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { environment } from 'src/environments/environment';
-import { containText, findEl, findEls, hasText, wait } from 'src/test.helpers';
+import { 
+  containText, 
+  findEl, 
+  findEls, 
+  hasText, 
+  wait } from 'src/test.helpers';
 
 import { HomeComponent } from './home.component';
 
@@ -75,6 +81,7 @@ describe('HomeComponent', () => {
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
         { provide: SimpsonService, useClass: SimpsonService },
+        { provide: SectionsAvaliablesService, useClass: SectionsAvaliablesService },
         {
           provide: PinnedTopicsService,
           useValue: mockPinnedTopicsService,
@@ -97,7 +104,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create and show waiting', fakeAsync(() => {
+  it('should create', fakeAsync(() => {
     givenAComponent();
     thenExists();
   }));
@@ -165,25 +172,32 @@ describe('HomeComponent', () => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    wait(fixture);
   }
 
   function thenExists() {
+    fixture.detectChanges();
+    wait(fixture);
     expect(component).toBeTruthy();
   }
 
   function thenHasWaiting() {
     const waitingComponent = findEl(fixture, '#spinner');
     expect(waitingComponent).toBeTruthy();
+    fixture.detectChanges();
+    wait(fixture);
   }
 
   function thenHasTopicsSection() {
+    fixture.detectChanges();
+    wait(fixture);
     wait(fixture);
     const topicSection = findEl(fixture, '#topics-section');
     expect(topicSection).toBeTruthy();
   }
 
   function thenHasTopicsSectionTitle() {
-    tick(800);
+    tick(1000);
     containText(fixture, '#topics-section', 'Temas a conversar');
   }
 
@@ -295,5 +309,8 @@ describe('HomeComponent', () => {
   function thenHaveNoPinnedTopicSection() {
     const pinnedTopics = findEls(fixture, '.pinned-topic-section');
     expect(pinnedTopics.length).toBe(0);
+    fixture.detectChanges();
+    fixture.destroy();
+    flush();
   }
 });

@@ -14,6 +14,8 @@ import { VersionComponent } from './components/version/version.component';
 import { PinnedTopicsService } from './services/pinned-topics.service';
 import { QuestionService } from './services/question.service';
 import { RandomWordsService } from './services/random-words.service';
+//import { APIResponse, WordOfTheDay } from './models/word-of-the-day';
+import { of } from 'rxjs';
 
 describe('AppComponent', () => {
   /**
@@ -36,7 +38,13 @@ describe('AppComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: QuestionService, useValue: {} },
         { provide: PinnedTopicsService, useValue: {} },
-        { provide: RandomWordsService, useValue: {} },
+        { provide: RandomWordsService, useValue: {
+          getWordOfTheDay: () => of({
+            body: {
+              Word: 'test',
+            }
+          })
+        } },
       ],
     }).compileComponents();
   });

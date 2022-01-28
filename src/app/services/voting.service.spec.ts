@@ -108,10 +108,10 @@ describe('VotingService', () => {
   }
 
   function thenHaveNotHighlightedQuestion(done: DoneFn) {
-    // service.highlightSubject.subscribe((value) => {
-    //   expect(value).toEqual([]);
-    //   done();
-    // });
+    service.highlightSubject.subscribe((value) => {
+      expect(value).toEqual([]);
+      done();
+    });
   }
 
   function whenSetNewRoomName() {

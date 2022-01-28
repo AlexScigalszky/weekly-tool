@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import {
   MatDialogModule,
@@ -13,7 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Question } from 'src/app/models/question';
-import { findEl, hasText } from 'src/test.helpers';
+import { containText, findEl, hasText } from 'src/test.helpers';
 import { QuestionItemComponent } from './question-item.component';
 
 describe('QuestionItemComponent', () => {
@@ -58,20 +58,20 @@ describe('QuestionItemComponent', () => {
     thenExistTheComponent();
   });
 
-  it('show question data', () => {
+  it('show question data', fakeAsync(() => {
     givenAAComponentWithAQuestion();
     thenQuestionDataIsShown();
-  });
+  }));
 
-  it('should emit edit event', () => {
+  it('should emit edit event', fakeAsync(() => {
     givenAAComponentWithAQuestion();
     whenClickOnEditButtonThenVotedIsEmitted();
-  });
+  }));
 
-  it('should emit vote event', () => {
+  it('should emit vote event', fakeAsync(() => {
     givenAAComponentWithAQuestion();
     whenClickOnEditButtonThenEditButtonClickedIsEmitted();
-  });
+  }));
 
   function givenAAComponent() {
     fixture = TestBed.createComponent(QuestionItemComponent);
@@ -82,6 +82,7 @@ describe('QuestionItemComponent', () => {
   function givenAAComponentWithAQuestion() {
     component.question = question;
     fixture.detectChanges();
+    flush();
   }
 
   function thenExistTheComponent() {
@@ -89,8 +90,8 @@ describe('QuestionItemComponent', () => {
   }
 
   function thenQuestionDataIsShown() {
-    hasText(fixture, '.question-title h3', question.title);
-    hasText(fixture, '.question-name', question.name);
+    hasText(fixture, '.question-title', question.title);
+    containText(fixture, '.question-name', question.name);
     hasText(fixture, '.question-description', question.description);
   }
 
@@ -116,5 +117,6 @@ describe('QuestionItemComponent', () => {
 
     fixture.detectChanges();
     expect(spy).toHaveBeenCalled();
+    flush();
   }
 });

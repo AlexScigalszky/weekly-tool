@@ -18,7 +18,7 @@ export class AniversariesService {
   hasAniversaryInThisWeek(date: Date, partner: Partner): boolean {
     const today = new Date();
     const diffDays = this.calculateDiffInDays(date, today);
-    console.log({ date, today });
+    // console.log({ date, today });
     const debt = diffDays % 365;
     const years = diffDays / 365;
     const has = 0 <= debt && debt <= 7 && years > 0;

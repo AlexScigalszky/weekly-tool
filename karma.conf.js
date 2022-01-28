@@ -5,10 +5,10 @@ module.exports = function (config) {
   config.set({
     basePath: '',
 
-    captureTimeout: 210000,
+    captureTimeout: 410000,
     browserDisconnectTolerance: 3,
-    browserDisconnectTimeout: 210000,
-    browserNoActivityTimeout: 210000,
+    browserDisconnectTimeout: 410000,
+    browserNoActivityTimeout: 410000,
 
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
