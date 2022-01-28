@@ -35,12 +35,7 @@ import { TimerMockService } from 'src/app/services/timer-mock.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { VotingService } from 'src/app/services/voting.service';
 import { environment } from 'src/environments/environment';
-import { 
-  containText, 
-  findEl, 
-  findEls, 
-  hasText, 
-  wait } from 'src/test.helpers';
+import { containText, findEl, findEls, hasText, wait } from 'src/test.helpers';
 
 import { HomeComponent } from './home.component';
 
@@ -81,7 +76,10 @@ describe('HomeComponent', () => {
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
         { provide: SimpsonService, useClass: SimpsonService },
-        { provide: SectionsAvaliablesService, useClass: SectionsAvaliablesService },
+        {
+          provide: SectionsAvaliablesService,
+          useClass: SectionsAvaliablesService,
+        },
         {
           provide: PinnedTopicsService,
           useValue: mockPinnedTopicsService,

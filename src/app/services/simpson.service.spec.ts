@@ -31,7 +31,6 @@ describe('SimpsonService', () => {
   function whenGetOneIsCalled() {
     quote = service.getOne();
     console.log(quote);
-    
   }
 
   function thenReturnAQuote() {

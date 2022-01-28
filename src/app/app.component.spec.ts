@@ -38,13 +38,17 @@ describe('AppComponent', () => {
         { provide: MatDialogRef, useValue: {} },
         { provide: QuestionService, useValue: {} },
         { provide: PinnedTopicsService, useValue: {} },
-        { provide: RandomWordsService, useValue: {
-          getWordOfTheDay: () => of({
-            body: {
-              Word: 'test',
-            }
-          })
-        } },
+        {
+          provide: RandomWordsService,
+          useValue: {
+            getWordOfTheDay: () =>
+              of({
+                body: {
+                  Word: 'test',
+                },
+              }),
+          },
+        },
       ],
     }).compileComponents();
   });
