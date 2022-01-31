@@ -33,6 +33,10 @@ export function hasText<T>(
   return expect(textContent).toEqual(textToEvaluate);
 }
 
+export function isEmpty<T>(element: DebugElement): boolean {
+  return element.nativeElement.textContent.trim().length === 0;
+}
+
 export function containText<T>(
   fixture: ComponentFixture<T>,
   testId: string,

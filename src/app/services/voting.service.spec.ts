@@ -88,6 +88,7 @@ describe('VotingService', () => {
     store = {
       'voting-system-new': JSON.stringify(newVotingSystem),
     };
+    localStorage.setItem(`voting-system-default`, null);
     spyOn(localStorage, 'getItem').and.callFake((key) => store[key]);
     spyOn(localStorage, 'setItem').and.callFake(
       (key, value) => (store[key] = value + ''),
