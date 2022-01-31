@@ -1,4 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -37,8 +42,8 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
   let mockPinnedTopicsService = {
     list: () => {
-        console.log('mockPinnedTopicsService.list()');
-        return of([new PinnedItem()]);
+      console.log('mockPinnedTopicsService.list()');
+      return of([new PinnedItem()]);
     },
     setRoom: (_string) => {},
   };
@@ -92,13 +97,10 @@ describe('HomeComponent', () => {
     }).compileComponents();
   });
 
-  it(
-    'should show pinned topics',
-    fakeAsync(() => {
-      givenAComponentWithPinnedTopics();
-      thenHavePinnedTopicSection();
-    }),
-  );
+  it('should show pinned topics', fakeAsync(() => {
+    givenAComponentWithPinnedTopics();
+    thenHavePinnedTopicSection();
+  }));
 
   async function givenAComponentWithPinnedTopics() {
     fixture = TestBed.createComponent(HomeComponent);
