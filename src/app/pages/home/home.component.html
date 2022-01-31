@@ -1,11 +1,11 @@
 <div class="aniversary-section">
-  <app-aniversaries
+  <wt-aniversaries
     *ngIf="sections.aniversary"
     [aniversaries]="aniversaries$ | async"
-  ></app-aniversaries>
+  ></wt-aniversaries>
 </div>
 <div class="pinned-topic-section" *ngIf="pinned$ | async as data">
-  <app-pinned-topics [topics]="data"></app-pinned-topics>
+  <wt-pinned-topics [topics]="data"></wt-pinned-topics>
 </div>
 
 <div *ngIf="apiData$ | async as apiData; else spinner" id="home-container">
@@ -44,13 +44,13 @@
 
     <mat-card tdMediaToggle="gt-xs" class="card-list">
       <mat-card-content>
-        <app-question-list
+        <wt-question-list
           *ngIf="questionsHighlight$ | async as questionsHighlight"
           [questions]="apiData.questions"
           [highlight]="questionsHighlight"
           (voted)="vote($event, questionsHighlight)"
           (editButtonClicked)="editQuestion($event)"
-        ></app-question-list>
+        ></wt-question-list>
       </mat-card-content>
     </mat-card>
   </div>
@@ -107,7 +107,7 @@
         </h3>
       </mat-card-content>
       <mat-card-actions>
-        <app-fullscreen-button [id]="'selected-topic'"></app-fullscreen-button>
+        <wt-fullscreen-button [id]="'selected-topic'"></wt-fullscreen-button>
       </mat-card-actions>
     </mat-card>
   </div>

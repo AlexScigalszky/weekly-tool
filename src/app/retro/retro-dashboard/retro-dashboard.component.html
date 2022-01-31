@@ -18,15 +18,15 @@
     *ngIf="sectionsBeforeRetro$ | async as sections"
   >
     <div class="retro-column more-of">
-      <app-item-list [list]="sections.moreOf"></app-item-list>
+      <wt-item-list [list]="sections.moreOf"></wt-item-list>
     </div>
 
     <div class="retro-column keep">
-      <app-item-list [list]="sections.keep"></app-item-list>
+      <wt-item-list [list]="sections.keep"></wt-item-list>
     </div>
 
     <div class="retro-column less-of">
-      <app-item-list [list]="sections.lessOf"></app-item-list>
+      <wt-item-list [list]="sections.lessOf"></wt-item-list>
     </div>
   </div>
 </div>
@@ -34,24 +34,24 @@
   <div class="retro-column more-of">
     <h1>😍 Más de...</h1>
 
-    <app-retro-input (onSubmited)="sendMoreOf($event)"></app-retro-input>
+    <wt-retro-input (onSubmited)="sendMoreOf($event)"></wt-retro-input>
 
-    <app-item-list [list]="sections.moreOf"></app-item-list>
+    <wt-item-list [list]="sections.moreOf"></wt-item-list>
   </div>
 
   <div class="retro-column keep">
     <h1>😇 Mantengamos...</h1>
 
-    <app-retro-input (onSubmited)="sendKeep($event)"></app-retro-input>
+    <wt-retro-input (onSubmited)="sendKeep($event)"></wt-retro-input>
 
-    <app-item-list [list]="sections.keep"></app-item-list>
+    <wt-item-list [list]="sections.keep"></wt-item-list>
   </div>
 
   <div class="retro-column less-of">
     <h1>😫 Menos de...</h1>
 
-    <app-retro-input (onSubmited)="sendLessOf($event)"></app-retro-input>
+    <wt-retro-input (onSubmited)="sendLessOf($event)"></wt-retro-input>
 
-    <app-item-list [list]="sections.lessOf"></app-item-list>
+    <wt-item-list [list]="sections.lessOf"></wt-item-list>
   </div>
 </div>

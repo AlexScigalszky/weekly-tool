@@ -3,7 +3,7 @@ import { Partner } from 'src/app/models/partner';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
 
 @Component({
-  selector: 'app-aniversaries',
+  selector: 'wt-aniversaries',
   templateUrl: './aniversaries.component.html',
   styleUrls: ['./aniversaries.component.scss'],
 })

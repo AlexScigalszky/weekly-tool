@@ -27,7 +27,7 @@ export type ApiData = {
 };
 
 @Component({
-  selector: 'app-home',
+  selector: 'wt-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })

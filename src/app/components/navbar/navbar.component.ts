@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'wt-nabvar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })

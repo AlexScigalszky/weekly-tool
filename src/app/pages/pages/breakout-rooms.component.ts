@@ -7,7 +7,7 @@ import { RetroService } from 'src/app/retro/services/retro.service';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 
 @Component({
-  selector: 'app-breakout-rooms',
+  selector: 'wt-breakout-rooms',
   templateUrl: './breakout-rooms.component.html',
   styleUrls: ['./breakout-rooms.component.scss'],
 })

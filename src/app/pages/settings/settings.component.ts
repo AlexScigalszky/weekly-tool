@@ -8,7 +8,7 @@ import { BreakoutRoomFirebase } from 'src/app/models/breackout-room-firebase';
 import { BreakoutRoomsFirebaseService } from 'src/app/services/breakout-rooms-firebase.service';
 
 @Component({
-  selector: 'app-settings',
+  selector: 'wt-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })

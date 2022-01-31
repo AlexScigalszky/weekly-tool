@@ -4,7 +4,7 @@ import { Question } from 'src/app/models/question';
 import { Editor } from 'ngx-editor';
 
 @Component({
-  selector: 'app-question-item-modal',
+  selector: 'wt-question-item-modal',
   templateUrl: './question-item-modal.component.html',
   styleUrls: ['./question-item-modal.component.scss'],
 })

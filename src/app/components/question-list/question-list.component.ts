@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from 'src/app/models/question';
 
 @Component({
-  selector: 'app-question-list',
+  selector: 'wt-question-list',
   templateUrl: './question-list.component.html',
   styleUrls: ['./question-list.component.scss'],
 })

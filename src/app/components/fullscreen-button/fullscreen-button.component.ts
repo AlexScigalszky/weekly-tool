@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: 'app-fullscreen-button',
+  selector: 'wt-fullscreen-button',
   templateUrl: './fullscreen-button.component.html',
   styleUrls: ['./fullscreen-button.component.scss'],
 })

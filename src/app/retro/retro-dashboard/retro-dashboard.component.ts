@@ -6,7 +6,7 @@ import { RetroData } from '../models/retro-data';
 import { RetroService } from '../services/retro.service';
 
 @Component({
-  selector: 'app-retro-dashboard',
+  selector: 'wt-retro-dashboard',
   templateUrl: './retro-dashboard.component.html',
   styleUrls: ['./retro-dashboard.component.scss'],
 })

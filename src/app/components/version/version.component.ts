@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { APP_VERSION } from '../../../environments/version';
 
 @Component({
-  selector: 'app-version',
+  selector: 'wt-version',
   templateUrl: './version.component.html',
   styleUrls: ['./version.component.scss'],
 })

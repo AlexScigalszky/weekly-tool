@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 import { RandomWordsService } from './services/random-words.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'wt-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

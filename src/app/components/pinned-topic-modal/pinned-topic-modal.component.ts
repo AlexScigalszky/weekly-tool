@@ -4,7 +4,7 @@ import { Editor } from 'ngx-editor';
 import { PinnedItem } from 'src/app/models/pinned-item';
 
 @Component({
-  selector: 'app-pinned-topic-modal',
+  selector: 'wt-pinned-topic-modal',
   templateUrl: './pinned-topic-modal.component.html',
   styleUrls: ['./pinned-topic-modal.component.scss'],
 })

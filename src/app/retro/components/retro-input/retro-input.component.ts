@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-retro-input',
+  selector: 'wt-retro-input',
   templateUrl: './retro-input.component.html',
   styleUrls: ['./retro-input.component.scss'],
 })

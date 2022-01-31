@@ -1,12 +1,12 @@
 <mat-list>
   <div id="question-list">
-    <app-question-item
+    <wt-question-item
       class="question-list-item"
       *ngFor="let question of questions"
       [question]="question"
       [highlight]="highlightQuestion(question)"
       (voted)="vote($event)"
       (editButtonClicked)="edit($event)"
-    ></app-question-item>
+    ></wt-question-item>
   </div>
 </mat-list>
