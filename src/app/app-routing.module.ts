@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BreakoutRoomsComponent } from './pages/breakout-rooms/breakout-rooms.component';
+import { BreakoutRoomsComponent } from './pages/pages/breakout-rooms.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { RetroDashboardComponent } from './retro/retro-dashboard/retro-dashboard.component';
