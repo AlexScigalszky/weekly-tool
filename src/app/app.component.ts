@@ -23,7 +23,7 @@ export class AppComponent implements OnDestroy {
   subscriptions: Subscription[] = [];
   companyName: string = environment.companyName;
   wordOfTheDay$ = this.randomWordsService.getWordOfTheDay();
-  wordDefinitionURL = environment.palabrasAleatoriasURL + '/#/specific-word/';
+  wordDefinitionURL = environment.palabrasAleatoriasURL + '/specific-word?w=';
 
   constructor(
     public sections: SectionsAvaliablesService,
