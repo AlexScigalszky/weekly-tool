@@ -122,15 +122,17 @@ export class HomeComponent implements OnInit {
     );
 
     this.pinned$ = this.pinnedService.list().pipe(
-      filter((x) =>
-        x.every((y) => {
-          return (
-            new DOMParser()
-              .parseFromString(y.text, 'text/html')
-              .body.textContent.trim() !== ''
-          );
-        }),
-      ),
+      map((topis) => topis.filter((x) => this.IsHtmlEmpty(x.text))),
+
+      // filter((x) =>
+      //   x.every((y) => {
+      //     return (
+      //       new DOMParser()
+      //         .parseFromString(y.text, 'text/html')
+      //         .body.textContent.trim() !== ''
+      //     );
+      //   }),
+      // ),
       map((x) => (x.length == 0 ? null : x)),
     );
   }
@@ -236,5 +238,13 @@ export class HomeComponent implements OnInit {
         .update(question)
         .then(() => console.log('question updated', question));
     });
+  }
+
+  IsHtmlEmpty(text: string): boolean {
+    return (
+      new DOMParser()
+        .parseFromString(text, 'text/html')
+        .body.textContent.trim() !== ''
+    );
   }
 }

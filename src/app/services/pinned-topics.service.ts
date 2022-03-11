@@ -4,7 +4,6 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PinnedItem } from '../models/pinned-item';
 
@@ -29,9 +28,7 @@ export class PinnedTopicsService {
   }
 
   list(): Observable<PinnedItem[]> {
-    return this.pinnedTopicCollection
-      .valueChanges()
-      .pipe(tap((x) => console.log(`pinned-topics`, x)));
+    return this.pinnedTopicCollection.valueChanges();
   }
 
   add(pinnedItem: PinnedItem): void {
