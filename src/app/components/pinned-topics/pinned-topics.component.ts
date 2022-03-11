@@ -7,6 +7,9 @@ import { PinnedItem } from 'src/app/models/pinned-item';
   styleUrls: ['./pinned-topics.component.scss'],
 })
 export class PinnedTopicsComponent {
-  @Input()
-  topics: PinnedItem[] = [];
+  @Input() topics: PinnedItem[] = [];
+
+  get topicsFiltered(): PinnedItem[] {
+    return this.topics.filter((topic) => topic.text);
+  }
 }

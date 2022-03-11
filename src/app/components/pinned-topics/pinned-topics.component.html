@@ -1,6 +1,6 @@
-<div class="aniversary-section">
-  <ul class="aniverary-partner-list">
-    <li class="pinned-topic-item" *ngFor="let topic of topics">
+<div class="pinned-topic-section">
+  <ul class="pinned-topic-list">
+    <li class="pinned-topic-item" *ngFor="let topic of topicsFiltered">
       <div [innerHTML]="topic.text"></div>
     </li>
   </ul>

@@ -29,7 +29,13 @@ describe('PinnedTopicsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show aniversary icon', () => {
+  it('should not show empty pinned topic', () => {
+    givenAComponentWithEmptyPinnedTopics();
+    whenTheComponentIsRefresh();
+    thenNotShowPinnedText();
+  });
+
+  it('should show pinned text', () => {
     givenAComponentWithPinnedTopics();
     whenTheComponentIsRefresh();
     thenShowPinnedText();
@@ -48,6 +54,13 @@ describe('PinnedTopicsComponent', () => {
     component.topics = topics;
   }
 
+  function givenAComponentWithEmptyPinnedTopics() {
+    fixture = TestBed.createComponent(PinnedTopicsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    component.topics = topics;
+  }
+
   function whenTheComponentIsRefresh() {
     fixture.detectChanges();
   }
@@ -55,5 +68,10 @@ describe('PinnedTopicsComponent', () => {
   function thenShowPinnedText() {
     const pinnedTopics = findEls(fixture, '.pinned-topic-item');
     expect(pinnedTopics.length).toBe(1);
+  }
+
+  function thenNotShowPinnedText() {
+    const pinnedTopics = findEls(fixture, '.pinned-topic-item');
+    expect(pinnedTopics.length).toBe(0);
   }
 });

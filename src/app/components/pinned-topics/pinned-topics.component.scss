@@ -1,64 +1,11 @@
-.aniversary-section {
+.pinned-topic-section {
   padding: 1rem;
   background-color: white;
   margin: 1rem 0;
   border-radius: 0.5rem;
   text-align: center;
 }
-
-.aniversary-title {
-  text-align: center;
-}
-
-.aniverary-partner-list {
+.pinned-topic-list {
   list-style: none;
   font-size: 1rem;
-}
-
-.parpadea {
-  animation-name: parpadeo;
-  animation-duration: 1.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  -webkit-animation-name: parpadeo;
-  -webkit-animation-duration: 1.5s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-}
-
-@-moz-keyframes parpadeo {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes parpadeo {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes parpadeo {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }

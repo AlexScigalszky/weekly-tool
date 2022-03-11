@@ -122,7 +122,15 @@ export class HomeComponent implements OnInit {
     );
 
     this.pinned$ = this.pinnedService.list().pipe(
-      tap((x) => console.log('ALEX', x)),
+      filter((x) =>
+        x.every((y) => {
+          return (
+            new DOMParser()
+              .parseFromString(y.text, 'text/html')
+              .body.textContent.trim() !== ''
+          );
+        }),
+      ),
       map((x) => (x.length == 0 ? null : x)),
     );
   }
