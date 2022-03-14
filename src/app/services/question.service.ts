@@ -6,7 +6,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Room } from '../models/room';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, first, map } from 'rxjs/operators';
 import { Nullable } from '../models/nullable';
 import { environment } from 'src/environments/environment';
 
@@ -116,5 +116,39 @@ export class QuestionService {
         votes: 0,
       }))
       .forEach(async (question) => await this.update(question));
+  }
+
+  async addIpAdress(roomName: string, ipAddess: string): Promise<void> {
+    const room = await this.roomCollection
+      .doc<Room>(roomName)
+      .valueChanges()
+      .pipe(first())
+      .toPromise();
+    if (!room) {
+      return;
+    }
+    return await this.roomCollection
+      .doc(roomName)
+      .update({
+        ips: [...(room.ips ?? []), ipAddess],
+      })
+      .then(() => console.log(`ip address added ${ipAddess}`));
+  }
+
+  async removeIpAdress(roomName: string, ipAddess: string): Promise<void> {
+    const room = await this.roomCollection
+      .doc<Room>(roomName)
+      .valueChanges()
+      .pipe(first())
+      .toPromise();
+    if (!room) {
+      return;
+    }
+    return await this.roomCollection
+      .doc(roomName)
+      .update({
+        ips: [...(room.ips ?? []).filter((x) => x != ipAddess)],
+      })
+      .then(() => console.log(`ip address added ${ipAddess}`));
   }
 }

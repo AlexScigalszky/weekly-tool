@@ -7,4 +7,5 @@ export class Room {
   currentQuestionId: Nullable<string> = null;
   timeStartTime: Date = new Date();
   questions: Question[] = [];
+  ips: string[] = [];
 }

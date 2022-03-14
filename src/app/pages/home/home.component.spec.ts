@@ -24,6 +24,7 @@ import { of } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
 import { RetroService } from 'src/app/retro/services/retro.service';
 import { AniversariesService } from 'src/app/services/aniversaries.service';
+import { ClientIpService } from 'src/app/services/client-ip.service';
 import { PartnersMockService } from 'src/app/services/partners-mock.service';
 import { PartnersService } from 'src/app/services/partners.service';
 import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
@@ -83,6 +84,7 @@ describe('HomeComponent', () => {
         { provide: PartnersService, useClass: PartnersMockService },
         { provide: AniversariesService, useClass: AniversariesService },
         { provide: SimpsonService, useClass: SimpsonService },
+        { provide: ClientIpService, useClass: ClientIpService },
         {
           provide: SectionsAvaliablesService,
           useClass: SectionsAvaliablesService,
@@ -130,6 +132,11 @@ describe('HomeComponent', () => {
   it('should show votes counter', fakeAsync(() => {
     givenAComponent();
     thenHasVotesCounter();
+  }));
+
+  it('should show users who votes counter', fakeAsync(() => {
+    givenAComponent();
+    thenHasUsersWhoVotesCounter();
   }));
 
   it('should show aniversary section', fakeAsync(() => {
@@ -217,6 +224,14 @@ describe('HomeComponent', () => {
 
     tick(800);
     hasText(fixture, '#votes-counter', '0');
+  }
+
+  function thenHasUsersWhoVotesCounter() {
+    wait(fixture);
+    fixture.detectChanges();
+
+    tick(800);
+    hasText(fixture, '#users-votes-counter', '0');
   }
 
   function thenHasAniversarySection() {
