@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
       //     );
       //   }),
       // ),
-      map((x) => (x.length == 0 ? null : x)),
+      map((x) => (x.length == 0 ? null : [x[0]])),
     );
   }
 
