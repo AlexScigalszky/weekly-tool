@@ -21,11 +21,14 @@ describe('ClientIpService', () => {
     thenExists();
   });
 
-  it('getClientIp should return an IP or null ', waitForAsync(async () => {
-    givenAService();
-    await whenGetClientIp();
-    thenReturnIpOrNull();
-  }));
+  it(
+    'getClientIp should return an IP or null ',
+    waitForAsync(async () => {
+      givenAService();
+      await whenGetClientIp();
+      thenReturnIpOrNull();
+    }),
+  );
 
   function givenAService() {
     service = TestBed.inject(ClientIpService);
@@ -38,7 +41,6 @@ describe('ClientIpService', () => {
   async function whenGetClientIp() {
     _result = await service.getClientIp().toPromise();
     console.log('AAAAA', _result);
-    
   }
 
   function thenReturnIpOrNull() {
