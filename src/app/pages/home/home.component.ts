@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, of } from 'rxjs';
-import { delay, filter, map, mergeMap, tap } from 'rxjs/operators';
+import { delay, filter, first, map, mergeMap, tap } from 'rxjs/operators';
 import { QuestionItemModalComponent } from 'src/app/components/question-item-modal/question-item-modal.component';
 import { Nullable } from 'src/app/models/nullable';
 import { Question } from 'src/app/models/question';
@@ -19,11 +19,13 @@ import { RetroService } from 'src/app/retro/services/retro.service';
 import { PinnedTopicsService } from 'src/app/services/pinned-topics.service';
 import { PinnedItem } from 'src/app/models/pinned-item';
 import { SimpsonService } from 'src/app/services/simpson.service';
+import { ClientIpService } from 'src/app/services/client-ip.service';
 
 export type ApiData = {
   room: Room;
   questions: Question[];
   totalVotes: number;
+  countUsers: number;
 };
 
 @Component({
@@ -47,6 +49,7 @@ export class HomeComponent implements OnInit {
     .pipe(map((x) => this.aniversariesService.getWhoHaveAnAniversary(x)));
   pinned$: Observable<PinnedItem[]>;
   simpsonQuote = this.simpsonService.getOne();
+  ipAddess: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,6 +63,7 @@ export class HomeComponent implements OnInit {
     private retroService: RetroService,
     public pinnedService: PinnedTopicsService,
     private simpsonService: SimpsonService,
+    private clientIpService: ClientIpService,
   ) {
     this.timer.onFinished().subscribe((finish: boolean) => {
       if (finish) {
@@ -72,6 +76,12 @@ export class HomeComponent implements OnInit {
     // this.partnersService.updateList();
     const ayearago = new Date();
     ayearago.setFullYear(ayearago.getFullYear() - 1);
+    this.clientIpService
+      .getClientIp()
+      .pipe(first())
+      .subscribe((ip) => {
+        this.ipAddess = ip;
+      });
   }
 
   async ngOnInit(): Promise<void> {
@@ -99,6 +109,7 @@ export class HomeComponent implements OnInit {
           (total: number, question: Question) => (total += question.votes),
           0,
         ),
+        countUsers: (room.ips ?? []).length,
       })),
       tap((data) => console.log('refresh room', data)),
       tap((data) => this.setCurrentQuestion(data.room)),
@@ -179,14 +190,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  vote(question: Question, questionsHighlight: Question[]): void {
+  async vote(
+    question: Question,
+    questionsHighlight: Question[],
+  ): Promise<void> {
     console.log(`vote`, question);
     const exists = questionsHighlight.some((x) => x.id == question.id);
     let votesChanges = false;
     if (exists) {
       votesChanges = this.votingService.voteDown(question);
+      await this.questionService.removeIpAdress(this.room, this.ipAddess);
     } else {
       votesChanges = this.votingService.voteUp(question);
+      await this.questionService.addIpAdress(this.room, this.ipAddess);
     }
 
     if (votesChanges) {

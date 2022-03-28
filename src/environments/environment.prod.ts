@@ -12,4 +12,5 @@ export const environment = {
     appId: '1:279315758764:web:cb251a80a9a29bffc82909',
     measurementId: 'G-6N3BZMM626',
   },
+  ipifyUrl: 'http://api.ipify.org/?format=json'
 };
