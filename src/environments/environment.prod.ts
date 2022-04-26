@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  companyName: 'w3itsolutions',
+  companyName: 'unosquare',
   baseRandomWordsApiUrl: 'https://palabras-aleatorias-public-api.herokuapp.com',
   palabrasAleatoriasURL: 'https://palabrasaleatorias.ar',
   firebaseConfig: {
