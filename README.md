@@ -2,6 +2,12 @@
 
 A tool for any company who create a dynamic weekly meeting with all employees. At the moment is only avaliable in Spanish.
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ## Getting Started
 
 Follow the steps below:
@@ -93,9 +99,3 @@ This section is for take notes about the meeting finish. It have three columns (
 
 This section is a free versionof breckout using a set of google meet room. each member will have a random link
 ![image](https://user-images.githubusercontent.com/20727215/150141665-f77cc951-ff37-4031-bd63-b1fbfa088d9f.png)
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
